@@ -62,6 +62,7 @@ public class RecoveryEnergyAgentAction : GoapAction
         if (startTime == 0)
         {
             abstractAgent.recovering = true;
+            targetCenter.enterAgentToRecover();
             startTime = Time.time;
         }
 
@@ -69,6 +70,7 @@ public class RecoveryEnergyAgentAction : GoapAction
         {
             abstractAgent.energy = 100;
             abstractAgent.recovering = false;
+            targetCenter.exitAgentToRecover();
             recovered = true;
         }
         return true;

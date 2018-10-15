@@ -4,21 +4,54 @@ using System.Collections.Generic;
 public abstract class Agent : MonoBehaviour, IGoap
 {
     // Basic data
-    public float moveSpeed = 1;
+    public float moveSpeed = 0;
     public int energy = 100;
 
     public bool recovering = false;
 
-    void Start()
-    {
 
+    public bool isAdult = false;
+    private float startTimerBorn = 0f;
+    private float bornDuration = 0f;
+
+    void Awake()
+    {
+        if (!isAdult)
+        {
+            transform.localScale = new Vector3(0.3f, 0.3f, 1f);
+            moveSpeed = 0;
+            bornDuration = 6f;
+        }
     }
 
     void Update()
     {
-
+        
     }
 
+
+    public void checkIsAdult()
+    {
+        if (!isAdult)
+        {
+            if (startTimerBorn == 0)
+            {
+                startTimerBorn = Time.time;
+            }
+
+            if (Time.time - startTimerBorn > bornDuration)
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+                moveSpeed = 1;
+                isAdult = true;
+            }
+            else
+            {
+                float scale = Mathf.Min(1f, transform.localScale.x + 0.01f);
+                transform.localScale = new Vector3(scale, scale, 1f);
+            }
+        }
+    }
     /**
 	 * Key-Value data that will feed the GOAP actions and system while planning.
 	 */

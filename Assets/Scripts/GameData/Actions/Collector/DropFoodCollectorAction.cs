@@ -61,7 +61,6 @@ public class DropFoodCollectorAction : GoapAction
     {
         if (startTime == 0)
         {
-            Collector collector = (Collector)agent.GetComponent(typeof(Collector));
             startTime = Time.time;
         }
 

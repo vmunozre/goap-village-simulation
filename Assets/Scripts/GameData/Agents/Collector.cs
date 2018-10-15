@@ -13,7 +13,7 @@ public class Collector : Agent {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        checkIsAdult();
 	}
 
     public override HashSet<KeyValuePair<string, object>> createGoalState()
