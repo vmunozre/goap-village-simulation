@@ -7,6 +7,8 @@ TagManager:
   - Tree
   - Center
   - Warehouse
+  - Bush
+  - Collector
   layers:
   - Default
   - TransparentFX

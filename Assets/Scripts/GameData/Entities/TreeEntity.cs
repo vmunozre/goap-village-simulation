@@ -20,7 +20,7 @@ public class TreeEntity : MonoBehaviour
     void Start()
     {
         rare = Random.Range(10, 30);
-        print("Rare: " + rare.ToString());
+        // print("Rare: " + rare.ToString());
         waitTime += rare;
         float scale = calculateScale();
         transform.localScale = new Vector3(scale, scale, 0f);
@@ -38,7 +38,7 @@ public class TreeEntity : MonoBehaviour
                 age += 1;
                 float scale = calculateScale();
                 transform.localScale = new Vector3(scale, scale, 0f);
-                print("Tree grew, age: " + age.ToString());
+                // print("Tree grew, age: " + age.ToString());
                 timer = 0f;
             }
         }
