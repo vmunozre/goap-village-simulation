@@ -50,6 +50,9 @@ public abstract class Agent : MonoBehaviour, IGoap
                 float scale = Mathf.Min(1f, transform.localScale.x + 0.01f);
                 transform.localScale = new Vector3(scale, scale, 1f);
             }
+        } else
+        {
+            moveSpeed = 1;
         }
     }
     /**

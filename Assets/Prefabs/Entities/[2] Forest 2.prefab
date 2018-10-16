@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 4245610172494320}
   - component: {fileID: 212199816815611174}
   - component: {fileID: 114989346487771976}
+  - component: {fileID: 61667304194002818}
   m_Layer: 0
   m_Name: '[2] Tree (13)'
   m_TagString: Tree
@@ -543,7 +544,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1374938988873774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08, y: 4.14, z: 0.2585403}
+  m_LocalPosition: {x: 2.99, y: 3.7616467, z: 0.2585403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4031913316756156}
@@ -566,6 +567,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61667304194002818
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939661770839816}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0024005175, y: 0.12777781}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.48727652, y: 0.14850998}
+    oldSize: {x: 0.41935483, y: 0.7741935}
+    newSize: {x: 0.41935483, y: 0.7741935}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.18727183, y: 0.3205428}
+  m_EdgeRadius: 0
 --- !u!114 &114006959045071428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -580,7 +606,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114047818256879202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -595,7 +625,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114097997834209822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -610,7 +644,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114107179131828658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -625,7 +663,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114113722301851400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -640,7 +682,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114122994557094002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -655,7 +701,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114162338669359780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -670,7 +720,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114361381406175216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -685,7 +739,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114369290286517322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -700,7 +758,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114556505710630810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -715,7 +777,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114602978412967950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -730,7 +796,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114626049263638412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -745,7 +815,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114741000003510362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -760,7 +834,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114796040858033326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -775,7 +853,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114804552814716126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -790,7 +872,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114937381825120950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -805,7 +891,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 0}
+  clippedTreeSprite: {fileID: 0}
 --- !u!114 &114989346487771976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -820,7 +910,11 @@ MonoBehaviour:
   age: 1
   wood: 100
   rare: 0
-  clipped: 0
+  chopped: 0
+  empty: 0
+  viewed: 0
+  emptyTreeSprite: {fileID: 21300142, guid: cf31a104a2c42874b80358d910cfa38f, type: 3}
+  clippedTreeSprite: {fileID: 21300124, guid: cf31a104a2c42874b80358d910cfa38f, type: 3}
 --- !u!212 &212035067992565678
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class AnalyzeBushCollectorAction : GoapAction
+public class AnalyzeTreeWoodcutterAction : GoapAction
 {
     private bool analyzed = false;
-    public BushEntity targetBush;
+    public TreeEntity targetTree;
 
     private float startTime = 0;
     public float analyzetDuration = 1.5f; // seconds
@@ -14,19 +14,19 @@ public class AnalyzeBushCollectorAction : GoapAction
     private float radius = 5f;
     private int numTry = 1;
 
-    public AnalyzeBushCollectorAction()
+    public AnalyzeTreeWoodcutterAction()
     {
         addPrecondition("hasEnergy", true);
-        addPrecondition("hasFood", false);
-        addPrecondition("hasActualBush", false);
-        addEffect("bushFound", true);
+        addPrecondition("hasWood", false);
+        addPrecondition("hasActualTree", false);
+        addEffect("treeFound", true);
     }
 
 
     public override void reset()
     {
         analyzed = false;
-        targetBush = null;
+        targetTree = null;
         startTime = 0;
     }
 
@@ -37,7 +37,7 @@ public class AnalyzeBushCollectorAction : GoapAction
 
     public override bool requiresInRange()
     {
-        return true; 
+        return true;
     }
 
     public override bool checkProceduralPrecondition(GameObject agent)
@@ -54,13 +54,13 @@ public class AnalyzeBushCollectorAction : GoapAction
         }
         foreach (Collider2D hit in colliders)
         {
-            if (hit.tag != "Bush")
+            if (hit.tag != "Tree")
             {
                 continue;
             }
 
-            BushEntity bush = (BushEntity)hit.gameObject.GetComponent(typeof(BushEntity));
-            if (bush.empty || bush.viewed)
+            TreeEntity tree = (TreeEntity)hit.gameObject.GetComponent(typeof(TreeEntity));
+            if (tree.empty || tree.viewed || tree.chopped)
             {
                 continue;
             }
@@ -79,14 +79,13 @@ public class AnalyzeBushCollectorAction : GoapAction
                     closestDist = dist;
                 }
             }
-            Debug.DrawLine(closestCollider.gameObject.transform.position, agent.transform.position, Color.red, 3, false);
+            Debug.DrawLine(closestCollider.gameObject.transform.position, agent.transform.position, Color.green, 3, false);
         }
-        
         bool isClosest = closestCollider != null;
-        if (isClosest)
+        if(isClosest)
         {
-            targetBush = (BushEntity)closestCollider.gameObject.GetComponent(typeof(BushEntity));
-            target = targetBush.gameObject;
+            targetTree = (TreeEntity)closestCollider.gameObject.GetComponent(typeof(TreeEntity));
+            target = targetTree.gameObject;
             numTry = 1;
         }
         return isClosest;
@@ -99,24 +98,25 @@ public class AnalyzeBushCollectorAction : GoapAction
             startTime = Time.time;
         }
 
-        if (targetBush.food <= 0)
-        {           
-            targetBush.turnEmptySprite();
+        if (targetTree.wood <= 0)
+        {
+            targetTree.turnEmptySprite();
             return false;
         }
 
         if (Time.time - startTime > analyzetDuration)
         {
-            Collector collector = (Collector)agent.GetComponent(typeof(Collector));
-            collector.energy -= energyCost;
+            Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
+            woodcutter.energy -= energyCost;
             analyzed = true;
-            if (targetBush.age < 3)
+            if (targetTree.age < 3)
             {
-                targetBush.viewed = true;
+                targetTree.viewed = true;
                 return false;
-            } else
+            }
+            else
             {
-                collector.actualBush = targetBush;
+                woodcutter.actualTree = targetTree;
             }
         }
         return true;

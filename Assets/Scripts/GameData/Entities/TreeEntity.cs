@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class TreeEntity : MonoBehaviour
 {
-    public int age = 1;
+    public int age = 4;
     public int wood = 100;
     public int rare = 0;
-    public bool clipped = false;
+    public bool chopped = false;
+    public bool empty = false;
+    public bool viewed = false;
+
     // Timer
     float timer = 0f;
     float waitTime = 10f;
 
+    //Images
+    public Sprite emptyTreeSprite;
+    public Sprite clippedTreeSprite;
     public void checkChopped()
     {
-        clipped = true;
+        chopped = true;
     }
     // Use this for initialization
     void Start()
@@ -29,7 +35,7 @@ public class TreeEntity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!clipped && age < 20)
+        if (!empty && !chopped && age < 20)
         {
             timer += Time.deltaTime;
             if (timer > waitTime)
@@ -43,6 +49,20 @@ public class TreeEntity : MonoBehaviour
             }
         }
 
+    }
+
+    public void turnEmptySprite()
+    {
+        empty = true;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.sprite = emptyTreeSprite;
+    }
+
+    public void turnChoppedSprite()
+    {
+        empty = true;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.sprite = clippedTreeSprite;
     }
 
     private float calculateScale()
