@@ -9,7 +9,7 @@ public class BushEntity : MonoBehaviour
     public int rare = 0;
     public bool collected = false;
     public bool empty = false;
-
+    public bool viewed = false;
     //Images
     public Sprite emptyBushSprite;
 
@@ -19,6 +19,8 @@ public class BushEntity : MonoBehaviour
     
     void Start()
     {
+        age = Random.Range(1, 4);
+        food = 100 + (20 * age);
         rare = Random.Range(10, 20);
         waitTime += rare;
     }
@@ -34,6 +36,7 @@ public class BushEntity : MonoBehaviour
                 food += 20;
                 age += 1;
                 // print("Bush grew, age: " + age.ToString());
+                viewed = false;
                 timer = 0f;
             }
         }
@@ -41,6 +44,7 @@ public class BushEntity : MonoBehaviour
 
     public void turnEmptySprite()
     {
+        empty = true;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.sprite = emptyBushSprite;
     }
