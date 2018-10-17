@@ -11,14 +11,13 @@ public class CenterEntity : MonoBehaviour {
     // Warehouse associated
     public WarehouseEntity warehouse;
 
-
     private int numWoodCutters = 1;
     private int numCollector = 1;
 
-    public void enterAgentToRecover()
+    public bool enterAgentToRecover()
     {
         agentsCounts++;
-        procreate();
+        return procreate();
     }
 
     public void exitAgentToRecover()
@@ -26,7 +25,7 @@ public class CenterEntity : MonoBehaviour {
         agentsCounts--;
     }
 
-    private void procreate()
+    private bool procreate()
     {
         if(agentsCounts >= 2)
         {
@@ -53,7 +52,10 @@ public class CenterEntity : MonoBehaviour {
                     Instantiate(agentTypes[1], new Vector3(transform.position.x, transform.position.y - 0.7f, -2.5f), Quaternion.identity);
                     numWoodCutters++;
                 }
+                agentsCounts = Mathf.Max(0, agentsCounts - 1);
+                return true;
             }
         }
+        return false;
     }
 }

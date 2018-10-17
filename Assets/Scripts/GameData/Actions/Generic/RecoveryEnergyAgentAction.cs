@@ -9,6 +9,8 @@ public class RecoveryEnergyAgentAction : GoapAction
     private float startTime = 0;
     public float recoveringDuration = 5; // seconds
 
+    private bool procreationControl = false;
+
     public RecoveryEnergyAgentAction()
     {
         addPrecondition("hasEnergy", false); // we need energy
@@ -19,6 +21,7 @@ public class RecoveryEnergyAgentAction : GoapAction
     public override void reset()
     {
         recovered = false;
+        procreationControl = false;
         targetCenter = null;
         startTime = 0;
     }
@@ -62,7 +65,7 @@ public class RecoveryEnergyAgentAction : GoapAction
         if (startTime == 0)
         {
             abstractAgent.recovering = true;
-            targetCenter.enterAgentToRecover();
+            procreationControl = targetCenter.enterAgentToRecover();
             startTime = Time.time;
         }
 
@@ -70,7 +73,10 @@ public class RecoveryEnergyAgentAction : GoapAction
         {
             abstractAgent.energy = 100;
             abstractAgent.recovering = false;
-            targetCenter.exitAgentToRecover();
+            if (!procreationControl)
+            {
+                targetCenter.exitAgentToRecover();
+            }
             recovered = true;
         }
         return true;
