@@ -66,7 +66,7 @@ public class CollectFoodCollectorAction : GoapAction
         {
             Collector collector = (Collector)agent.GetComponent(typeof(Collector));
             // finished cutting
-            int food = 101;
+            int food = 30;
             targetBush.collected = true;
             if ((targetBush.food - food) >= 0)
             {
