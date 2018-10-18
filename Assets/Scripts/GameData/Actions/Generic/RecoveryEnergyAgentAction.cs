@@ -73,10 +73,7 @@ public class RecoveryEnergyAgentAction : GoapAction
         {
             abstractAgent.energy = 100;
             abstractAgent.recovering = false;
-            if (!procreationControl)
-            {
-                targetCenter.exitAgentToRecover();
-            }
+            targetCenter.exitAgentToRecover();
             recovered = true;
         }
         return true;
