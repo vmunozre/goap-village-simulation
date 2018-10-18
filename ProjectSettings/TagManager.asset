@@ -10,6 +10,8 @@ TagManager:
   - Bush
   - Collector
   - Woodcutter
+  - Quarry
+  - Stonecutter
   layers:
   - Default
   - TransparentFX
