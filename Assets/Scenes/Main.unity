@@ -23389,6 +23389,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114391516507379272, guid: b07e0d78cfc8427498366ef887756149,
+        type: 2}
+      propertyPath: energy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114391516507379272, guid: b07e0d78cfc8427498366ef887756149,
+        type: 2}
+      propertyPath: isAdult
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b07e0d78cfc8427498366ef887756149, type: 2}
   m_IsPrefabAsset: 0
@@ -25752,6 +25762,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4158138721873724, guid: d92bf0d47ec1ef54c88151ac629af1ba,
     type: 2}
   m_PrefabInternal: {fileID: 2110030911}
+--- !u!1001 &1057853620
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4041233260761088, guid: e80b74b4c739abe4a99832e3aa907180, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233260761088, guid: e80b74b4c739abe4a99832e3aa907180, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233260761088, guid: e80b74b4c739abe4a99832e3aa907180, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233260761088, guid: e80b74b4c739abe4a99832e3aa907180, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233260761088, guid: e80b74b4c739abe4a99832e3aa907180, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233260761088, guid: e80b74b4c739abe4a99832e3aa907180, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233260761088, guid: e80b74b4c739abe4a99832e3aa907180, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233260761088, guid: e80b74b4c739abe4a99832e3aa907180, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e80b74b4c739abe4a99832e3aa907180, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1088548783
 Prefab:
   m_ObjectHideFlags: 0
@@ -27203,48 +27255,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92bf0d47ec1ef54c88151ac629af1ba, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1585358555
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1585358557}
-  - component: {fileID: 1585358556}
-  m_Layer: 0
-  m_Name: Herd
-  m_TagString: Herd
-  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1585358556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1585358555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0e2c9e6f0bb61d47b81c9eb5d755374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDeer: 5
-  deerPrefab: {fileID: 1471798934277242, guid: 51b377e68c0b6d840a08456da6a9adcb, type: 2}
---- !u!4 &1585358557
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1585358555}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.47, y: -3.89, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1591146783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4158138721873724, guid: d92bf0d47ec1ef54c88151ac629af1ba,

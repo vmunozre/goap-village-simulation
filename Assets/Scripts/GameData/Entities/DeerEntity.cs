@@ -3,42 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeerEntity : MonoBehaviour {
-    public float moveSpeed = 0.5f;
+    public float moveSpeed = 0;
     public Vector3 randWander;
+
+    //Private var's
     private bool resting = false;
+    private bool isAdult = false;
+
 
     //Timer
     private float startTime = 0;
     private float restingTime = 3;
+    private float bornDuration = 5f;
     void Start () {
+        transform.localScale = new Vector3(0.3f, 0.3f, 1f);
         randWander = getRandomWander(-0.5f, 0.5f);
         restingTime = getRandomTime(1.5f, 5f);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (!resting)
-        {
-            float step = moveSpeed * Time.deltaTime;
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, randWander, step);
-
-            if (gameObject.transform.position.Equals(randWander))
-            {
-                startTime = 0;
-                restingTime = getRandomTime(1.5f, 5f);
-                resting = true;
-            }
-        }
-        else
+        if (!isAdult)
         {
             if (startTime == 0)
             {
                 startTime = Time.time;
             }
-            if (Time.time - startTime > restingTime)
+
+            if (Time.time - startTime > bornDuration)
             {
-                randWander = getRandomWander(-0.5f,0.5f);
-                resting = false;
+                isAdult = true;
+                transform.localScale = new Vector3(1f, 1f, 1f);
+                moveSpeed = 0.5f;
+                startTime = 0;
+            }
+            else
+            {
+                float scale = Mathf.Min(1f, transform.localScale.x + 0.003f);
+                transform.localScale = new Vector3(scale, scale, 1f);
+            }
+        } else
+        {
+            if (!resting)
+            {
+                float step = moveSpeed * Time.deltaTime;
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, randWander, step);
+
+                if (gameObject.transform.position.Equals(randWander))
+                {
+                    startTime = 0;
+                    restingTime = getRandomTime(1.5f, 5f);
+                    resting = true;
+                }
+            }
+            else
+            {
+                if (startTime == 0)
+                {
+                    startTime = Time.time;
+                }
+                if (Time.time - startTime > restingTime)
+                {
+                    randWander = getRandomWander(-0.5f, 0.5f);
+                    resting = false;
+                }
             }
         }
     }
