@@ -15,6 +15,8 @@ public abstract class GoapAction : MonoBehaviour
     // Objetivo, si aplica (puede ser null)
     public GameObject target;
 
+    public Vector3 targetPosition;
+
     public GoapAction()
     {
         preconditions = new HashSet<KeyValuePair<string, object>>();
@@ -25,6 +27,7 @@ public abstract class GoapAction : MonoBehaviour
     {
         inRange = false;
         target = null;
+        targetPosition = Vector3.zero;
         reset();
     }
 

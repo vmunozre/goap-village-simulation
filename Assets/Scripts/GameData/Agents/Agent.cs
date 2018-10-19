@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public abstract class Agent : MonoBehaviour, IGoap
 {
     // Basic data
-    public float moveSpeed = 0;
+    public float moveSpeed = 1;
     public int energy = 100;
 
     public bool recovering = false;
@@ -95,11 +95,27 @@ public abstract class Agent : MonoBehaviour, IGoap
 
     public bool moveAgent(GoapAction nextAction)
     {
+
+        Vector3 position = Vector3.zero;
+        if(nextAction.target != null)
+        {
+            position = nextAction.target.transform.position;
+        }
+        if(nextAction.targetPosition != Vector3.zero)
+        {            
+            position = nextAction.targetPosition;
+            Debug.Log("Target Position" + position.ToString());
+        }
+        if (position.Equals(Vector3.zero))
+        {
+            Debug.LogError("No position");
+            return false;
+        }
         // move towards the NextAction's target
         float step = moveSpeed * Time.deltaTime;
-        Vector3 actualTarget = new Vector3(nextAction.target.transform.position.x, nextAction.target.transform.position.y, transform.position.z);
+        Vector3 actualTarget = new Vector3(position.x, position.y, transform.position.z);
         gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, actualTarget, step);
-        Vector3 toCompare = new Vector3(nextAction.target.transform.position.x, nextAction.target.transform.position.y, transform.position.z);
+        Vector3 toCompare = new Vector3(position.x, position.y, transform.position.z);
         if (gameObject.transform.position.Equals(toCompare))
         {
             // we are at the target location, we are done

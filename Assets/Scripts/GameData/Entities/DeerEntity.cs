@@ -8,7 +8,7 @@ public class DeerEntity : MonoBehaviour {
 
     //Private var's
     private bool resting = false;
-    private bool isAdult = false;
+    public bool isAdult = false;
 
 
     //Timer
@@ -64,7 +64,7 @@ public class DeerEntity : MonoBehaviour {
                 }
                 if (Time.time - startTime > restingTime)
                 {
-                    randWander = getRandomWander(-0.5f, 0.5f);
+                    randWander = getRandomWander(-0.5f, 0.65f);
                     resting = false;
                 }
             }
@@ -77,12 +77,24 @@ public class DeerEntity : MonoBehaviour {
     }
     private Vector3 getRandomWander(float _min, float _max)
     {
-        return new Vector3(transform.position.x + Random.Range(_min, _max), transform.position.y + Random.Range(_min, _max), transform.position.z); ;
+        float posX = transform.position.x - Random.Range(_min, _max);
+        if (transform.parent.position.x > transform.position.x)
+        {
+            posX = transform.position.x + Random.Range(_min, _max);
+        }
+
+        float posY = transform.position.y - Random.Range(_min, _max);
+        if (transform.parent.position.y > transform.position.y)
+        {
+            posY = transform.position.y + Random.Range(_min, _max);
+        }
+
+        return new Vector3(posX, posY, transform.position.z); ;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Collector")
+        if(collision.tag == "Hunter")
         {
             Debug.Log("HUMANO!!!!");
             // Debug.DrawLine(collision.transform.position, transform.position, Color.magenta, 4, false);
@@ -92,7 +104,7 @@ public class DeerEntity : MonoBehaviour {
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Collector")
+        if (collision.tag == "Hunter")
         {
             Debug.DrawLine(collision.transform.position, transform.position, Color.magenta);
             randWander = getRunAwayPosition(collision);
