@@ -12,6 +12,8 @@ TagManager:
   - Woodcutter
   - Quarry
   - Stonecutter
+  - Deer
+  - Herd
   layers:
   - Default
   - TransparentFX
