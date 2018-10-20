@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class DeerEntity : MonoBehaviour {
     public float moveSpeed = 0;
+    public int food = 150;
+    public bool isAdult = false;
     public Vector3 randWander;
+    public Sprite[] sprites;
 
     //Private var's
     private bool resting = false;
-    public bool isAdult = false;
-
+    private SpriteRenderer sr;
 
     //Timer
     private float startTime = 0;
     private float restingTime = 3;
     private float bornDuration = 5f;
     void Start () {
+        sr = GetComponent<SpriteRenderer>();
         transform.localScale = new Vector3(0.3f, 0.3f, 1f);
         randWander = getRandomWander(-0.5f, 0.5f);
         restingTime = getRandomTime(1.5f, 5f);
@@ -60,12 +63,18 @@ public class DeerEntity : MonoBehaviour {
             {
                 if (startTime == 0)
                 {
+                    sr.sprite = sprites[1];
                     startTime = Time.time;
                 }
                 if (Time.time - startTime > restingTime)
                 {
-                    randWander = getRandomWander(-0.5f, 0.65f);
+                    sr.sprite = sprites[0];
+                    randWander = getRandomWander(-0.5f, 0.65f);                    
                     resting = false;
+                    if(Random.Range(0,10) < 3)
+                    {
+                        food = Mathf.Min(300, food + 5);
+                    }
                 }
             }
         }

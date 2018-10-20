@@ -73,7 +73,7 @@ BoxCollider2D:
   m_Offset: {x: -0.00503397, y: 0.051843286}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.61990184, y: 0.15928268}
+    pivot: {x: 0.5890993, y: 0.16241379}
     oldSize: {x: 0.34375, y: 0.3125}
     newSize: {x: 0.34375, y: 0.3125}
     adaptiveTilingThreshold: 0.5
@@ -95,8 +95,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
-  randWander: {x: 0, y: 0, z: 0}
+  food: 150
   isAdult: 0
+  randWander: {x: 0, y: 0, z: 0}
+  sprites:
+  - {fileID: 21300000, guid: 7e8317fbd280a764999d9952c578baa1, type: 3}
+  - {fileID: 21300002, guid: 7e8317fbd280a764999d9952c578baa1, type: 3}
+  - {fileID: 21300004, guid: 7e8317fbd280a764999d9952c578baa1, type: 3}
+  - {fileID: 21300006, guid: 7e8317fbd280a764999d9952c578baa1, type: 3}
 --- !u!212 &212644974869652954
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -132,7 +138,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bc7b98c4302fb994a9f42d02f287b863, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e8317fbd280a764999d9952c578baa1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
