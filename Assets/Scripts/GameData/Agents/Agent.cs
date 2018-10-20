@@ -104,11 +104,11 @@ public abstract class Agent : MonoBehaviour, IGoap
         if(nextAction.targetPosition != Vector3.zero)
         {            
             position = nextAction.targetPosition;
-            Debug.Log("Target Position" + position.ToString());
+            
         }
         if (position.Equals(Vector3.zero))
         {
-            Debug.LogError("No position");
+            
             return false;
         }
         // move towards the NextAction's target

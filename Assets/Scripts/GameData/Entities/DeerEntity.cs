@@ -6,6 +6,7 @@ public class DeerEntity : MonoBehaviour {
     public float moveSpeed = 0;
     public int food = 150;
     public bool isAdult = false;
+    public bool isDead = false;
     public Vector3 randWander;
     public Sprite[] sprites;
 
@@ -26,6 +27,10 @@ public class DeerEntity : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (isDead)
+        {
+            return;
+        }
         if (!isAdult)
         {
             if (startTime == 0)
@@ -80,6 +85,21 @@ public class DeerEntity : MonoBehaviour {
         }
     }
 
+    public void killDeer()
+    {
+        isDead = true;
+        sr.sprite = sprites[2];
+        moveSpeed = 0;
+    }
+
+    public void turnEmpty()
+    {
+        food = 0;
+        sr.sprite = sprites[3];
+
+        HerdEntity herd = GetComponentInParent<HerdEntity>();
+        herd.hunted();
+    }
     private float getRandomTime(float _min, float _max)
     {
         return Random.Range(_min, _max);
@@ -103,7 +123,7 @@ public class DeerEntity : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Hunter")
+        if(!isDead && collision.tag == "Hunter")
         {
             Debug.Log("HUMANO!!!!");
             // Debug.DrawLine(collision.transform.position, transform.position, Color.magenta, 4, false);
@@ -113,7 +133,7 @@ public class DeerEntity : MonoBehaviour {
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Hunter")
+        if (!isDead && collision.tag == "Hunter")
         {
             Debug.DrawLine(collision.transform.position, transform.position, Color.magenta);
             randWander = getRunAwayPosition(collision);

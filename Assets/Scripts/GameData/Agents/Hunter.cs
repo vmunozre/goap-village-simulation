@@ -16,7 +16,15 @@ public class Hunter : Agent
     public override HashSet<KeyValuePair<string, object>> createGoalState()
     {
         HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
-        goal.Add(new KeyValuePair<string, object>("preyFound", true));
+        if(actualPrey == null)
+        {
+            goal.Add(new KeyValuePair<string, object>("preyFound", true));        
+        }
+
+        if(actualPrey != null)
+        {
+            goal.Add(new KeyValuePair<string, object>("collectFood", true));        
+        }
         return goal;
     }
 
@@ -26,7 +34,15 @@ public class Hunter : Agent
 
         worldData.Add(new KeyValuePair<string, object>("hasFood", (food > 0)));
         worldData.Add(new KeyValuePair<string, object>("hasEnergy", (energy > 0)));
+        worldData.Add(new KeyValuePair<string, object>("hasActualPrey", (actualPrey != null)));
 
+        if (actualPrey != null)
+        {
+            worldData.Add(new KeyValuePair<string, object>("hasDeadPrey", actualPrey.isDead));
+        } else
+        {
+            worldData.Add(new KeyValuePair<string, object>("hasDeadPrey", false));
+        }
         return worldData;
     }
 }

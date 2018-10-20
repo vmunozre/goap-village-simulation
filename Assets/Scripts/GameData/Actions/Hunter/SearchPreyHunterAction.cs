@@ -18,6 +18,9 @@ public class SearchPreyHunterAction : GoapAction
     {
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
+        addPrecondition("hasActualPrey", false);
+        addPrecondition("hasDeadPrey", false);
+        addEffect("hasActualPrey", true);
         addEffect("preyFound", true);
     }
 
@@ -99,7 +102,7 @@ public class SearchPreyHunterAction : GoapAction
                 }
 
                 DeerEntity deer = (DeerEntity)hit.gameObject.GetComponent(typeof(DeerEntity));
-                if (!deer.isAdult)
+                if (!deer.isAdult || deer.isDead)
                 {
                     continue;
                 }
@@ -124,7 +127,8 @@ public class SearchPreyHunterAction : GoapAction
             if (isClosest)
             {
                 hunter.actualPrey = (DeerEntity)closestCollider.gameObject.GetComponent(typeof(DeerEntity));
-                return true;
+                found = true;
+               
             } else
             {
                 return false;

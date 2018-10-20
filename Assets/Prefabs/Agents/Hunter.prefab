@@ -24,6 +24,9 @@ GameObject:
   - component: {fileID: 114372144160655646}
   - component: {fileID: 114794902640131546}
   - component: {fileID: 114701814609472544}
+  - component: {fileID: 114570975216938806}
+  - component: {fileID: 114458047662271682}
+  - component: {fileID: 114013170963189540}
   - component: {fileID: 61766414361289224}
   - component: {fileID: 50100733862605410}
   m_Layer: 0
@@ -40,7 +43,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550548726277508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.29, y: 1.09, z: -2.5}
+  m_LocalPosition: {x: 4.22, y: -0.73, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -91,6 +94,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.29032257, y: 0.4032258}
   m_EdgeRadius: 0
+--- !u!114 &114013170963189540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1550548726277508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb6e64c42a13aa4b8843b8e895b193f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  dropDuration: 1.5
 --- !u!114 &114372144160655646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,6 +126,36 @@ MonoBehaviour:
   isAdult: 1
   food: 0
   actualPrey: {fileID: 0}
+--- !u!114 &114458047662271682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1550548726277508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6cb543932143b445bbd3ddb3d58f643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  collectDuration: 3
+--- !u!114 &114570975216938806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1550548726277508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcdb7bd5bdb138646b17e64a1ff42120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  huntDuration: 2.5
 --- !u!114 &114651238888641470
 MonoBehaviour:
   m_ObjectHideFlags: 1
