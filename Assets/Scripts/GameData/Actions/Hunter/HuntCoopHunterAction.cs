@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HuntAloneHunterAction : GoapAction
+public class HuntCoopHunterAction : GoapAction
 {
     private bool hunt = false;
     private DeerEntity targetPrey = null;
@@ -8,13 +8,14 @@ public class HuntAloneHunterAction : GoapAction
     private float startTime = 0;
     public float huntDuration = 2.5f; // seconds
 
-    public HuntAloneHunterAction()
+    public HuntCoopHunterAction()
     {
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addPrecondition("hasActualPrey", true);
         addPrecondition("hasDeadPrey", false);
-        addPrecondition("hasCoopHunter", false);
+        addPrecondition("hasCoopHunter", true);
+        addPrecondition("isInPosition", true);
         addEffect("hasDeadPrey", true);
     }
 
@@ -24,7 +25,7 @@ public class HuntAloneHunterAction : GoapAction
         hunt = false;
         targetPrey = null;
         startTime = 0;
-        
+
     }
 
     public override bool isDone()
@@ -56,7 +57,10 @@ public class HuntAloneHunterAction : GoapAction
             startTime = Time.time;
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
             Debug.Log("PREY DEAD!");
-            hunter.actualPrey.killDeer();
+            if (!hunter.actualPrey.isDead)
+            {
+                hunter.actualPrey.killDeer();
+            }
         }
 
         if (Time.time - startTime > huntDuration)
@@ -65,7 +69,7 @@ public class HuntAloneHunterAction : GoapAction
             hunter.energy -= energyCost;
             hunt = true;
         }
-            
+
         return true;
     }
 

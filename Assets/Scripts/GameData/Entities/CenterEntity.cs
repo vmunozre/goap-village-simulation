@@ -15,7 +15,14 @@ public class CenterEntity : MonoBehaviour {
     private int numCollector = 1;
     private int numStonecutter = 1;
 
-    //Procreation Time
+    //Tenders
+
+    private Dictionary<string, Hunter> tenders;
+
+    public CenterEntity()
+    {
+        tenders = new Dictionary<string, Hunter>();
+    }
 
     public bool enterAgentToRecover()
     {
@@ -26,6 +33,22 @@ public class CenterEntity : MonoBehaviour {
     public void exitAgentToRecover()
     {
         agentsCounts--;
+    }
+
+    public void addTender(string _title, Hunter _object)
+    {
+        tenders.Add(_title, _object);
+    }
+
+    public Hunter checkTender(string _title)
+    {
+        Hunter tender = null;
+        if (tenders.ContainsKey(_title))
+        {
+            tender = tenders[_title];
+            
+        }
+        return tender;
     }
 
     private bool procreate()
@@ -51,7 +74,7 @@ public class CenterEntity : MonoBehaviour {
                     {
                         randomNum -= 20;
                     }
-                    Debug.Log("[CenterEntity - procreate()]Random num: " + randomNum);
+                    
                     if (randomNum >= 50)
                     {
                         Instantiate(agentTypes[0], new Vector3(transform.position.x, transform.position.y - 0.7f, -2.5f), Quaternion.identity);

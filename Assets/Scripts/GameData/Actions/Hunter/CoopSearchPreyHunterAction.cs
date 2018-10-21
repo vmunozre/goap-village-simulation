@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SearchPreyHunterAction : GoapAction
+public class CoopSearchPreyHunterAction : GoapAction
 {
     private bool found = false;
     public Vector3 nextPosition;
@@ -14,13 +14,13 @@ public class SearchPreyHunterAction : GoapAction
     private float radius = 2f;
     private float minMove = -0.4f;
     private float maxMove = 0.8f;
-    public SearchPreyHunterAction()
+    public CoopSearchPreyHunterAction()
     {
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addPrecondition("hasActualPrey", false);
         addPrecondition("hasDeadPrey", false);
-        addPrecondition("hasCoopHunter", false);
+        addPrecondition("hasCoopHunter", true);
         addEffect("hasActualPrey", true);
         addEffect("preyFound", true);
     }
@@ -46,15 +46,15 @@ public class SearchPreyHunterAction : GoapAction
     public override bool checkProceduralPrecondition(GameObject agent)
     {
 
-        if(trendHerd == null)
+        if (trendHerd == null)
         {
             trendHerd = getTrendHerd();
         }
 
-        if(trendHerd != null)
+        if (trendHerd != null)
         {
             float posX = agent.transform.position.x - Random.Range(minMove, maxMove);
-            if(trendHerd.transform.position.x > agent.transform.position.x)
+            if (trendHerd.transform.position.x > agent.transform.position.x)
             {
                 posX = agent.transform.position.x + Random.Range(minMove, maxMove);
             }
@@ -83,9 +83,13 @@ public class SearchPreyHunterAction : GoapAction
         if (Time.time - startTime > searchDuration)
         {
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
-            if(hunter.actualPrey == null)
+            if (hunter.actualPrey == null)
             {
                 hunter.energy -= energyCost;
+            } else
+            {
+                found = true;
+                return true;
             }
             Collider2D[] colliders = Physics2D.OverlapCircleAll(agent.transform.position, radius);
             Collider2D closestCollider = null;
@@ -121,16 +125,17 @@ public class SearchPreyHunterAction : GoapAction
                         closestCollider = hit;
                         closestDist = dist;
                     }
-                }                
+                }
             }
 
             bool isClosest = closestCollider != null;
             if (isClosest)
             {
                 hunter.actualPrey = (DeerEntity)closestCollider.gameObject.GetComponent(typeof(DeerEntity));
+                hunter.coopHunter.actualPrey = hunter.actualPrey;
                 found = true;
-               
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -153,7 +158,7 @@ public class SearchPreyHunterAction : GoapAction
             return herds[index];
         }
         return null;
-        
+
     }
 
 }

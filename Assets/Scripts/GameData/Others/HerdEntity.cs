@@ -11,8 +11,8 @@ public class HerdEntity : MonoBehaviour {
     //Timer
     private float startTime = 0;
     private float reproductionTime = 10f;
-    private float minReproductionTime = 10f;
-    private float maxReproductionTime = 30f;
+    public float minReproductionTime = 10f;
+    public float maxReproductionTime = 30f;
     
     void Start () {
         maxDeer = Random.Range(3, 6);
