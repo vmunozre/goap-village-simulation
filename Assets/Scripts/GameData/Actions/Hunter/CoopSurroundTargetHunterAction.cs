@@ -7,7 +7,6 @@ public class CoopSurroundTargetHunterAction : GoapAction
 
     public float angleRotation = 0;
     public float firstAngle = 0;
-    public float angleAux = 0;
     public bool positiveRotation = true;
     public Vector3 tentativePos;
     public CoopSurroundTargetHunterAction()
