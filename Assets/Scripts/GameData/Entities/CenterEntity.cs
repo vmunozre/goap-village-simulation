@@ -15,13 +15,34 @@ public class CenterEntity : MonoBehaviour {
     private int numCollector = 1;
     private int numStonecutter = 1;
 
-    //Tenders
+    private List<Building> buildingsRequests = new List<Building>();
 
+    //Tenders
     private Dictionary<string, Hunter> tenders;
 
     public CenterEntity()
     {
         tenders = new Dictionary<string, Hunter>();
+    }
+
+    private void Awake()
+    {
+        
+    }
+    public Building getBuildingRequest()
+    {
+        
+        Building building = null;
+        if (buildingsRequests.Count > 0)
+        {
+            building = buildingsRequests[0];
+            buildingsRequests.RemoveAt(0);
+        } else
+        {
+            Debug.Log("NO BUILDING REQUESTS");
+            //building = new Building("Prefabs/Buildings/House");
+        }
+        return building;
     }
 
     public bool enterAgentToRecover()
