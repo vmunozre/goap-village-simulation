@@ -10,7 +10,6 @@ public class FindPlaceBuilderAction : GoapAction
     private int energyCost = 2;
 
     // find settings
-    private float radius = 2f;
     private float minMove = -1f;
     private float maxMove = 1f;
     public FindPlaceBuilderAction()
@@ -41,8 +40,7 @@ public class FindPlaceBuilderAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        Builder builder = (Builder)agent.GetComponent(typeof(Builder));
-
+        // TODO buscar cerca de lugares apropiados (aserradeor == bosque)
         float posX = agent.transform.position.x + Random.Range(minMove, maxMove);
         float posY = agent.transform.position.y + Random.Range(minMove, maxMove);
         nextPosition = new Vector3(posX, posY, agent.transform.position.z);
@@ -51,7 +49,7 @@ public class FindPlaceBuilderAction : GoapAction
         targetPosition = nextPosition;
         //Debug.DrawLine(targetPosition, agent.transform.position, Color.black, 3, false);
 
-        return targetPosition != null;
+        return targetPosition != Vector3.zero;
     }
 
     public override bool perform(GameObject agent)
@@ -86,8 +84,6 @@ public class FindPlaceBuilderAction : GoapAction
             agentCollider.enabled = false;
             Collider2D[] colliders = Physics2D.OverlapAreaAll(pointA, pointB);
             agentCollider.enabled = true;
-            Collider2D closestCollider = null;
-            float closestDist = 0;
 
             if (colliders == null)
             {
@@ -108,47 +104,7 @@ public class FindPlaceBuilderAction : GoapAction
             }
 
             //TODO si los colliders son árboles pedir que se talen y poner aqui la construcción
-            /*
-            foreach (Collider2D hit in colliders)
-            {
-                if (hit.tag != "Deer")
-                {
-                    continue;
-                }
-
-                DeerEntity deer = (DeerEntity)hit.gameObject.GetComponent(typeof(DeerEntity));
-                if (!deer.isAdult || deer.isDead)
-                {
-                    continue;
-                }
-                if (closestCollider == null)
-                {
-                    closestCollider = hit;
-                    closestDist = (closestCollider.gameObject.transform.position - agent.transform.position).magnitude;
-                }
-                else
-                {
-                    float dist = (hit.gameObject.transform.position - agent.transform.position).magnitude;
-                    if (dist < closestDist)
-                    {
-                        // we found a closer one, use it
-                        closestCollider = hit;
-                        closestDist = dist;
-                    }
-                }
-            }
-
-            bool isClosest = closestCollider != null;
-            if (isClosest)
-            {
-                hunter.actualPrey = (DeerEntity)closestCollider.gameObject.GetComponent(typeof(DeerEntity));
-                found = true;
-
-            }
-            else
-            {
-                return false;
-            }*/
+           
         }
         return true;
     }
