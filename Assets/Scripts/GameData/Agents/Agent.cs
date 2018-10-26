@@ -8,7 +8,7 @@ public abstract class Agent : MonoBehaviour, IGoap
     public int energy = 100;
 
     public bool recovering = false;
-
+    public bool waiting = false;
 
     public bool isAdult = false;
     private float startTimerBorn = 0f;

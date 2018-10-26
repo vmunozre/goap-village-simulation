@@ -18,4 +18,9 @@ public class Building {
         building = (Resources.Load(_prefab)) as GameObject;
 
     }
+
+    public bool hasAllResources()
+    {
+        return actualWood >= woodCost && actualStone >= stoneCost;
+    }
 }

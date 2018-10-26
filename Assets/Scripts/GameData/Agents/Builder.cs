@@ -18,7 +18,22 @@ public class Builder : Agent
     public override HashSet<KeyValuePair<string, object>> createGoalState()
     {
         HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
-        goal.Add(new KeyValuePair<string, object>("hasActualBuilding", true));
+
+        if (waiting)
+        {
+            goal.Add(new KeyValuePair<string, object>("waitComplete", true));
+        }
+
+        if(actualBuilding == null)
+        {
+            goal.Add(new KeyValuePair<string, object>("hasActualBuilding", true));
+        }
+
+        if(actualBuilding != null)
+        {
+            goal.Add(new KeyValuePair<string, object>("buildComplete", true));            
+        }
+
         return goal;
     }
 
@@ -26,11 +41,21 @@ public class Builder : Agent
     {
         HashSet<KeyValuePair<string, object>> worldData = new HashSet<KeyValuePair<string, object>>();
 
+        worldData.Add(new KeyValuePair<string, object>("isWaiting", waiting));
         worldData.Add(new KeyValuePair<string, object>("hasResources", (stone > 0) || (wood > 0)));
-        //worldData.Add(new KeyValuePair<string, object>("hasWood", (wood > 0)));
         worldData.Add(new KeyValuePair<string, object>("hasEnergy", (energy > 0)));
         worldData.Add(new KeyValuePair<string, object>("hasActualBuilding", (actualBuilding != null)));
         worldData.Add(new KeyValuePair<string, object>("hasActualRequest", (actualRequest != null)));
+
+        if(actualBuilding != null)
+        {
+            BaseBuilding building = actualBuilding.GetComponent<BaseBuilding>();
+            worldData.Add(new KeyValuePair<string, object>("buildingSupply", building.blueprint.hasAllResources()));
+        }
+        else
+        {
+            worldData.Add(new KeyValuePair<string, object>("buildingSupply", false));
+        }
 
         return worldData;
     }

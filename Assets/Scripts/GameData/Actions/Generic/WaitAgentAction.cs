@@ -1,38 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class CheckRequestsBuilderAction : GoapAction
+public class WaitAgentAction : GoapAction
 {
-    private bool isChecked = false;
+    private bool waited = false;
     private CenterEntity targetCenter;
 
     private float startTime = 0;
-    public float checkDuration = 0.5f; // seconds
+    public float waitDuration = 5; // seconds
 
-    public CheckRequestsBuilderAction()
+    public WaitAgentAction()
     {
-        addPrecondition("hasEnergy", true);
-        addPrecondition("hasActualRequest", false);
-        addPrecondition("hasActualBuilding", false);
-        addEffect("hasActualRequest", true);
+        addPrecondition("isWaiting", true); // we need energy
+        addEffect("isWaiting", false);
+        addEffect("waitComplete", true);
     }
 
 
     public override void reset()
     {
-        isChecked = false;
+        waited = false;
         targetCenter = null;
         startTime = 0;
     }
 
     public override bool isDone()
     {
-        return isChecked;
+        return waited;
     }
 
     public override bool requiresInRange()
     {
-        return false;
+        return true;
     }
 
     public override bool checkProceduralPrecondition(GameObject agent)
@@ -51,35 +50,33 @@ public class CheckRequestsBuilderAction : GoapAction
         if (closest == null)
             return false;
 
+      
         targetCenter = closest;
-        target = targetCenter.gameObject;
+        float diff = 0.5f;
+        float posX = targetCenter.transform.position.x + Random.Range(-diff, diff);
+        float posY = targetCenter.transform.position.y + Random.Range(-diff, diff);
+
+        targetPosition = new Vector3(posX, posY, agent.transform.position.z);
+        // Debug line
+        Debug.DrawLine(targetPosition, agent.transform.position, Color.white, 3, false);
         return closest != null;
     }
 
     public override bool perform(GameObject agent)
     {
-
+        
         if (startTime == 0)
         {
-            Builder builder = (Builder)agent.GetComponent(typeof(Builder));
-
-            Building building = targetCenter.getBuildingRequest();
-            
-            if (building == null)
-            {
-                builder.waiting = true;
-                return false;
-            } else
-            {
-                Debug.Log("Building added to builder");
-                builder.actualRequest = building;
-            }
+            Debug.Log("Agent Waiting");
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > checkDuration)
-        {            
-            isChecked = true;
+        if (Time.time - startTime > waitDuration)
+        {
+            Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
+            abstractAgent.energy = 100;
+            abstractAgent.waiting = false;
+            waited = true;
         }
         return true;
     }

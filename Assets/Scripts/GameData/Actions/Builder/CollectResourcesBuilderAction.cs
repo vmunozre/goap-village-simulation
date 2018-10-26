@@ -7,8 +7,10 @@ public class CollectResourcesBuilderAction : GoapAction
     private WarehouseEntity targetWarehouse;
 
     private float startTime = 0;
-    public float checkDuration = 0.5f; // seconds
+    public float checkDuration = 1.5f; // seconds
 
+    public int agentCapacity = 50;
+    private int energyCost = 10;
     public CollectResourcesBuilderAction()
     {
         addPrecondition("hasEnergy", true);
@@ -59,18 +61,58 @@ public class CollectResourcesBuilderAction : GoapAction
 
     public override bool perform(GameObject agent)
     {
-
         if (startTime == 0)
         {
+            //TODO - Si no quedan recursos en almacen esperar un tiempo
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));
             BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();
-            
- 
+
+            int lackWood = building.blueprint.woodCost - building.blueprint.actualWood;
+            int lackStone = building.blueprint.stoneCost - building.blueprint.actualStone;
+
+            if(targetWarehouse.wood <= 0 && lackWood > 0)
+            {
+                builder.waiting = true;
+                return false;
+            }
+
+            if(targetWarehouse.stone <= 0 && lackStone > 0)
+            {
+                builder.waiting = true;
+                return false;
+            }
+
+            if(targetWarehouse.wood >= lackWood)
+            {
+                builder.wood = Mathf.Min(lackWood, agentCapacity);
+                targetWarehouse.wood -= builder.wood;
+            } else
+            {
+                builder.wood = targetWarehouse.wood;
+                targetWarehouse.wood -= builder.wood;
+            }
+
+            if(builder.wood + builder.stone < agentCapacity)
+            {
+                if (targetWarehouse.stone >= lackStone)
+                {
+                    builder.stone = Mathf.Min(lackStone, agentCapacity);
+                    targetWarehouse.stone -= builder.stone;
+                }
+                else
+                {
+                    builder.stone = targetWarehouse.stone;
+                    targetWarehouse.stone -= builder.stone;
+                }
+            }
+
             startTime = Time.time;
         }
 
         if (Time.time - startTime > checkDuration)
         {
+            Builder builder = (Builder)agent.GetComponent(typeof(Builder));
+            builder.energy -= energyCost;
             collected = true;
         }
         return true;

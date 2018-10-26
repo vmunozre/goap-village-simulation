@@ -27,7 +27,8 @@ public class CenterEntity : MonoBehaviour {
 
     private void Awake()
     {
-        
+        Building building = new Building("Prefabs/Buildings/House");
+        buildingsRequests.Add(building);
     }
     public Building getBuildingRequest()
     {
