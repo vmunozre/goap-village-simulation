@@ -27444,7 +27444,7 @@ Prefab:
     - target: {fileID: 114956847420064224, guid: 566d827a13f4f1746bf20c700c2df5ff,
         type: 2}
       propertyPath: wood
-      value: 0
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 114956847420064224, guid: 566d827a13f4f1746bf20c700c2df5ff,
         type: 2}

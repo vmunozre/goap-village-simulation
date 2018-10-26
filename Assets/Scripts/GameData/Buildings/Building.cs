@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building {
+public class Building
+{
     public GameObject building;
     public int woodCost = 100;
     public int stoneCost = 100;
@@ -11,6 +13,7 @@ public class Building {
     public int priority = 1;
     public float timeCost = 20f;
     public float progress = 0f;
+    public bool done = false;
     public Vector3 position = Vector3.zero;
 
     public Building(string _prefab)
@@ -23,4 +26,5 @@ public class Building {
     {
         return actualWood >= woodCost && actualStone >= stoneCost;
     }
+
 }

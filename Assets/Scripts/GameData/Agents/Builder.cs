@@ -31,7 +31,7 @@ public class Builder : Agent
 
         if(actualBuilding != null)
         {
-            goal.Add(new KeyValuePair<string, object>("buildComplete", true));            
+            goal.Add(new KeyValuePair<string, object>("completeRequest", true));            
         }
 
         return goal;
@@ -51,10 +51,12 @@ public class Builder : Agent
         {
             BaseBuilding building = actualBuilding.GetComponent<BaseBuilding>();
             worldData.Add(new KeyValuePair<string, object>("buildingSupply", building.blueprint.hasAllResources()));
+            worldData.Add(new KeyValuePair<string, object>("buildComplete", building.blueprint.done));
         }
         else
         {
             worldData.Add(new KeyValuePair<string, object>("buildingSupply", false));
+            worldData.Add(new KeyValuePair<string, object>("buildComplete", false));
         }
 
         return worldData;

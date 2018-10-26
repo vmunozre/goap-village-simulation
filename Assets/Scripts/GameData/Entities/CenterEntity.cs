@@ -28,16 +28,33 @@ public class CenterEntity : MonoBehaviour {
     private void Awake()
     {
         Building building = new Building("Prefabs/Buildings/House");
-        buildingsRequests.Add(building);
+        addNewBuildingRequest(building);
     }
-    public Building getBuildingRequest()
+
+    public void addNewBuildingRequest(Building _building)
     {
-        
+        buildingsRequests.Add(_building);
+        buildingsRequests.Sort((x, y) => x.priority.CompareTo(y.priority));
+    }
+    public void removeBuildingRequest(Building _building)
+    {
+        if (checkBuildingRequests(_building))
+        {
+            buildingsRequests.Remove(_building);
+        }
+    }
+    public bool checkBuildingRequests(Building _building)
+    {
+        return buildingsRequests.Contains(_building);
+    }
+
+    public Building getBuildingRequest()
+    { 
         Building building = null;
         if (buildingsRequests.Count > 0)
         {
             building = buildingsRequests[0];
-            buildingsRequests.RemoveAt(0);
+            //buildingsRequests.RemoveAt(0);
         } else
         {
             Debug.Log("NO BUILDING REQUESTS");

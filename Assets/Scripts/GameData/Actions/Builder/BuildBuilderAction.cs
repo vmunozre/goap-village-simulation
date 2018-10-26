@@ -81,10 +81,7 @@ public class BuildBuilderAction : GoapAction
             {
                 SpriteRenderer sr = builder.actualBuilding.GetComponent<SpriteRenderer>();
                 sr.sprite = building.normalSprite;
-
-                builder.actualRequest = null;
-                builder.actualBuilding = null;
-
+                building.blueprint.done = true;
                 built = true;
                 return true;
             } else
