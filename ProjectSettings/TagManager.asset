@@ -23,6 +23,7 @@ TagManager:
   - Orchard
   - Fisher
   - Lake
+  - Farmer
   layers:
   - Default
   - TransparentFX

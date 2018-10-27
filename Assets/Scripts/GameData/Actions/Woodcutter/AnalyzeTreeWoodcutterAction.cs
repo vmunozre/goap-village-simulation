@@ -114,7 +114,6 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
                 if (centers != null && centers.Length > 0)
                 {
                     Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 25, 2);
-
                     centers[0].addNewBuildingRequest(building);
 
                 }

@@ -30,7 +30,7 @@ public class Fisher : Agent
     public override HashSet<KeyValuePair<string, object>> getWorldState()
     {
         HashSet<KeyValuePair<string, object>> worldData = new HashSet<KeyValuePair<string, object>>();
-
+        worldData.Add(new KeyValuePair<string, object>("isWaiting", waiting));
         worldData.Add(new KeyValuePair<string, object>("hasFood", (food > 0)));
         worldData.Add(new KeyValuePair<string, object>("hasEnergy", (energy > 0)));
 

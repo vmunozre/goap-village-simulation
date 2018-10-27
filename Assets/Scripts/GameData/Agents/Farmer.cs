@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collector : Agent {
+public class Farmer : Agent
+{
     // Basic data
     public int food = 0;
-    public BushEntity actualBush = null;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    public OrchardBuilding actualOrchard = null;
+
+    // Update is called once per frame
+    void Update()
+    {
         checkIsAdult();
-	}
+    }
 
     public override HashSet<KeyValuePair<string, object>> createGoalState()
     {
@@ -24,16 +22,8 @@ public class Collector : Agent {
             goal.Add(new KeyValuePair<string, object>("waitComplete", true));
             return goal;
         }
-        if (actualBush != null)
-        {
-            goal.Add(new KeyValuePair<string, object>("collectFood", true));
-        }
 
-        if (actualBush == null)
-        {
-            goal.Add(new KeyValuePair<string, object>("bushFound", true));
-        }
-        
+        goal.Add(new KeyValuePair<string, object>("collectFood", true));
         return goal;
     }
 
@@ -43,7 +33,13 @@ public class Collector : Agent {
         worldData.Add(new KeyValuePair<string, object>("isWaiting", waiting));
         worldData.Add(new KeyValuePair<string, object>("hasFood", (food > 0)));
         worldData.Add(new KeyValuePair<string, object>("hasEnergy", (energy > 0)));
-        worldData.Add(new KeyValuePair<string, object>("hasActualBush", (actualBush != null)));
+        if(actualOrchard != null)
+        {
+            worldData.Add(new KeyValuePair<string, object>("harvestTime", (actualOrchard.farmProgress >= actualOrchard.effort)));
+        } else
+        {
+            worldData.Add(new KeyValuePair<string, object>("harvestTime", false));
+        }
 
         return worldData;
     }

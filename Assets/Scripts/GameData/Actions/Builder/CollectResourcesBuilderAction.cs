@@ -63,7 +63,6 @@ public class CollectResourcesBuilderAction : GoapAction
     {
         if (startTime == 0)
         {
-            //TODO - Si no quedan recursos en almacen esperar un tiempo
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));
             BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();
 
