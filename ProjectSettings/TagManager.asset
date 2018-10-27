@@ -21,6 +21,8 @@ TagManager:
   - HuntingShed
   - Windmill
   - Orchard
+  - Fisher
+  - Lake
   layers:
   - Default
   - TransparentFX
