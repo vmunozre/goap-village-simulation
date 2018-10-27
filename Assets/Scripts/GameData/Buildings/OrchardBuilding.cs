@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrchardBuilding : MonoBehaviour {
+public class OrchardBuilding : BaseBuilding {
 
 	// Use this for initialization
 	void Start () {

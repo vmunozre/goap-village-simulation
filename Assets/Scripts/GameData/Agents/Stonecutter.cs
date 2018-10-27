@@ -17,6 +17,12 @@ public class Stonecutter : Agent
     public override HashSet<KeyValuePair<string, object>> createGoalState()
     {
         HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
+        if (waiting)
+        {
+            goal.Add(new KeyValuePair<string, object>("waitComplete", true));
+            return goal;
+        }
+
         goal.Add(new KeyValuePair<string, object>("collectStone", true));
         return goal;
     }

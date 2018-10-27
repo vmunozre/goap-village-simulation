@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212735592623647220}
   - component: {fileID: 114700656794506798}
   - component: {fileID: 114899008284641330}
+  - component: {fileID: 114975226563618714}
   - component: {fileID: 114959050697269210}
   - component: {fileID: 114424990572623342}
   - component: {fileID: 114732431415339202}
@@ -105,6 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 1
   target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   mineDuration: 10
 --- !u!114 &114700656794506798
 MonoBehaviour:
@@ -130,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 1
   target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   dropDuration: 1.5
 --- !u!114 &114899008284641330
 MonoBehaviour:
@@ -145,6 +148,7 @@ MonoBehaviour:
   moveSpeed: 0
   energy: 100
   recovering: 0
+  waiting: 0
   isAdult: 0
   stone: 0
   actualQuarry: {fileID: 0}
@@ -161,7 +165,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 1
   target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   recoveringDuration: 5
+--- !u!114 &114975226563618714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063974001219804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  waitDuration: 5
 --- !u!212 &212735592623647220
 SpriteRenderer:
   m_ObjectHideFlags: 1

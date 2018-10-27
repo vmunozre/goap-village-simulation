@@ -22,6 +22,7 @@ public class Builder : Agent
         if (waiting)
         {
             goal.Add(new KeyValuePair<string, object>("waitComplete", true));
+            return goal;
         }
 
         if(actualBuilding == null)

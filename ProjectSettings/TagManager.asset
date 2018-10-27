@@ -17,6 +17,10 @@ TagManager:
   - Hunter
   - House
   - Builder
+  - Sawmill
+  - HuntingShed
+  - Windmill
+  - Orchard
   layers:
   - Default
   - TransparentFX

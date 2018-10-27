@@ -11,7 +11,7 @@ public class AnalyzeBushCollectorAction : GoapAction
 
 
     // find settings
-    private float radius = 5f;
+    private float radius = 1f;
     private int numTry = 1;
 
     public AnalyzeBushCollectorAction()
@@ -42,7 +42,7 @@ public class AnalyzeBushCollectorAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        float localRadius = numTry * radius;
+        float localRadius = (numTry/2) + radius;
         numTry++;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(agent.transform.position, localRadius);
         Collider2D closestCollider = null;

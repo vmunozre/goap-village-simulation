@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212361867776320086}
   - component: {fileID: 114391516507379272}
   - component: {fileID: 114101959803880194}
+  - component: {fileID: 114958286713942490}
   - component: {fileID: 114717043433876312}
   - component: {fileID: 114748117791955744}
   - component: {fileID: 114811531908540626}
@@ -118,6 +119,7 @@ MonoBehaviour:
   moveSpeed: 1
   energy: 100
   recovering: 0
+  waiting: 0
   isAdult: 0
   food: 0
   actualBush: {fileID: 0}
@@ -134,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 1
   target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   recoveringDuration: 5
 --- !u!114 &114717043433876312
 MonoBehaviour:
@@ -148,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 1
   target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   collectDuration: 3
 --- !u!114 &114748117791955744
 MonoBehaviour:
@@ -162,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 1
   target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   dropDuration: 1.5
 --- !u!114 &114811531908540626
 MonoBehaviour:
@@ -176,8 +181,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 1
   target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   targetBush: {fileID: 0}
   analyzetDuration: 1.5
+--- !u!114 &114958286713942490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234606181017666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  waitDuration: 5
 --- !u!212 &212361867776320086
 SpriteRenderer:
   m_ObjectHideFlags: 1

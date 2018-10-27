@@ -93,8 +93,8 @@ public class FindPlaceBuilderAction : GoapAction
             {
                 GameObject build = Instantiate(builder.actualRequest.building, new Vector3(builder.transform.position.x, builder.transform.position.y, -0.1f), Quaternion.identity);
                 SpriteRenderer sr = build.GetComponent<SpriteRenderer>();
-                sr.sprite = build.GetComponent<HouseBuilding>().inConstructionSprite;
-                build.GetComponent<HouseBuilding>().blueprint = builder.actualRequest;
+                sr.sprite = build.GetComponent<BaseBuilding>().inConstructionSprite;
+                build.GetComponent<BaseBuilding>().blueprint = builder.actualRequest;
 
                 builder.actualBuilding = build;
                 found = true;

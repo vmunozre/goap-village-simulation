@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WindmillBuilding : MonoBehaviour {
+public class WindmillBuilding : BaseBuilding {
 
 	// Use this for initialization
 	void Start () {

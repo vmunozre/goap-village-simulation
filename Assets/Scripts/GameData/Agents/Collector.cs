@@ -19,6 +19,11 @@ public class Collector : Agent {
     public override HashSet<KeyValuePair<string, object>> createGoalState()
     {
         HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
+        if (waiting)
+        {
+            goal.Add(new KeyValuePair<string, object>("waitComplete", true));
+            return goal;
+        }
         if (actualBush != null)
         {
             goal.Add(new KeyValuePair<string, object>("collectFood", true));

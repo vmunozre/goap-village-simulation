@@ -15,8 +15,7 @@ public class CenterEntity : MonoBehaviour {
     private int numCollector = 1;
     private int numStonecutter = 1;
 
-    private List<Building> buildingsRequests = new List<Building>();
-
+    public List<Building> buildingsRequests = new List<Building>();
     //Tenders
     private Dictionary<string, Hunter> tenders;
 
@@ -27,24 +26,32 @@ public class CenterEntity : MonoBehaviour {
 
     private void Awake()
     {
-        Building building = new Building("Prefabs/Buildings/House");
+        Building building = new Building("Prefabs/Buildings/House", 100, 100, 20, 1);
         addNewBuildingRequest(building);
     }
 
     public void addNewBuildingRequest(Building _building)
     {
-        buildingsRequests.Add(_building);
-        buildingsRequests.Sort((x, y) => x.priority.CompareTo(y.priority));
+        if (!checkBuildingRequests(_building))
+        {
+            buildingsRequests.Add(_building);
+            buildingsRequests.Sort((x, y) => x.priority.CompareTo(y.priority));
+        }
+        
     }
     public void removeBuildingRequest(Building _building)
     {
         if (checkBuildingRequests(_building))
         {
-            buildingsRequests.Remove(_building);
+            // Elimina todos para evitar duplicados
+            buildingsRequests.RemoveAll(building => building.prefabPath == _building.prefabPath);
+            //buildingsRequests.RemoveAt(index);
         }
     }
     public bool checkBuildingRequests(Building _building)
     {
+        Debug.Log("Check Building: " + buildingsRequests.Contains(_building));
+        Debug.Log("Check Count: " + buildingsRequests.Count);
         return buildingsRequests.Contains(_building);
     }
 

@@ -14,12 +14,17 @@ public class Building
     public float timeCost = 20f;
     public float progress = 0f;
     public bool done = false;
+    public string prefabPath = "";
     public Vector3 position = Vector3.zero;
 
-    public Building(string _prefab)
+    public Building(string _prefab, int _woodCost, int _stoneCost, float _timeCost, int _priority)
     {
+        prefabPath = _prefab;
         building = (Resources.Load(_prefab)) as GameObject;
-
+        woodCost = _woodCost;
+        stoneCost = _stoneCost;
+        timeCost = _timeCost;
+        priority = _priority;
     }
 
     public bool hasAllResources()

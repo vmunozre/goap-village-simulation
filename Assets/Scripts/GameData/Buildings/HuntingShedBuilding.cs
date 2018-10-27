@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HuntingShedBuilding : MonoBehaviour {
+public class HuntingShedBuilding : BaseBuilding {
 
 	// Use this for initialization
 	void Start () {

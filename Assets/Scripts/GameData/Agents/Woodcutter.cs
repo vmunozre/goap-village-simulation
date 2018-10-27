@@ -22,6 +22,12 @@ public class Woodcutter : Agent
     public override HashSet<KeyValuePair<string, object>> createGoalState()
     {
         HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
+        if (waiting)
+        {
+            goal.Add(new KeyValuePair<string, object>("waitComplete", true));
+            return goal;
+        }
+
         if (actualTree != null)
         {
             goal.Add(new KeyValuePair<string, object>("collectWood", true));

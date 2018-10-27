@@ -11,7 +11,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
 
 
     // find settings
-    private float radius = 5f;
+    private float radius = 1f;
     private int numTry = 1;
 
     public AnalyzeTreeWoodcutterAction()
@@ -42,7 +42,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        float localRadius = numTry * radius;
+        float localRadius = (numTry/2) + radius;
         numTry++;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(agent.transform.position, localRadius);
         Collider2D closestCollider = null;
@@ -107,6 +107,19 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
         if (Time.time - startTime > analyzetDuration)
         {
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
+            SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
+            if (sawmills != null && sawmills.Length <= 0)
+            {
+                CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
+                if (centers != null && centers.Length > 0)
+                {
+                    Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 25, 2);
+
+                    centers[0].addNewBuildingRequest(building);
+
+                }
+            }
+
             woodcutter.energy -= energyCost;
             analyzed = true;
             if (targetTree.age < 3)
@@ -117,6 +130,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
             else
             {
                 woodcutter.actualTree = targetTree;
+                
             }
         }
         return true;
