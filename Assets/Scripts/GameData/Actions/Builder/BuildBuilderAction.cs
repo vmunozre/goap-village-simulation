@@ -6,9 +6,9 @@ public class BuildBuilderAction : GoapAction
     private GameObject targetBuilding;
 
     private float startTime = 0;
-    public float buildDuration = 10f; // seconds
     private float timeEnergyLoss = 5;
     private int energyCost = 5;
+
     public BuildBuilderAction()
     {
         addPrecondition("hasEnergy", true);
@@ -43,8 +43,7 @@ public class BuildBuilderAction : GoapAction
         bool checkActualBuilding = builder.actualBuilding != null;
         if (checkActualBuilding)
         {
-            BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();
-            buildDuration = Mathf.Max(1, building.blueprint.timeCost - building.blueprint.progress);
+            BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();            
             targetBuilding = builder.actualBuilding;
             target = targetBuilding;
         }
@@ -55,40 +54,30 @@ public class BuildBuilderAction : GoapAction
 
     public override bool perform(GameObject agent)
     {
+        Builder builder = (Builder)agent.GetComponent(typeof(Builder));
+        BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();
         if (startTime == 0)
         {
             startTime = Time.time;
         }
 
-        if((Time.time - startTime) % timeEnergyLoss == 0)
+        if((Time.time - startTime) > timeEnergyLoss)
         {
-            Builder builder = (Builder)agent.GetComponent(typeof(Builder));
-            BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();
-            building.blueprint.progress += timeEnergyLoss;
+            building.blueprint.progress += 1;
             builder.energy -= energyCost;
             if(builder.energy <= 0)
             {
                 return false;
             }
+            startTime = Time.time;
         }
 
-        if (Time.time - startTime > buildDuration)
-        {
-            Builder builder = (Builder)agent.GetComponent(typeof(Builder));
-            BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();
-
-            if(building.blueprint.progress >= building.blueprint.timeCost)
-            {
-                SpriteRenderer sr = builder.actualBuilding.GetComponent<SpriteRenderer>();
-                sr.sprite = building.normalSprite;
-                building.blueprint.done = true;
-                built = true;
-                return true;
-            } else
-            {
-                return false;
-            }
-
+        if (building.blueprint.progress >= building.blueprint.buildEffort)
+        {        
+            SpriteRenderer sr = builder.actualBuilding.GetComponent<SpriteRenderer>();
+            sr.sprite = building.normalSprite;
+            building.blueprint.done = true;
+            built = true;
         }
         return true;
     }

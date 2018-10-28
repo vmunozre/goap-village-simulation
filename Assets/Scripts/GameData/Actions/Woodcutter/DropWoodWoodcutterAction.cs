@@ -77,7 +77,7 @@ public class DropWoodWoodcutterAction : GoapAction
                 }
                 if (woodcutter.sawmill == null)
                 {
-                    Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 25, 2);
+                    Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 5, 2);
                     woodcutter.center.addNewBuildingRequest(building);
                 }
             }

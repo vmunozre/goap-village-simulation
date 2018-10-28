@@ -12,7 +12,7 @@ public class Collector : Agent {
     {
         center.agentsCounter[name]++;
         Debug.Log("--------- Collectors"+ center.agentsCounter[name]);
-        if(center.needCarriers() && center.agentsCounter[name] >= 3)
+        if(center.needCarriers() && center.agentsCounter[name] >= 2)
         {
             instanciateSuccessor("Carrier");
         }

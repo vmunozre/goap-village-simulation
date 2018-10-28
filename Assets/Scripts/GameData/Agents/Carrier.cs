@@ -47,7 +47,6 @@ public class Carrier : Agent
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         checkIsAdult();

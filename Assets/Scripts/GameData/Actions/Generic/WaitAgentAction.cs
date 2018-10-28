@@ -61,7 +61,7 @@ public class WaitAgentAction : GoapAction
         if (Time.time - startTime > waitDuration)
         {
             Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
-            abstractAgent.energy = 100;
+            abstractAgent.energy += 5;
             abstractAgent.waiting = false;
             waited = true;
         }

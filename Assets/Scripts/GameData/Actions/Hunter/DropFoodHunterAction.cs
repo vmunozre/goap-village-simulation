@@ -77,7 +77,7 @@ public class DropFoodHunterAction : GoapAction
                 }
                 if (hunter.huntingShed == null)
                 {
-                    Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 30, 2);
+                    Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 7, 2);
                     hunter.center.addNewBuildingRequest(building);
                     hunter.warehouse.food += hunter.food;
                 } else

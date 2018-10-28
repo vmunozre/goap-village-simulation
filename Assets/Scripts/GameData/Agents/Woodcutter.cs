@@ -29,7 +29,7 @@ public class Woodcutter : Agent
         }
         if (sawmill == null)
         {
-            Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 25, 2);
+            Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 5, 2);
             center.addNewBuildingRequest(building);
         }
     }

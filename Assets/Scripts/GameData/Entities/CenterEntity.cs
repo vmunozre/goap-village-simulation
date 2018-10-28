@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class CenterEntity : MonoBehaviour {
 
-    public int agentsCounts = 0;
-    public float bornRate = 100f;
-    public float bornLimitRate = 0f;
-    public Agent[] agentTypes;
+    public int actualAgents = 0;
+    public int bornCost = 50;
+
     // Warehouse associated
     public WarehouseEntity warehouse;
-
-    private int numWoodCutters = 1;
-    private int numCollector = 1;
-    private int numStonecutter = 1;
     public Dictionary<string, int> agentsCounter;
 
     public List<Building> buildingsRequests = new List<Building>();
@@ -36,7 +31,7 @@ public class CenterEntity : MonoBehaviour {
 
     private void Awake()
     {
-        Building building = new Building("Prefabs/Buildings/House", 100, 100, 20, 1);
+        Building building = new Building("Prefabs/Buildings/House", 100, 100, 3, 1);
         addNewBuildingRequest(building);
     }
 
@@ -80,15 +75,15 @@ public class CenterEntity : MonoBehaviour {
         return building;
     }
 
-    public bool enterAgentToRecover()
+    public void enterAgentToRecover()
     {
-        agentsCounts++;
-        return procreate();
+        actualAgents++;
+        procreate();
     }
 
     public void exitAgentToRecover()
     {
-        agentsCounts--;
+        actualAgents--;
     }
 
     public void addTender(string _title, Hunter _object)
@@ -107,47 +102,76 @@ public class CenterEntity : MonoBehaviour {
         return tender;
     }
 
-    private bool procreate()
+    private void procreate()
     {
-        if(agentsCounts >= 2 && (agentsCounts % 2 == 0))
+        if (actualAgents >= 2 && (actualAgents % 2 == 0) && warehouse.food >= bornCost)
         {
-            float rate = Random.Range(0f, bornRate);
-            if(rate > bornLimitRate)
+            int rate = Random.Range(1, 100);
+
+            if (rate <= 35 && needStoneCutters())
             {
-                float randomNum = Random.Range(0f, 100f);
-
-                if(randomNum < 30)
+                rate = Random.Range(1, 100);
+                if (rate < 15 && needBuilders())
                 {
-                    Instantiate(agentTypes[2], new Vector3(transform.position.x, transform.position.y - 0.7f, -2.5f), Quaternion.identity);
-                    numStonecutter++;
-                } else
-                {
-                    if (warehouse.wood > warehouse.food)
-                    {
-                        randomNum += 20;
-                    }
-                    else
-                    {
-                        randomNum -= 20;
-                    }
-                    
-                    if (randomNum >= 50)
-                    {
-                        Instantiate(agentTypes[0], new Vector3(transform.position.x, transform.position.y - 0.7f, -2.5f), Quaternion.identity);
-                        numCollector++;
-                    }
-                    else
-                    {
-                        Instantiate(agentTypes[1], new Vector3(transform.position.x, transform.position.y - 0.7f, -2.5f), Quaternion.identity);
-                        numWoodCutters++;
-                    }
-                    
+                    Instantiate(Resources.Load("Prefabs/Agents/Builder"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
                 }
-                return true;
-
+                else
+                {
+                    Instantiate(Resources.Load("Prefabs/Agents/Stonecutter"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
+                }
             }
+            else
+            {
+                rate = Random.Range(1, 100);
+
+                if (rate < 40 && needWoodcutters())
+                {
+                    Instantiate(Resources.Load("Prefabs/Agents/Woodcutter"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(Resources.Load("Prefabs/Agents/Collector"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
+                }
+            }
+            warehouse.food -= bornCost;
         }
-        return false;
+
+    }
+
+    public bool needBuilders()
+    {
+        bool result = false;
+
+        // 3 por ejemplo
+        result = agentsCounter["Builder"] < 1;
+
+        return result;
+    }
+
+    public bool needWoodcutters()
+    {
+        bool result = false;
+
+        // 5 por ejemplo
+        result = agentsCounter["Woodcutter"] < 5;
+
+        return result;
+    }
+
+    public bool needStoneCutters()
+    {
+        bool result = false;
+        QuarryEntity[] quarries = (QuarryEntity[])FindObjectsOfType(typeof(QuarryEntity));
+        foreach (QuarryEntity quarry in quarries)
+        {
+            if (quarry.full)
+            {
+                continue;
+            }
+            result = true;
+            break;
+        }
+        return result;
     }
 
     public bool needCarriers()

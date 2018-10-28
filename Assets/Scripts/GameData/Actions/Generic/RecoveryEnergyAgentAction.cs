@@ -7,6 +7,7 @@ public class RecoveryEnergyAgentAction : GoapAction
 
     private float startTime = 0;
     public float recoveringDuration = 5; // seconds
+    public int foodCost = 10;
 
     public RecoveryEnergyAgentAction()
     {
@@ -55,7 +56,7 @@ public class RecoveryEnergyAgentAction : GoapAction
             }
             if (abstractAgent.house == null)
             {
-                Building building = new Building("Prefabs/Buildings/House", 100, 100, 20, 1);
+                Building building = new Building("Prefabs/Buildings/House", 100, 100, 3, 1);
                 abstractAgent.center.addNewBuildingRequest(building);
                 target = abstractAgent.center.gameObject;
             } else
@@ -74,6 +75,12 @@ public class RecoveryEnergyAgentAction : GoapAction
         Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
         if (startTime == 0)
         {
+            if(abstractAgent.warehouse.food < foodCost)
+            {
+                abstractAgent.waiting = true;
+                return false;
+            }
+            abstractAgent.warehouse.food -= foodCost;
             abstractAgent.recovering = true;
             if(abstractAgent.house != null)
             {

@@ -34,7 +34,7 @@ public class Hunter : Agent
         }
         if (huntingShed == null)
         {
-            Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 30, 2);
+            Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 7, 2);
             center.addNewBuildingRequest(building);
         }
         moveSpeed = 1;
