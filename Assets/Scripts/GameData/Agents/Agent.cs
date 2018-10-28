@@ -14,6 +14,11 @@ public abstract class Agent : MonoBehaviour, IGoap
     private float startTimerBorn = 0f;
     private float bornDuration = 0f;
 
+    // Places
+    public CenterEntity center = null;
+    public WarehouseEntity warehouse = null;
+
+    public HouseBuilding house = null;
     void Awake()
     {
         if (!isAdult)
@@ -21,6 +26,36 @@ public abstract class Agent : MonoBehaviour, IGoap
             transform.localScale = new Vector3(0.3f, 0.3f, 1f);
             moveSpeed = 0;
             bornDuration = 6f;
+        }
+
+        CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
+        if (centers.Length > 0)
+        {
+            center = centers[0];
+        }
+        WarehouseEntity[] warehouses = (WarehouseEntity[])FindObjectsOfType(typeof(WarehouseEntity));
+        if (warehouses.Length > 0)
+        {
+            warehouse = warehouses[0];
+        }
+
+        HouseBuilding[] houses = (HouseBuilding[])FindObjectsOfType(typeof(HouseBuilding));
+        foreach(HouseBuilding hos in houses)
+        {
+            if (hos.full && hos.blueprint.done)
+            {
+                continue;
+            }
+            if (hos.addAgent())
+            {
+                house = hos;
+                break;
+            }
+        }
+        if(house == null)
+        {
+            Building building = new Building("Prefabs/Buildings/House", 100, 100, 20, 1);
+            center.addNewBuildingRequest(building);
         }
     }
 

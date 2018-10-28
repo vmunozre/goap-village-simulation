@@ -4,7 +4,6 @@ using UnityEngine;
 public class RecoveryEnergyAgentAction : GoapAction
 {
     private bool recovered = false;
-    private CenterEntity targetCenter;
 
     private float startTime = 0;
     public float recoveringDuration = 5; // seconds
@@ -19,7 +18,6 @@ public class RecoveryEnergyAgentAction : GoapAction
     public override void reset()
     {
         recovered = false;       
-        targetCenter = null;
         startTime = 0;
     }
 
@@ -35,25 +33,40 @@ public class RecoveryEnergyAgentAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
-        CenterEntity closest = null;
-        if(centers == null)
+        Agent abstractAgent = (Agent) agent.GetComponent(typeof(Agent));
+
+        if(abstractAgent.house != null)
         {
-            return false;
-        }
-        if (centers.Length > 0)
+            target = abstractAgent.house.gameObject;
+        } else
         {
-            closest = centers[0];
+            HouseBuilding[] houses = (HouseBuilding[])FindObjectsOfType(typeof(HouseBuilding));
+            foreach (HouseBuilding house in houses)
+            {
+                if (house.full && house.blueprint.done)
+                {
+                    continue;
+                }
+                if (house.addAgent())
+                {
+                    abstractAgent.house = house;
+                    break;
+                }
+            }
+            if (abstractAgent.house == null)
+            {
+                Building building = new Building("Prefabs/Buildings/House", 100, 100, 20, 1);
+                abstractAgent.center.addNewBuildingRequest(building);
+                target = abstractAgent.center.gameObject;
+            } else
+            {
+                target = abstractAgent.house.gameObject;
+            }
         }
 
-        if (closest == null)
-            return false;
-
-        targetCenter = closest;
-        target = targetCenter.gameObject;
         // Debug line
-        Debug.DrawLine(target.transform.position, agent.transform.position, Color.blue, 3, false);
-        return closest != null;
+        //Debug.DrawLine(target.transform.position, agent.transform.position, Color.blue, 3, false);
+        return target != null;
     }
 
     public override bool perform(GameObject agent)
@@ -62,7 +75,13 @@ public class RecoveryEnergyAgentAction : GoapAction
         if (startTime == 0)
         {
             abstractAgent.recovering = true;
-            targetCenter.enterAgentToRecover();
+            if(abstractAgent.house != null)
+            {
+                abstractAgent.house.enterAgentToRecover();
+            } else
+            {
+                abstractAgent.center.enterAgentToRecover();
+            }
             startTime = Time.time;
         }
 
@@ -70,7 +89,14 @@ public class RecoveryEnergyAgentAction : GoapAction
         {
             abstractAgent.energy = 100;
             abstractAgent.recovering = false;
-            targetCenter.exitAgentToRecover();
+            if (abstractAgent.house != null)
+            {
+                abstractAgent.house.exitAgentToRecover();
+            }
+            else
+            {
+                abstractAgent.center.exitAgentToRecover();
+            }
             recovered = true;
         }
         return true;
