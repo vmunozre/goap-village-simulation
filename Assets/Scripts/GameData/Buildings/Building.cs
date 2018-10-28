@@ -14,6 +14,7 @@ public class Building
     public int buildEffort = 10;
     public int progress = 0;
     public bool done = false;
+    public bool taken = false;
     public string prefabPath = "";
     public Vector3 position = Vector3.zero;
 

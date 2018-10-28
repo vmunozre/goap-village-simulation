@@ -78,9 +78,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a622a551ead5443bb61930b7f29fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wood: 0
-  food: 0
-  stone: 0
+  wood: 100
+  food: 100
+  stone: 100
 --- !u!212 &212226951237201382
 SpriteRenderer:
   m_ObjectHideFlags: 1
