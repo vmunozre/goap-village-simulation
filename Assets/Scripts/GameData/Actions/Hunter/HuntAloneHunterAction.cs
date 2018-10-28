@@ -34,7 +34,7 @@ public class HuntAloneHunterAction : GoapAction
 
     public override bool requiresInRange()
     {
-        return true; // yes we need to be near a tree
+        return true; 
     }
 
     public override bool checkProceduralPrecondition(GameObject agent)

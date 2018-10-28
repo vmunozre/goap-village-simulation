@@ -34,26 +34,12 @@ public class DropFoodFisherAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        WarehouseEntity[] warehouses = (WarehouseEntity[])FindObjectsOfType(typeof(WarehouseEntity));
-        WarehouseEntity closest = null;
-        if (warehouses == null)
-        {
-            return false;
-        }
-
-        if (warehouses.Length > 0)
-        {
-            closest = warehouses[0];
-        }
-
-        if (closest == null)
-            return false;
-
-        targetWarehouse = closest;
+        Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
+        targetWarehouse = abstractAgent.warehouse;
         target = targetWarehouse.gameObject;
         // Debug line
-        Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
-        return closest != null;
+        // Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
+        return targetWarehouse != null;
     }
 
     public override bool perform(GameObject agent)

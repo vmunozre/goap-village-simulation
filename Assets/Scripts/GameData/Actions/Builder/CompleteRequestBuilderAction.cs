@@ -35,23 +35,10 @@ public class CompleteRequestBuilderAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
-        CenterEntity closest = null;
-        if (centers == null)
-        {
-            return false;
-        }
-        if (centers.Length > 0)
-        {
-            closest = centers[0];
-        }
-
-        if (closest == null)
-            return false;
-
-        targetCenter = closest;
+        Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
+        targetCenter = abstractAgent.center;
         target = targetCenter.gameObject;
-        return closest != null;
+        return targetCenter != null;
     }
 
     public override bool perform(GameObject agent)

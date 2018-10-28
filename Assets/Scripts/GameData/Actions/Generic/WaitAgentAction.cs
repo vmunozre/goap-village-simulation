@@ -36,22 +36,9 @@ public class WaitAgentAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
-        CenterEntity closest = null;
-        if (centers == null)
-        {
-            return false;
-        }
-        if (centers.Length > 0)
-        {
-            closest = centers[0];
-        }
+        Agent abstractAgent = (Agent) agent.GetComponent(typeof(Agent));
 
-        if (closest == null)
-            return false;
-
-      
-        targetCenter = closest;
+        targetCenter = abstractAgent.center;
         float diff = 0.5f;
         float posX = targetCenter.transform.position.x + Random.Range(-diff, diff);
         float posY = targetCenter.transform.position.y + Random.Range(-diff, diff);
@@ -59,7 +46,7 @@ public class WaitAgentAction : GoapAction
         targetPosition = new Vector3(posX, posY, agent.transform.position.z);
         // Debug line
         Debug.DrawLine(targetPosition, agent.transform.position, Color.white, 3, false);
-        return closest != null;
+        return targetCenter != null;
     }
 
     public override bool perform(GameObject agent)

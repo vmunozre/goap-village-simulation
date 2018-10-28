@@ -109,14 +109,9 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
             SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
             if (sawmills != null && sawmills.Length <= 0)
-            {
-                CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
-                if (centers != null && centers.Length > 0)
-                {
-                    Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 25, 2);
-                    centers[0].addNewBuildingRequest(building);
-
-                }
+            {      
+                Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 25, 2);
+                woodcutter.center.addNewBuildingRequest(building);
             }
 
             woodcutter.energy -= energyCost;

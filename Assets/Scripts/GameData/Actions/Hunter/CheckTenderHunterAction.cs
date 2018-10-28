@@ -37,23 +37,10 @@ public class CheckTenderHunterAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
-        CenterEntity closest = null;
-        if (centers == null)
-        {
-            return false;
-        }
-        if (centers.Length > 0)
-        {
-            closest = centers[0];
-        }
-
-        if (closest == null)
-            return false;
-
-        targetCenter = closest;
+        Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
+        targetCenter = abstractAgent.center;
         target = targetCenter.gameObject;
-        return closest != null;
+        return targetCenter != null;
     }
 
     public override bool perform(GameObject agent)
@@ -98,7 +85,6 @@ public class CheckTenderHunterAction : GoapAction
                 {
                     Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 30, 2);
                     centers[0].addNewBuildingRequest(building);
-
                 }
             }
             isChecked = true;

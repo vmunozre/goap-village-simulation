@@ -122,14 +122,9 @@ public class FarmFarmerAction : GoapAction
     }
 
     private void addOrchardRequest(Farmer _farmer)
-    {
-        CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
-        if (centers != null && centers.Length > 0)
-        {
-            Building building = new Building("Prefabs/Buildings/Orchard", 100, 50, 15, 3);
-            centers[0].addNewBuildingRequest(building);
-
-        }
+    {       
+        Building building = new Building("Prefabs/Buildings/Orchard", 100, 50, 15, 3);
+        _farmer.center.addNewBuildingRequest(building);
         Debug.Log(".------------Go to sleeep!");
         _farmer.waiting = true;
     }
