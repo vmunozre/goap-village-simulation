@@ -5,6 +5,8 @@ using UnityEngine;
 public class SawmillBuilding : BaseBuilding
 {
     public int workers = 0;
+    public int carriers = 0;
+    public int limitCarriers = 2;
     public int wood = 0;
     // Use this for initialization
     void Start()

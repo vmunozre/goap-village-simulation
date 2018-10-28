@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HuntingShedBuilding : BaseBuilding {
     public int hunters = 0;
+    public int carriers = 0;
+    public int limitCarriers = 2;
     public int food = 0;
 	// Use this for initialization
 	void Start () {
