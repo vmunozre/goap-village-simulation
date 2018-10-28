@@ -77,16 +77,6 @@ public class CheckTenderHunterAction : GoapAction
 
         if (Time.time - startTime > checkDuration)
         {
-            HuntingShedBuilding[] huntingShed = (HuntingShedBuilding[])FindObjectsOfType(typeof(HuntingShedBuilding));
-            if (huntingShed != null && huntingShed.Length <= 0)
-            {
-                CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
-                if (centers != null && centers.Length > 0)
-                {
-                    Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 30, 2);
-                    centers[0].addNewBuildingRequest(building);
-                }
-            }
             isChecked = true;
         }
         return true;

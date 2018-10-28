@@ -13,9 +13,27 @@ public class Hunter : Agent
     public bool leader = false;
     public bool hasTender = false;
     public bool isInPosition = false;
-
+    
+    public HuntingShedBuilding huntingShed = null;
     private void Start()
     {
+        HuntingShedBuilding[] huntingSheds = (HuntingShedBuilding[])FindObjectsOfType(typeof(HuntingShedBuilding));
+        foreach (HuntingShedBuilding shed in huntingSheds)
+        {
+            if (!shed.blueprint.done)
+            {
+                continue;
+            }
+            huntingShed = shed;
+            huntingShed.hunters++;
+            break;
+
+        }
+        if (huntingShed == null)
+        {
+            Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 30, 2);
+            center.addNewBuildingRequest(building);
+        }
         moveSpeed = 1;
     }
 

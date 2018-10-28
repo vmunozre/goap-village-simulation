@@ -3,7 +3,6 @@
 public class DropWoodWoodcutterAction : GoapAction
 {
     private bool droppedWood = false;
-    private WarehouseEntity targetWarehouse;
 
     private float startTime = 0;
     public float dropDuration = 1.5f; // seconds
@@ -18,7 +17,6 @@ public class DropWoodWoodcutterAction : GoapAction
     public override void reset()
     {
         droppedWood = false;
-        targetWarehouse = null;
         startTime = 0;
     }
 
@@ -34,12 +32,18 @@ public class DropWoodWoodcutterAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
-        targetWarehouse = abstractAgent.warehouse;
-        target = targetWarehouse.gameObject;
+        Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
+
+        if (woodcutter.sawmill != null)
+        {
+            target = woodcutter.sawmill.gameObject;
+        } else
+        {
+            target = woodcutter.warehouse.gameObject;
+        }
         // Debug line
         // Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
-        return targetWarehouse != null;
+        return target != null;
     }
 
     public override bool perform(GameObject agent)
@@ -52,7 +56,32 @@ public class DropWoodWoodcutterAction : GoapAction
         if (Time.time - startTime > dropDuration)
         {
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
-            targetWarehouse.wood += woodcutter.wood;
+            if (woodcutter.sawmill != null)
+            {
+                woodcutter.sawmill.wood += woodcutter.wood;
+            }
+            else
+            {
+                woodcutter.warehouse.wood += woodcutter.wood;
+                SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
+                foreach (SawmillBuilding saw in sawmills)
+                {
+                    if (!saw.blueprint.done)
+                    {
+                        continue;
+                    }
+                    woodcutter.sawmill = saw;
+                    woodcutter.sawmill.workers++;
+                    break;
+
+                }
+                if (woodcutter.sawmill == null)
+                {
+                    Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 25, 2);
+                    woodcutter.center.addNewBuildingRequest(building);
+                }
+            }
+
             woodcutter.wood = 0;
             droppedWood = true;
         }

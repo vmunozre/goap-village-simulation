@@ -43,7 +43,7 @@ public class RecoveryEnergyAgentAction : GoapAction
             HouseBuilding[] houses = (HouseBuilding[])FindObjectsOfType(typeof(HouseBuilding));
             foreach (HouseBuilding house in houses)
             {
-                if (house.full && house.blueprint.done)
+                if (house.full || !house.blueprint.done)
                 {
                     continue;
                 }

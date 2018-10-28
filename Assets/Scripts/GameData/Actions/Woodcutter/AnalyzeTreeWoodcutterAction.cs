@@ -107,13 +107,6 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
         if (Time.time - startTime > analyzetDuration)
         {
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
-            SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
-            if (sawmills != null && sawmills.Length <= 0)
-            {      
-                Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 25, 2);
-                woodcutter.center.addNewBuildingRequest(building);
-            }
-
             woodcutter.energy -= energyCost;
             analyzed = true;
             if (targetTree.age < 3)

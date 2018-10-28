@@ -42,7 +42,7 @@ public abstract class Agent : MonoBehaviour, IGoap
         HouseBuilding[] houses = (HouseBuilding[])FindObjectsOfType(typeof(HouseBuilding));
         foreach(HouseBuilding hos in houses)
         {
-            if (hos.full && hos.blueprint.done)
+            if (hos.full || !hos.blueprint.done)
             {
                 continue;
             }

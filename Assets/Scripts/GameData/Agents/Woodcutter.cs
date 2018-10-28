@@ -7,10 +7,28 @@ public class Woodcutter : Agent
     // Basic data
     public int wood = 0;
     public TreeEntity actualTree = null;
+
+    public SawmillBuilding sawmill = null;
     // Use this for initialization
     void Start()
     {
-
+        SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
+        foreach (SawmillBuilding saw in sawmills)
+        {
+            if (!saw.blueprint.done)
+            {
+                continue;
+            }
+            sawmill = saw;
+            sawmill.workers++;
+            break;
+            
+        }
+        if (sawmill == null)
+        {
+            Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 25, 2);
+            center.addNewBuildingRequest(building);
+        }
     }
 
     // Update is called once per frame
