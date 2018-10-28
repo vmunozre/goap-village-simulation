@@ -5,10 +5,15 @@ using UnityEngine;
 public class Stonecutter : Agent
 {
     // Basic data
+    public new string name = "Stonecutter";
     public int stone = 0;
     public QuarryEntity actualQuarry = null;
 
-    // Update is called once per frame
+    void Start()
+    {
+        center.agentsCounter[name]++;
+    }
+
     void Update()
     {
         checkIsAdult();

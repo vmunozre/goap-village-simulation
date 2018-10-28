@@ -5,11 +5,17 @@ using UnityEngine;
 public class Builder : Agent
 {
     // Basic data
+    public new string name = "Builder";
     public int stone = 0;
     public int wood = 0;
     public GameObject actualBuilding = null;
     public Building actualRequest = null;
-    // Update is called once per frame
+
+    void Start()
+    {
+        center.agentsCounter[name]++;
+    }
+
     void Update()
     {
         checkIsAdult();

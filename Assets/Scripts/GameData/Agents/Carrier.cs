@@ -5,6 +5,7 @@ using UnityEngine;
 public class Carrier : Agent
 {
     // Basic data
+    public new string name = "Carrier";
     public int wood = 0;
     public int food = 0;
 
@@ -13,6 +14,8 @@ public class Carrier : Agent
     // Use this for initialization
     void Start()
     {
+        center.agentsCounter[name]++;
+
         SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
         foreach (SawmillBuilding saw in sawmills)
         {

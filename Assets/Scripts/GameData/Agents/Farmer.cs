@@ -5,10 +5,14 @@ using UnityEngine;
 public class Farmer : Agent
 {
     // Basic data
+    public new string name = "Farmer";
     public int food = 0;
     public OrchardBuilding actualOrchard = null;
+    void Start()
+    {
+        center.agentsCounter[name]++;
+    }
 
-    // Update is called once per frame
     void Update()
     {
         checkIsAdult();

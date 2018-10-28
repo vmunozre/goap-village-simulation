@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hunter : Agent
 {
     // Basic data
+    public new string name = "Hunter";
     public int food = 0;
     public DeerEntity actualPrey = null;
 
@@ -15,8 +16,10 @@ public class Hunter : Agent
     public bool isInPosition = false;
     
     public HuntingShedBuilding huntingShed = null;
-    private void Start()
+    void Start()
     {
+        center.agentsCounter[name]++;
+
         HuntingShedBuilding[] huntingSheds = (HuntingShedBuilding[])FindObjectsOfType(typeof(HuntingShedBuilding));
         foreach (HuntingShedBuilding shed in huntingSheds)
         {

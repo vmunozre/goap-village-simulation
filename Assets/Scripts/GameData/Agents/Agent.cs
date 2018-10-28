@@ -6,7 +6,7 @@ public abstract class Agent : MonoBehaviour, IGoap
     // Basic data
     public float moveSpeed = 1;
     public int energy = 100;
-
+   
     public bool recovering = false;
     public bool waiting = false;
 

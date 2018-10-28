@@ -5,6 +5,7 @@ using UnityEngine;
 public class Woodcutter : Agent
 {
     // Basic data
+    public new string name = "Woodcutter";
     public int wood = 0;
     public TreeEntity actualTree = null;
 
@@ -12,6 +13,8 @@ public class Woodcutter : Agent
     // Use this for initialization
     void Start()
     {
+        center.agentsCounter[name]++;
+
         SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
         foreach (SawmillBuilding saw in sawmills)
         {

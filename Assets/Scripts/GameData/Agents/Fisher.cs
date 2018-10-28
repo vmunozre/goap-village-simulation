@@ -5,10 +5,15 @@ using UnityEngine;
 public class Fisher : Agent
 {
     // Basic data
+    public new string name = "Fisher";
     public int food = 0;
     public GameObject actualLakePosition = null;
 
-    // Update is called once per frame
+    void Start()
+    {
+        center.agentsCounter[name]++;
+    }
+      
     void Update()
     {
         checkIsAdult();

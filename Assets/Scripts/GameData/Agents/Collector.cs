@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Collector : Agent {
     // Basic data
+    public new string name = "Collector";
     public int food = 0;
     public BushEntity actualBush = null;
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start()
+    {
+        center.agentsCounter[name]++;
+        Debug.Log("--------- Collectors"+ center.agentsCounter[name]);
+        if(center.needCarriers() && center.agentsCounter[name] >= 3)
+        {
+            instanciateSuccessor("Carrier");
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -46,5 +53,17 @@ public class Collector : Agent {
         worldData.Add(new KeyValuePair<string, object>("hasActualBush", (actualBush != null)));
 
         return worldData;
+    }
+
+    private void autoDestroy()
+    {
+        center.agentsCounter[name]--;
+        Destroy(gameObject);
+    }
+
+    public void instanciateSuccessor(string _prefab)
+    {
+        Instantiate(Resources.Load("Prefabs/Agents/" + _prefab), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        autoDestroy();
     }
 }

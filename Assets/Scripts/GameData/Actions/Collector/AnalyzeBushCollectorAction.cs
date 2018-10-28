@@ -88,6 +88,31 @@ public class AnalyzeBushCollectorAction : GoapAction
             targetBush = (BushEntity)closestCollider.gameObject.GetComponent(typeof(BushEntity));
             target = targetBush.gameObject;
             numTry = 1;
+        } 
+        if(numTry > 10)
+        {
+            Collector collector = (Collector)agent.GetComponent(typeof(Collector));
+            if (collector.center.needCarriers())
+            {
+                
+                collector.instanciateSuccessor("Carrier");
+                return false;
+            }
+
+            if (collector.center.needHunters())
+            {
+                collector.instanciateSuccessor("Hunter");
+                return false;
+            }
+
+            if (collector.center.needFishers())
+            {
+                collector.instanciateSuccessor("Fisher");
+                return false;
+            }
+
+            collector.instanciateSuccessor("Farmer");
+            return false;
         }
         return isClosest;
     }

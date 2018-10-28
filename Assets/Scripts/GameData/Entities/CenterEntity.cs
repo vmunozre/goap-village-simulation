@@ -14,6 +14,7 @@ public class CenterEntity : MonoBehaviour {
     private int numWoodCutters = 1;
     private int numCollector = 1;
     private int numStonecutter = 1;
+    public Dictionary<string, int> agentsCounter;
 
     public List<Building> buildingsRequests = new List<Building>();
     //Tenders
@@ -22,6 +23,15 @@ public class CenterEntity : MonoBehaviour {
     public CenterEntity()
     {
         tenders = new Dictionary<string, Hunter>();
+        agentsCounter = new Dictionary<string, int>();
+        agentsCounter.Add("Builder", 0);
+        agentsCounter.Add("Carrier", 0);
+        agentsCounter.Add("Collector", 0);
+        agentsCounter.Add("Farmer", 0);
+        agentsCounter.Add("Fisher", 0);
+        agentsCounter.Add("Hunter", 0);
+        agentsCounter.Add("Stonecutter", 0);
+        agentsCounter.Add("Woodcutter", 0);                
     }
 
     private void Awake()
@@ -106,7 +116,7 @@ public class CenterEntity : MonoBehaviour {
             {
                 float randomNum = Random.Range(0f, 100f);
 
-                if(randomNum < 20)
+                if(randomNum < 30)
                 {
                     Instantiate(agentTypes[2], new Vector3(transform.position.x, transform.position.y - 0.7f, -2.5f), Quaternion.identity);
                     numStonecutter++;
@@ -138,5 +148,54 @@ public class CenterEntity : MonoBehaviour {
             }
         }
         return false;
+    }
+
+    public bool needCarriers()
+    {
+        bool result = false;
+
+        SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
+        foreach (SawmillBuilding saw in sawmills)
+        {
+            if (!saw.blueprint.done || saw.carriers >= saw.limitCarriers)
+            {
+                continue;
+            }
+            result = true;
+            break;
+        }
+        if (!result)
+        {
+            HuntingShedBuilding[] huntingSheds = (HuntingShedBuilding[])FindObjectsOfType(typeof(HuntingShedBuilding));
+            foreach (HuntingShedBuilding shed in huntingSheds)
+            {
+                if (!shed.blueprint.done || shed.carriers >= shed.limitCarriers)
+                {
+                    continue;
+                }
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    public bool needHunters()
+    {
+        bool result = false;
+        HerdEntity[] herds = (HerdEntity[])FindObjectsOfType(typeof(HerdEntity));
+        result = agentsCounter["Hunter"] < (herds.Length + 2);
+        
+        return result;
+    }
+
+    public bool needFishers()
+    {
+        bool result = false;
+        LakeEntity[] lakes = (LakeEntity[])FindObjectsOfType(typeof(LakeEntity));
+
+        result = agentsCounter["Fisher"] < (lakes.Length * 4);        
+        return result;
     }
 }
