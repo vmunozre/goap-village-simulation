@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114732431415339202}
   - component: {fileID: 50453294253220328}
   - component: {fileID: 61735160795674406}
+  - component: {fileID: 95833060245198840}
   m_Layer: 0
   m_Name: Stonecutter
   m_TagString: Stonecutter
@@ -93,6 +94,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2580645, y: 0.38709676}
   m_EdgeRadius: 0
+--- !u!95 &95833060245198840
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063974001219804}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: adfa27174df422144ae7d580f7714405, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114424990572623342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e8bd5f5c3ca2f4cb7a6c78d5019cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -130,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba79860abeb80fa4bb36dfb19fa54037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -148,8 +169,13 @@ MonoBehaviour:
   moveSpeed: 0
   energy: 100
   recovering: 0
+  isMoving: 0
   waiting: 0
   isAdult: 0
+  center: {fileID: 0}
+  warehouse: {fileID: 0}
+  house: {fileID: 0}
+  name: Stonecutter
   stone: 0
   actualQuarry: {fileID: 0}
 --- !u!114 &114959050697269210
@@ -163,10 +189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c875fcc669aeb47a75b696ec704114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   recoveringDuration: 5
+  foodCost: 10
 --- !u!114 &114975226563618714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}

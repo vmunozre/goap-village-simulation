@@ -95,17 +95,20 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (targetTree.wood <= 0)
         {
+            disableBubbleIcon(agent);
             targetTree.turnEmptySprite();
             return false;
         }
 
         if (Time.time - startTime > analyzetDuration)
         {
+            disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
             woodcutter.energy -= energyCost;
             analyzed = true;
@@ -119,6 +122,8 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
                 woodcutter.actualTree = targetTree;
                 
             }
+            
+            
         }
         return true;
     }

@@ -8,7 +8,9 @@ public abstract class GoapAction : MonoBehaviour
     private HashSet<KeyValuePair<string, object>> effects;
 
     private bool inRange = false;
-    
+
+    // Sprite bubble
+    public Sprite bubbleSprite;
     // Coste de la acción
     public float cost = 1f;
 
@@ -124,5 +126,20 @@ public abstract class GoapAction : MonoBehaviour
         {
             return effects;
         }
+    }
+
+    public void enableBubbleIcon(GameObject _agent)
+    {
+        Transform bubble = _agent.transform.GetChild(0);
+        GameObject icon = bubble.GetChild(0).gameObject;
+        SpriteRenderer iconSr = icon.GetComponent<SpriteRenderer>();
+        iconSr.sprite = bubbleSprite;
+        bubble.gameObject.SetActive(true);
+    }
+
+    public void disableBubbleIcon(GameObject _agent)
+    {
+        GameObject bubble = _agent.transform.GetChild(0).gameObject;
+        bubble.SetActive(false);
     }
 }

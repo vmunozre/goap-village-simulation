@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114710342385887994}
   - component: {fileID: 50442134754690384}
   - component: {fileID: 61190573685140424}
+  - component: {fileID: 95883532388678482}
   m_Layer: 0
   m_Name: Collector
   m_TagString: Collector
@@ -94,6 +95,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2580645, y: 0.38709676}
   m_EdgeRadius: 0
+--- !u!95 &95883532388678482
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234606181017666}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: adfa27174df422144ae7d580f7714405, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114101959803880194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,8 +138,13 @@ MonoBehaviour:
   moveSpeed: 1
   energy: 100
   recovering: 0
+  isMoving: 0
   waiting: 0
   isAdult: 0
+  center: {fileID: 0}
+  warehouse: {fileID: 0}
+  house: {fileID: 0}
+  name: Collector
   food: 0
   actualBush: {fileID: 0}
 --- !u!114 &114710342385887994
@@ -134,10 +158,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c875fcc669aeb47a75b696ec704114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   recoveringDuration: 5
+  foodCost: 10
 --- !u!114 &114717043433876312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a142d8fadd5fa1144ae2adc6e492adde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -164,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6d2b4d9a19d66468f54c972cdac272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -179,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc03b7f578bd1c34facfeeb287671a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -195,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}

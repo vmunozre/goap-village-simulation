@@ -50,11 +50,13 @@ public class DropWoodWoodcutterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (Time.time - startTime > dropDuration)
         {
+            disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
             if (woodcutter.sawmill != null)
             {

@@ -34,6 +34,7 @@ GameObject:
   - component: {fileID: 114376028588165556}
   - component: {fileID: 61766414361289224}
   - component: {fileID: 50100733862605410}
+  - component: {fileID: 95980924306244386}
   m_Layer: 0
   m_Name: Hunter
   m_TagString: Hunter
@@ -99,6 +100,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.29032257, y: 0.4032258}
   m_EdgeRadius: 0
+--- !u!95 &95980924306244386
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1550548726277508}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: adfa27174df422144ae7d580f7714405, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114013170963189540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb6e64c42a13aa4b8843b8e895b193f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -125,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -143,14 +164,20 @@ MonoBehaviour:
   moveSpeed: 1
   energy: 100
   recovering: 0
+  isMoving: 0
   waiting: 0
   isAdult: 1
+  center: {fileID: 0}
+  warehouse: {fileID: 0}
+  house: {fileID: 0}
+  name: Hunter
   food: 0
   actualPrey: {fileID: 0}
   coopHunter: {fileID: 0}
   leader: 0
   hasTender: 0
   isInPosition: 0
+  huntingShed: {fileID: 0}
 --- !u!114 &114376028588165556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e188a2c06b62c64694202bcb2506d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -177,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6cb543932143b445bbd3ddb3d58f643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -192,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdb7bd5bdb138646b17e64a1ff42120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -207,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa8198418671c74abff85c561aa6656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -233,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457546c4d5478714a8bdb7fd25237cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -252,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af06639ee03bfd45bb70eb020c5c87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -267,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ce52b57e2103d418dce5d625ff8900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -282,10 +316,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c875fcc669aeb47a75b696ec704114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   recoveringDuration: 5
+  foodCost: 10
 --- !u!212 &212841414387102930
 SpriteRenderer:
   m_ObjectHideFlags: 1

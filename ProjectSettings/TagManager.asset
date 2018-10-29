@@ -25,6 +25,8 @@ TagManager:
   - Lake
   - Farmer
   - Carrier
+  - Bubble
+  - Icon
   layers:
   - Default
   - TransparentFX

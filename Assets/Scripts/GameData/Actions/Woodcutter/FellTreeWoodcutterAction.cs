@@ -52,11 +52,13 @@ public class FellTreeWoodcutterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (targetTree.wood <= 0)
         {
+            disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
             targetTree.turnEmptySprite();
             woodcutter.actualTree = null;
@@ -65,6 +67,7 @@ public class FellTreeWoodcutterAction : GoapAction
 
         if (Time.time - startTime > choppedDuration)
         {
+            disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
 
             targetTree.chopped = true;

@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114630698859884502}
   - component: {fileID: 114714045832475604}
   - component: {fileID: 114074200078436828}
+  - component: {fileID: 95023180478338218}
   m_Layer: 0
   m_Name: Fisher
   m_TagString: Fisher
@@ -91,6 +92,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2580645, y: 0.38709676}
   m_EdgeRadius: 0
+--- !u!95 &95023180478338218
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1405534807906124}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: adfa27174df422144ae7d580f7714405, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114074200078436828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc644f66448964f43b090364b67c5e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -131,8 +151,13 @@ MonoBehaviour:
   moveSpeed: 1
   energy: 100
   recovering: 0
+  isMoving: 0
   waiting: 0
   isAdult: 1
+  center: {fileID: 0}
+  warehouse: {fileID: 0}
+  house: {fileID: 0}
+  name: Fisher
   food: 0
   actualLakePosition: {fileID: 0}
 --- !u!114 &114714045832475604
@@ -146,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a585268f528e21e46b5a3a7f8e769c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSprite: {fileID: 0}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}

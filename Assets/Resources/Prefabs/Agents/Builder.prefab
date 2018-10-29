@@ -32,6 +32,7 @@ GameObject:
   - component: {fileID: 114671722452694748}
   - component: {fileID: 114905104494389032}
   - component: {fileID: 114637245450695018}
+  - component: {fileID: 95259056919395194}
   m_Layer: 0
   m_Name: Builder
   m_TagString: Builder
@@ -46,7 +47,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1390374301817658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3, y: 0.06, z: -2.5}
+  m_LocalPosition: {x: -2.014179, y: 1.0098867, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,6 +98,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32258064, y: 0.41935483}
   m_EdgeRadius: 0
+--- !u!95 &95259056919395194
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1390374301817658}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: adfa27174df422144ae7d580f7714405, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114015549222420600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,6 +131,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   recoveringDuration: 5
+  foodCost: 10
 --- !u!114 &114282265085609086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,7 +146,6 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  buildDuration: 10
 --- !u!114 &114318483894384340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,8 +246,13 @@ MonoBehaviour:
   moveSpeed: 1
   energy: 100
   recovering: 0
+  isMoving: 0
   waiting: 0
   isAdult: 1
+  center: {fileID: 0}
+  warehouse: {fileID: 0}
+  house: {fileID: 0}
+  name: Builder
   stone: 0
   wood: 0
   actualBuilding: {fileID: 0}

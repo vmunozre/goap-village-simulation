@@ -128,7 +128,7 @@ public abstract class Agent : MonoBehaviour, IGoap
 
     public bool moveAgent(GoapAction nextAction)
     {
-        animator.SetBool("isMoving", true);
+        //animator.SetBool("isMoving", true);
         Vector3 position = Vector3.zero;
         if(nextAction.target != null)
         {
@@ -152,7 +152,7 @@ public abstract class Agent : MonoBehaviour, IGoap
         if (gameObject.transform.position.Equals(toCompare))
         {
             // we are at the target location, we are done
-            animator.SetBool("isMoving", false);
+           // animator.SetBool("isMoving", false);
             nextAction.setInRange(true);
             return true;
         }

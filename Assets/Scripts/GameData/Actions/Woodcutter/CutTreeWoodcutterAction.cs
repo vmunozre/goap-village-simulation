@@ -52,11 +52,13 @@ public class CutTreeWoodcutterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (targetTree.wood <= 0)
         {
+            disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
             targetTree.turnEmptySprite();
             woodcutter.actualTree = null;
@@ -65,6 +67,7 @@ public class CutTreeWoodcutterAction : GoapAction
 
         if (Time.time - startTime > choppedDuration)
         {
+            disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
             // finished cutting
             int wood = 30;
