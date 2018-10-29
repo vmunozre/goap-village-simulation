@@ -8,19 +8,22 @@ public abstract class Agent : MonoBehaviour, IGoap
     public int energy = 100;
    
     public bool recovering = false;
+    public bool isMoving = false;
     public bool waiting = false;
 
     public bool isAdult = false;
     private float startTimerBorn = 0f;
     private float bornDuration = 0f;
 
+    private Animator animator;
     // Places
     public CenterEntity center = null;
     public WarehouseEntity warehouse = null;
-
+    
     public HouseBuilding house = null;
     void Awake()
     {
+        animator = GetComponent<Animator>();
         if (!isAdult)
         {
             transform.localScale = new Vector3(0.3f, 0.3f, 1f);
@@ -57,11 +60,6 @@ public abstract class Agent : MonoBehaviour, IGoap
             Building building = new Building("Prefabs/Buildings/House", 100, 100, 20, 1);
             center.addNewBuildingRequest(building);
         }
-    }
-
-    void Update()
-    {
-        
     }
 
 
@@ -130,7 +128,7 @@ public abstract class Agent : MonoBehaviour, IGoap
 
     public bool moveAgent(GoapAction nextAction)
     {
-
+        animator.SetBool("isMoving", true);
         Vector3 position = Vector3.zero;
         if(nextAction.target != null)
         {
@@ -154,6 +152,7 @@ public abstract class Agent : MonoBehaviour, IGoap
         if (gameObject.transform.position.Equals(toCompare))
         {
             // we are at the target location, we are done
+            animator.SetBool("isMoving", false);
             nextAction.setInRange(true);
             return true;
         }
