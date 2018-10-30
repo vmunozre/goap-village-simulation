@@ -57,10 +57,12 @@ public class HarvestFarmerAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             Farmer farmer = (Farmer)agent.GetComponent(typeof(Farmer));
 
             if(farmer.actualOrchard.food <= 0)
             {
+                disableBubbleIcon(agent);
                 farmer.actualOrchard.toggleSpriteEmpty();
                 farmer.actualOrchard.farmProgress = 0f;
                 return false;
@@ -71,6 +73,7 @@ public class HarvestFarmerAction : GoapAction
 
         if (Time.time - startTime > collectedDuration)
         {
+            disableBubbleIcon(agent);
             Farmer farmer = (Farmer)agent.GetComponent(typeof(Farmer));
             if (farmer.actualOrchard.food >= agentCapacity)
             {

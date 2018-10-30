@@ -56,11 +56,13 @@ public class FindPlaceBuilderAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (Time.time - startTime > searchDuration)
         {
+            disableBubbleIcon(agent);
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));
             if (builder.actualBuilding == null)
             {

@@ -56,11 +56,13 @@ public class DropResourcesBuilderAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (Time.time - startTime > dropDuration)
         {
+            disableBubbleIcon(agent);
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));
             BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();
 

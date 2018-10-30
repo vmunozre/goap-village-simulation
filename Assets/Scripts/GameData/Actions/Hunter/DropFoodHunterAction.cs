@@ -52,11 +52,13 @@ public class DropFoodHunterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (Time.time - startTime > dropDuration)
         {
+            disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
             if (hunter.huntingShed != null)
             {

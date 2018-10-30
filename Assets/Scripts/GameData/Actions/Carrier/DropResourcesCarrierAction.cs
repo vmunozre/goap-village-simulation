@@ -46,11 +46,13 @@ public class DropResourcesCarrierAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (Time.time - startTime > dropDuration)
         {
+            disableBubbleIcon(agent);
             Carrier carrier = (Carrier)agent.GetComponent(typeof(Carrier));
             targetWarehouse.food += carrier.food;
             targetWarehouse.wood += carrier.wood;

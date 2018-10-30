@@ -88,12 +88,14 @@ public class CollectResourcesCarrierAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             Carrier carrier = (Carrier)agent.GetComponent(typeof(Carrier));
 
             if (carrier.sawmill != null)
             {
                 if(carrier.sawmill.wood <= 0)
                 {
+                    disableBubbleIcon(agent);
                     carrier.waiting = true;
                     return false;
                 }
@@ -106,6 +108,7 @@ public class CollectResourcesCarrierAction : GoapAction
             {
                 if (carrier.huntingShed.food <= 0)
                 {
+                    disableBubbleIcon(agent);
                     carrier.waiting = true;
                     return false;
                 }
@@ -120,6 +123,7 @@ public class CollectResourcesCarrierAction : GoapAction
 
         if (Time.time - startTime > checkDuration)
         {
+            disableBubbleIcon(agent);
             Carrier carrier = (Carrier)agent.GetComponent(typeof(Carrier));
             carrier.energy -= energyCost;
             collected = true;

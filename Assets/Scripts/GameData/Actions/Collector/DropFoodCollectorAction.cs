@@ -47,11 +47,13 @@ public class DropFoodCollectorAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (Time.time - startTime > dropDuration)
         {
+            disableBubbleIcon(agent);
             Collector collector = (Collector)agent.GetComponent(typeof(Collector));
             targetWarehouse.food += collector.food;
             collector.food = 0;

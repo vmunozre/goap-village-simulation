@@ -121,17 +121,20 @@ public class AnalyzeBushCollectorAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (targetBush.food <= 0)
-        {           
+        {
+            disableBubbleIcon(agent);
             targetBush.turnEmptySprite();
             return false;
         }
 
         if (Time.time - startTime > analyzetDuration)
         {
+            disableBubbleIcon(agent);
             Collector collector = (Collector)agent.GetComponent(typeof(Collector));
             collector.energy -= energyCost;
             analyzed = true;

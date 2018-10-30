@@ -48,6 +48,7 @@ public class CheckTenderHunterAction : GoapAction
         
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
             Hunter tender = (Hunter)targetCenter.checkTender("Coop-Hunt");
             if(tender == null)
@@ -77,6 +78,7 @@ public class CheckTenderHunterAction : GoapAction
 
         if (Time.time - startTime > checkDuration)
         {
+            disableBubbleIcon(agent);
             isChecked = true;
         }
         return true;

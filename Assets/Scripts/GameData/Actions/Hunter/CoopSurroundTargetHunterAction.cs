@@ -69,6 +69,7 @@ public class CoopSurroundTargetHunterAction : GoapAction
 
     public override bool perform(GameObject agent)
     {
+        enableBubbleIcon(agent);
         Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
         float step = 1 * Time.deltaTime;
         float posX = hunter.actualPrey.transform.position.x - 2f;
@@ -94,6 +95,7 @@ public class CoopSurroundTargetHunterAction : GoapAction
             hunter.isInPosition = true;
             if (hunter.coopHunter.isInPosition)
             {
+                disableBubbleIcon(agent);
                 positioned = true;
                 return true;
             }
@@ -113,6 +115,7 @@ public class CoopSurroundTargetHunterAction : GoapAction
                 
                 if (Mathf.Abs(angleRotation - firstAngle) > 3f)
                 {
+                    disableBubbleIcon(agent);
                     hunter.isInPosition = true;
                     positioned = true;
                     return true;
@@ -127,6 +130,7 @@ public class CoopSurroundTargetHunterAction : GoapAction
                     float converseAngle = Mathf.Abs(angle % 6.301f);
                     if(angle > 0)
                     {
+                        disableBubbleIcon(agent);
                         positiveRotation = false;
                         //converseAngle *= -1;
                     }

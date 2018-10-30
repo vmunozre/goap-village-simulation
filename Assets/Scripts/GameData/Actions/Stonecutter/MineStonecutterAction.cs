@@ -105,6 +105,7 @@ public class MineStonecutterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             Stonecutter stonecutter = (Stonecutter)agent.GetComponent(typeof(Stonecutter));
             startTime = Time.time;
             if (stonecutter.actualQuarry == null)
@@ -122,6 +123,7 @@ public class MineStonecutterAction : GoapAction
 
         if (Time.time - startTime > mineDuration)
         {
+            disableBubbleIcon(agent);
             Stonecutter stonecutter = (Stonecutter)agent.GetComponent(typeof(Stonecutter));
 
             stonecutter.stone += Random.Range(10, 50);

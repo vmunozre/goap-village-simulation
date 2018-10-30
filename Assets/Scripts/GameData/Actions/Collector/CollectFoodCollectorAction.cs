@@ -51,11 +51,13 @@ public class CollectFoodCollectorAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (targetBush.food <= 0)
         {
+            disableBubbleIcon(agent);
             Collector collector = (Collector)agent.GetComponent(typeof(Collector));
             targetBush.turnEmptySprite();
             collector.actualBush = null;
@@ -64,6 +66,7 @@ public class CollectFoodCollectorAction : GoapAction
 
         if (Time.time - startTime > collectDuration)
         {
+            disableBubbleIcon(agent);
             Collector collector = (Collector)agent.GetComponent(typeof(Collector));
             // finished cutting
             int food = 30;

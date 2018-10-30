@@ -54,12 +54,13 @@ public class WaitAgentAction : GoapAction
         
         if (startTime == 0)
         {
-            Debug.Log("Agent Waiting");
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (Time.time - startTime > waitDuration)
         {
+            disableBubbleIcon(agent);
             Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
             abstractAgent.energy += 5;
             abstractAgent.waiting = false;

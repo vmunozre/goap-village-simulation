@@ -58,6 +58,7 @@ public class BuildBuilderAction : GoapAction
         BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
@@ -67,13 +68,15 @@ public class BuildBuilderAction : GoapAction
             builder.energy -= energyCost;
             if(builder.energy <= 0)
             {
+                disableBubbleIcon(agent);
                 return false;
             }
             startTime = Time.time;
         }
 
         if (building.blueprint.progress >= building.blueprint.buildEffort)
-        {        
+        {
+            disableBubbleIcon(agent);
             SpriteRenderer sr = builder.actualBuilding.GetComponent<SpriteRenderer>();
             sr.sprite = building.normalSprite;
             building.blueprint.done = true;

@@ -93,6 +93,7 @@ public class FarmFarmerAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
@@ -104,12 +105,14 @@ public class FarmFarmerAction : GoapAction
             farmer.energy -= energyCost;
             if (farmer.energy <= 0)
             {
+                disableBubbleIcon(agent);
                 return false;
             } 
         }
 
         if (targetOrchard.farmProgress > targetOrchard.effort)
         {
+            disableBubbleIcon(agent);
             Farmer farmer = (Farmer)agent.GetComponent(typeof(Farmer));
             farmer.energy -= energyCost;
             if (targetOrchard.food <= 0)

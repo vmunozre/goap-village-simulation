@@ -75,8 +75,10 @@ public class RecoveryEnergyAgentAction : GoapAction
         Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
         if (startTime == 0)
         {
-            if(abstractAgent.warehouse.food < foodCost)
+            enableBubbleIcon(agent);
+            if (abstractAgent.warehouse.food < foodCost)
             {
+                disableBubbleIcon(agent);
                 abstractAgent.waiting = true;
                 return false;
             }
@@ -94,6 +96,7 @@ public class RecoveryEnergyAgentAction : GoapAction
 
         if (Time.time - startTime > recoveringDuration)
         {
+            disableBubbleIcon(agent);
             abstractAgent.energy = 100;
             abstractAgent.recovering = false;
             if (abstractAgent.house != null)

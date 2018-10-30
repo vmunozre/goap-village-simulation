@@ -52,11 +52,13 @@ public class CollectFoodHunterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (targetPrey.food <= 0)
         {
+            disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
             hunter.actualPrey.turnEmpty();
             hunter.actualPrey = null;            
@@ -65,6 +67,7 @@ public class CollectFoodHunterAction : GoapAction
 
         if (Time.time - startTime > collectDuration)
         {
+            disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
             
             int food = Random.Range(20, 40);

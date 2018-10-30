@@ -54,6 +54,7 @@ public class HuntCoopHunterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
             Debug.Log("PREY DEAD!");
@@ -65,6 +66,7 @@ public class HuntCoopHunterAction : GoapAction
 
         if (Time.time - startTime > huntDuration)
         {
+            disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
             hunter.energy -= energyCost;
             hunt = true;

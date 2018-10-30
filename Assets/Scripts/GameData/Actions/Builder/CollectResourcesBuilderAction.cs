@@ -50,6 +50,7 @@ public class CollectResourcesBuilderAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));
             BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();
 
@@ -58,12 +59,14 @@ public class CollectResourcesBuilderAction : GoapAction
 
             if(targetWarehouse.wood <= 0 && lackWood > 0)
             {
+                disableBubbleIcon(agent);
                 builder.waiting = true;
                 return false;
             }
 
             if(targetWarehouse.stone <= 0 && lackStone > 0)
             {
+                disableBubbleIcon(agent);
                 builder.waiting = true;
                 return false;
             }
@@ -97,6 +100,7 @@ public class CollectResourcesBuilderAction : GoapAction
 
         if (Time.time - startTime > checkDuration)
         {
+            disableBubbleIcon(agent);
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));
             builder.energy -= energyCost;
             collected = true;

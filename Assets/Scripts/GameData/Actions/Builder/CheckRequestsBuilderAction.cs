@@ -48,11 +48,13 @@ public class CheckRequestsBuilderAction : GoapAction
 
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));
             Building building = targetCenter.getBuildingRequest();
             
             if (building == null)
             {
+                disableBubbleIcon(agent);
                 builder.waiting = true;
                 return false;
             } else
@@ -64,7 +66,8 @@ public class CheckRequestsBuilderAction : GoapAction
         }
 
         if (Time.time - startTime > checkDuration)
-        {            
+        {
+            disableBubbleIcon(agent);
             isChecked = true;
         }
         return true;

@@ -77,11 +77,13 @@ public class CoopSearchPreyHunterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (Time.time - startTime > searchDuration)
         {
+            disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
             if (hunter.actualPrey == null)
             {

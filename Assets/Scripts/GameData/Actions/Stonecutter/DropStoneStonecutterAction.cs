@@ -46,11 +46,13 @@ public class DropStoneStonecutterAction : GoapAction
     {
         if (startTime == 0)
         {
+            enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
         if (Time.time - startTime > dropDuration)
         {
+            disableBubbleIcon(agent);
             Stonecutter stonecutter = (Stonecutter)agent.GetComponent(typeof(Stonecutter));
             targetWarehouse.stone += stonecutter.stone;
             stonecutter.stone = 0;
