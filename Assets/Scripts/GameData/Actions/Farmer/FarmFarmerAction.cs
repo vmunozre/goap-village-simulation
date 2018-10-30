@@ -126,7 +126,7 @@ public class FarmFarmerAction : GoapAction
 
     private void addOrchardRequest(Farmer _farmer)
     {       
-        Building building = new Building("Prefabs/Buildings/Orchard", 100, 50, 15, 3);
+        Building building = new Building("Prefabs/Buildings/Orchard", 100, 50, 5, 3);
         _farmer.center.addNewBuildingRequest(building);
         Debug.Log(".------------Go to sleeep!");
         _farmer.waiting = true;

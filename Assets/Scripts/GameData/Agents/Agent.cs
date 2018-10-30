@@ -15,7 +15,7 @@ public abstract class Agent : MonoBehaviour, IGoap
     private float startTimerBorn = 0f;
     private float bornDuration = 0f;
 
-    private Animator animator;
+    //private Animator animator;
     // Places
     public CenterEntity center = null;
     public WarehouseEntity warehouse = null;
@@ -23,7 +23,7 @@ public abstract class Agent : MonoBehaviour, IGoap
     public HouseBuilding house = null;
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         if (!isAdult)
         {
             transform.localScale = new Vector3(0.3f, 0.3f, 1f);
@@ -57,7 +57,7 @@ public abstract class Agent : MonoBehaviour, IGoap
         }
         if(house == null)
         {
-            Building building = new Building("Prefabs/Buildings/House", 100, 100, 20, 1);
+            Building building = new Building("Prefabs/Buildings/House", 100, 100, 3, 1);
             center.addNewBuildingRequest(building);
         }
     }

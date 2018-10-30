@@ -43,7 +43,7 @@ public class BuildBuilderAction : GoapAction
         bool checkActualBuilding = builder.actualBuilding != null;
         if (checkActualBuilding)
         {
-            BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();            
+//            BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();            
             targetBuilding = builder.actualBuilding;
             target = targetBuilding;
         }
