@@ -28145,40 +28145,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 1129313959355162, guid: ad84dbab62d690b4ea48be8497e601a9, type: 2}
-      propertyPath: m_IsActive
+    - target: {fileID: 114978779500529190, guid: ad84dbab62d690b4ea48be8497e601a9,
+        type: 2}
+      propertyPath: isAdult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114978779500529190, guid: ad84dbab62d690b4ea48be8497e601a9,
+        type: 2}
+      propertyPath: energy
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114596655582495706, guid: ad84dbab62d690b4ea48be8497e601a9,
-        type: 2}
-      propertyPath: bubbleSprite
-      value: 
-      objectReference: {fileID: 21300010, guid: 1390338d34c1b084b92a72b01a11a601,
-        type: 3}
-    - target: {fileID: 114085723454076420, guid: ad84dbab62d690b4ea48be8497e601a9,
-        type: 2}
-      propertyPath: bubbleSprite
-      value: 
-      objectReference: {fileID: 21300008, guid: 1390338d34c1b084b92a72b01a11a601,
-        type: 3}
-    - target: {fileID: 114806678645092954, guid: ad84dbab62d690b4ea48be8497e601a9,
-        type: 2}
-      propertyPath: bubbleSprite
-      value: 
-      objectReference: {fileID: 21300004, guid: 1390338d34c1b084b92a72b01a11a601,
-        type: 3}
-    - target: {fileID: 114321080524115630, guid: ad84dbab62d690b4ea48be8497e601a9,
-        type: 2}
-      propertyPath: bubbleSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 1390338d34c1b084b92a72b01a11a601,
-        type: 3}
-    - target: {fileID: 114440090051691308, guid: ad84dbab62d690b4ea48be8497e601a9,
-        type: 2}
-      propertyPath: bubbleSprite
-      value: 
-      objectReference: {fileID: 21300012, guid: 1390338d34c1b084b92a72b01a11a601,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad84dbab62d690b4ea48be8497e601a9, type: 2}
   m_IsPrefabAsset: 0
