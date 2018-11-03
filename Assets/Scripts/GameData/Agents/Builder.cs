@@ -21,49 +21,49 @@ public class Builder : Agent
         checkIsAdult();
     }
 
-    public override HashSet<KeyValuePair<string, object>> createGoalState()
+    public override Dictionary<string, object> createGoalState()
     {
-        HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
+        Dictionary<string, object> goal = new Dictionary<string, object>();
 
         if (waiting)
         {
-            goal.Add(new KeyValuePair<string, object>("waitComplete", true));
+            goal.Add("waitComplete", true);
             return goal;
         }
 
         if(actualBuilding == null)
         {
-            goal.Add(new KeyValuePair<string, object>("hasActualBuilding", true));
+            goal.Add("hasActualBuilding", true);
         }
 
         if(actualBuilding != null)
         {
-            goal.Add(new KeyValuePair<string, object>("completeRequest", true));            
+            goal.Add("completeRequest", true);            
         }
 
         return goal;
     }
 
-    public override HashSet<KeyValuePair<string, object>> getWorldState()
+    public override Dictionary<string, object> getWorldState()
     {
-        HashSet<KeyValuePair<string, object>> worldData = new HashSet<KeyValuePair<string, object>>();
+        Dictionary<string, object> worldData = new Dictionary<string, object>();
 
-        worldData.Add(new KeyValuePair<string, object>("isWaiting", waiting));
-        worldData.Add(new KeyValuePair<string, object>("hasResources", (stone > 0) || (wood > 0)));
-        worldData.Add(new KeyValuePair<string, object>("hasEnergy", (energy > 0)));
-        worldData.Add(new KeyValuePair<string, object>("hasActualBuilding", (actualBuilding != null)));
-        worldData.Add(new KeyValuePair<string, object>("hasActualRequest", (actualRequest != null)));
+        worldData.Add("isWaiting", waiting);
+        worldData.Add("hasResources", (stone > 0) || (wood > 0));
+        worldData.Add("hasEnergy", (energy > 0));
+        worldData.Add("hasActualBuilding", (actualBuilding != null));
+        worldData.Add("hasActualRequest", (actualRequest != null));
 
         if(actualBuilding != null)
         {
             BaseBuilding building = actualBuilding.GetComponent<BaseBuilding>();
-            worldData.Add(new KeyValuePair<string, object>("buildingSupply", building.blueprint.hasAllResources()));
-            worldData.Add(new KeyValuePair<string, object>("buildComplete", building.blueprint.done));
+            worldData.Add("buildingSupply", building.blueprint.hasAllResources());
+            worldData.Add("buildComplete", building.blueprint.done);
         }
         else
         {
-            worldData.Add(new KeyValuePair<string, object>("buildingSupply", false));
-            worldData.Add(new KeyValuePair<string, object>("buildComplete", false));
+            worldData.Add("buildingSupply", false);
+            worldData.Add("buildComplete", false);
         }
 
         return worldData;

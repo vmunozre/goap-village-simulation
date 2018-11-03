@@ -73,8 +73,8 @@ public sealed class GoapAgent : MonoBehaviour
             // GOAP planning
 
             // get the world state and the goal we want to plan for
-            HashSet<KeyValuePair<string, object>> worldState = dataProvider.getWorldState();
-            HashSet<KeyValuePair<string, object>> goal = dataProvider.createGoalState();
+            Dictionary<string, object> worldState = new Dictionary<string, object>(dataProvider.getWorldState());
+            Dictionary<string, object> goal = new Dictionary<string, object>(dataProvider.createGoalState());
 
             // Plan
             Queue<GoapAction> plan = planner.plan(gameObject, availableActions, worldState, goal);
@@ -224,12 +224,12 @@ public sealed class GoapAgent : MonoBehaviour
         Debug.Log("Found actions: " + prettyPrint(actions));
     }
 
-    public static string prettyPrint(HashSet<KeyValuePair<string, object>> state)
+    public static string prettyPrint(Dictionary<string, object> state)
     {
-        String s = "";
-        foreach (KeyValuePair<string, object> kvp in state)
+        string s = "";
+        foreach (string key in state.Keys)
         {
-            s += kvp.Key + ":" + kvp.Value.ToString();
+            s += key + ":" + state[key].ToString();
             s += ", ";
         }
         return s;
@@ -237,7 +237,7 @@ public sealed class GoapAgent : MonoBehaviour
 
     public static string prettyPrint(Queue<GoapAction> actions)
     {
-        String s = "";
+        string s = "";
         foreach (GoapAction a in actions)
         {
             s += a.GetType().Name;
@@ -249,7 +249,7 @@ public sealed class GoapAgent : MonoBehaviour
 
     public static string prettyPrint(GoapAction[] actions)
     {
-        String s = "";
+        string s = "";
         foreach (GoapAction a in actions)
         {
             s += a.GetType().Name;
@@ -260,7 +260,7 @@ public sealed class GoapAgent : MonoBehaviour
 
     public static string prettyPrint(GoapAction action)
     {
-        String s = "" + action.GetType().Name;
+        string s = "" + action.GetType().Name;
         return s;
     }
 }

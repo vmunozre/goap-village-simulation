@@ -91,22 +91,22 @@ public abstract class Agent : MonoBehaviour, IGoap
     /**
 	 * Key-Value data that will feed the GOAP actions and system while planning.
 	 */
-    public abstract HashSet<KeyValuePair<string, object>> getWorldState();
+    public abstract Dictionary<string, object> getWorldState();
 
     /**
 	 * Implement in subclasses
 	 */
-    public abstract HashSet<KeyValuePair<string, object>> createGoalState();
+    public abstract Dictionary<string, object> createGoalState();
 
 
-    public void planFailed(HashSet<KeyValuePair<string, object>> failedGoal)
+    public void planFailed(Dictionary<string, object> failedGoal)
     {
         // Not handling this here since we are making sure our goals will always succeed.
         // But normally you want to make sure the world state has changed before running
         // the same goal again, or else it will just fail.
     }
 
-    public void planFound(HashSet<KeyValuePair<string, object>> goal, Queue<GoapAction> actions)
+    public void planFound(Dictionary<string, object> goal, Queue<GoapAction> actions)
     {
         // Yay we found a plan for our goal
         Debug.Log("<color=green>Plan found</color> " + GoapAgent.prettyPrint(actions));

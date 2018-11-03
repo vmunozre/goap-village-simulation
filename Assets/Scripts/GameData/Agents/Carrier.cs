@@ -52,26 +52,26 @@ public class Carrier : Agent
         checkIsAdult();
     }
 
-    public override HashSet<KeyValuePair<string, object>> createGoalState()
+    public override Dictionary<string, object> createGoalState()
     {
-        HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
+        Dictionary<string, object> goal = new Dictionary<string, object>();
         if (waiting)
         {
-            goal.Add(new KeyValuePair<string, object>("waitComplete", true));
+            goal.Add("waitComplete", true);
             return goal;
         }
 
-        goal.Add(new KeyValuePair<string, object>("collectResources", true));
+        goal.Add("collectResources", true);
 
         return goal;
     }
 
-    public override HashSet<KeyValuePair<string, object>> getWorldState()
+    public override Dictionary<string, object> getWorldState()
     {
-        HashSet<KeyValuePair<string, object>> worldData = new HashSet<KeyValuePair<string, object>>();
-        worldData.Add(new KeyValuePair<string, object>("isWaiting", waiting));
-        worldData.Add(new KeyValuePair<string, object>("hasResources", (wood > 0 || food > 0)));
-        worldData.Add(new KeyValuePair<string, object>("hasEnergy", (energy > 0)));
+        Dictionary<string, object> worldData = new Dictionary<string, object>();
+        worldData.Add("isWaiting", waiting);
+        worldData.Add("hasResources", (wood > 0 || food > 0));
+        worldData.Add("hasEnergy", (energy > 0));
 
         return worldData;
     }

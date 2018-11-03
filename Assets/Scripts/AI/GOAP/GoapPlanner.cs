@@ -15,8 +15,8 @@ public class GoapPlanner
 	 */
     public Queue<GoapAction> plan(GameObject agent,
                                   HashSet<GoapAction> availableActions,
-                                  HashSet<KeyValuePair<string, object>> worldState,
-                                  HashSet<KeyValuePair<string, object>> goal)
+                                  Dictionary<string, object> worldState,
+                                  Dictionary<string, object> goal)
     {
         // reset the actions so we can start fresh with them
         foreach (GoapAction a in availableActions)
@@ -90,10 +90,10 @@ public class GoapPlanner
 	 * 'runningCost' value where the lowest cost will be the best action
 	 * sequence.
 	 */
-    private bool buildGraph(Node parent, List<Node> leaves, HashSet<GoapAction> usableActions, HashSet<KeyValuePair<string, object>> goal)
+    private bool buildGraph(Node parent, List<Node> leaves, HashSet<GoapAction> usableActions, Dictionary<string, object> goal)
     {
         bool foundOne = false;
-        Debug.Log("Number of actions: " + usableActions.Count);
+        // Debug.Log("Number of actions: " + usableActions.Count);
         // go through each action available at this node and see if we can use it here
         foreach (GoapAction action in usableActions)
         {
@@ -103,7 +103,7 @@ public class GoapPlanner
             {
 
                 // apply the action's effects to the parent state
-                HashSet<KeyValuePair<string, object>> currentState = populateState(parent.state, action.Effects);
+                Dictionary<string, object> currentState = new Dictionary<string, object>(populateState(parent.state, action.Effects));
                 //Debug.Log(GoapAgent.prettyPrint(currentState));
                 Node node = new Node(parent, parent.runningCost + action.cost, currentState, action);
 
@@ -145,22 +145,18 @@ public class GoapPlanner
 	 * Check that all items in 'test' are in 'state'. If just one does not match or is not there
 	 * then this returns false.
 	 */
-    private bool inState(HashSet<KeyValuePair<string, object>> test, HashSet<KeyValuePair<string, object>> state)
+    private bool inState(Dictionary<string, object> test, Dictionary<string, object> state)
     {
         bool allMatch = true;
-        foreach (KeyValuePair<string, object> t in test)
+        foreach(string key in test.Keys)
         {
-            bool match = false;
-            foreach (KeyValuePair<string, object> s in state)
-            {
-                if (s.Equals(t))
-                {
-                    match = true;
-                    break;
-                }
-            }
+            bool match = state.ContainsKey(key) && test[key].Equals(state[key]);
             if (!match)
+            {
                 allMatch = false;
+                break;
+            }
+                
         }
         return allMatch;
     }
@@ -168,61 +164,21 @@ public class GoapPlanner
     /**
 	 * Apply the stateChange to the currentState
 	 */
-    private HashSet<KeyValuePair<string, object>> populateState(HashSet<KeyValuePair<string, object>> currentState, HashSet<KeyValuePair<string, object>> stateChange)
+    private Dictionary<string, object> populateState(Dictionary<string, object> currentState, Dictionary<string, object> stateChange)
     {
-        HashSet<KeyValuePair<string, object>> state = new HashSet<KeyValuePair<string, object>>();
-        // copy the KVPs over as new objects
-        foreach (KeyValuePair<string, object> s in currentState)
+        Dictionary<string, object> state = new Dictionary<string, object>(currentState);
+
+        foreach (string key in stateChange.Keys)
         {
-            state.Add(new KeyValuePair<string, object>(s.Key, s.Value));
-        }
-
-        foreach (KeyValuePair<string, object> change in stateChange)
-        {
-            // if the key exists in the current state, update the Value
-            bool exists = false;
-
-            foreach (KeyValuePair<string, object> s in state)
+            if (state.ContainsKey(key))
             {
-                if (s.Equals(change))
-                {
-                    exists = true;
-                    break;
-                }
-            }
-
-            if (exists)
+                state[key] = stateChange[key];
+            } else
             {
-                state.RemoveWhere((KeyValuePair<string, object> kvp) => { return kvp.Key.Equals(change.Key); });
-                KeyValuePair<string, object> updated = new KeyValuePair<string, object>(change.Key, change.Value);
-                state.Add(updated);
-            }
-            // if it does not exist in the current state, add it
-            else
-            {
-                state.Add(new KeyValuePair<string, object>(change.Key, change.Value));
+                state.Add(key, stateChange[key]);                
             }
         }
         return state;
-    }
-
-    /**
-	 * Used for building up the graph and holding the running costs of actions.
-	 */
-    private class Node
-    {
-        public Node parent;
-        public float runningCost;
-        public HashSet<KeyValuePair<string, object>> state;
-        public GoapAction action;
-
-        public Node(Node parent, float runningCost, HashSet<KeyValuePair<string, object>> state, GoapAction action)
-        {
-            this.parent = parent;
-            this.runningCost = runningCost;
-            this.state = state;
-            this.action = action;
-        }
     }
 
 }

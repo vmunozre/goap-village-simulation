@@ -40,59 +40,59 @@ public class Hunter : Agent
         moveSpeed = 1;
     }
 
-    public override HashSet<KeyValuePair<string, object>> createGoalState()
+    public override Dictionary<string, object> createGoalState()
     {
-        HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
+        Dictionary<string, object> goal = new Dictionary<string, object>();
         if (waiting)
         {
-            goal.Add(new KeyValuePair<string, object>("waitComplete", true));
+            goal.Add("waitComplete", true);
             return goal;
         }
 
         if (!hasTender)
         {
-            goal.Add(new KeyValuePair<string, object>("checkTender", true));
+            goal.Add("checkTender", true);
             return goal;
         }
 
         if(actualPrey == null)
         {
-            goal.Add(new KeyValuePair<string, object>("preyFound", true));
+            goal.Add("preyFound", true);
             return goal;
         }
 
         if(actualPrey != null)
         {
-            goal.Add(new KeyValuePair<string, object>("collectFood", true));
+            goal.Add("collectFood", true);
             return goal;
         }
         return goal;
     }
 
-    public override HashSet<KeyValuePair<string, object>> getWorldState()
+    public override Dictionary<string, object> getWorldState()
     {
-        HashSet<KeyValuePair<string, object>> worldData = new HashSet<KeyValuePair<string, object>>();
-        worldData.Add(new KeyValuePair<string, object>("isWaiting", waiting));
-        worldData.Add(new KeyValuePair<string, object>("hasFood", (food > 0)));
-        worldData.Add(new KeyValuePair<string, object>("hasEnergy", (energy > 0)));
-        worldData.Add(new KeyValuePair<string, object>("hasActualPrey", (actualPrey != null)));
-        worldData.Add(new KeyValuePair<string, object>("hasTender", hasTender));
-        worldData.Add(new KeyValuePair<string, object>("hasCoopHunter", coopHunter != null));
+        Dictionary<string, object> worldData = new Dictionary<string, object>();
+        worldData.Add("isWaiting", waiting);
+        worldData.Add("hasFood", (food > 0));
+        worldData.Add("hasEnergy", (energy > 0));
+        worldData.Add("hasActualPrey", (actualPrey != null));
+        worldData.Add("hasTender", hasTender);
+        worldData.Add("hasCoopHunter", coopHunter != null);
 
         if(coopHunter != null)
         {
-            worldData.Add(new KeyValuePair<string, object>("isInPosition", isInPosition && coopHunter.isInPosition));
+            worldData.Add("isInPosition", isInPosition && coopHunter.isInPosition);
         } else
         {
-            worldData.Add(new KeyValuePair<string, object>("isInPosition", false));
+            worldData.Add("isInPosition", false);
         }
         
         if (actualPrey != null)
         {
-            worldData.Add(new KeyValuePair<string, object>("hasDeadPrey", actualPrey.isDead));
+            worldData.Add("hasDeadPrey", actualPrey.isDead);
         } else
         {
-            worldData.Add(new KeyValuePair<string, object>("hasDeadPrey", false));
+            worldData.Add("hasDeadPrey", false);
         }
         return worldData;
     }
