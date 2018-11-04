@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class Stonecutter : Agent
 {
-    // Basic data
-    public new string name = "Stonecutter";
     public int stone = 0;
     public QuarryEntity actualQuarry = null;
 
+    private new string name = "Stonecutter";
     void Start()
     {
         center.agentsCounter[name]++;

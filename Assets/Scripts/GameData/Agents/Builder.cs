@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Builder : Agent
 {
-    // Basic data
-    public new string name = "Builder";
     public int stone = 0;
     public int wood = 0;
     public GameObject actualBuilding = null;
     public Building actualRequest = null;
+
+    private new string name = "Builder";
 
     void Start()
     {
@@ -34,11 +33,9 @@ public class Builder : Agent
         if(actualBuilding == null)
         {
             goal.Add("hasActualBuilding", true);
-        }
-
-        if(actualBuilding != null)
+        } else
         {
-            goal.Add("completeRequest", true);            
+            goal.Add("completeRequest", true);
         }
 
         return goal;

@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class Carrier : Agent
 {
-    // Basic data
-    public new string name = "Carrier";
     public int wood = 0;
     public int food = 0;
-
     public SawmillBuilding sawmill = null;
     public HuntingShedBuilding huntingShed = null;
-    // Use this for initialization
+
+    private new string name = "Carrier";
+
     void Start()
     {
         center.agentsCounter[name]++;
 
+        // Find sawmill or HunyerShed to work
         SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
         foreach (SawmillBuilding saw in sawmills)
         {
@@ -40,6 +38,7 @@ public class Carrier : Agent
                 huntingShed.carriers++;
                 break;
             }
+            // No building found, turn waiting
             if(huntingShed == null)
             {
                 waiting = true;

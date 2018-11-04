@@ -1,20 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class Woodcutter : Agent
 {
-    // Basic data
-    public new string name = "Woodcutter";
     public int wood = 0;
     public TreeEntity actualTree = null;
-
     public SawmillBuilding sawmill = null;
-    // Use this for initialization
+
+    private new string name = "Woodcutter";
+
     void Start()
     {
         center.agentsCounter[name]++;
-
+        // Find sawmill building
         SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
         foreach (SawmillBuilding saw in sawmills)
         {
@@ -27,6 +24,7 @@ public class Woodcutter : Agent
             break;
             
         }
+        // If not found send building request
         if (sawmill == null)
         {
             Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 5, 2);
@@ -34,7 +32,6 @@ public class Woodcutter : Agent
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         checkIsAdult();
@@ -52,9 +49,7 @@ public class Woodcutter : Agent
         if (actualTree != null)
         {
             goal.Add("collectWood", true);
-        }
-
-        if (actualTree == null)
+        } else
         {
             goal.Add("treeFound", true);
         }

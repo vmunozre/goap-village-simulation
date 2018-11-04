@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Fisher : Agent
 {
-    // Basic data
-    public new string name = "Fisher";
     public int food = 0;
     public GameObject actualLakePosition = null;
+
+    private new string name = "Fisher";
 
     void Start()
     {

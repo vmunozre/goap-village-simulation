@@ -1,23 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Collector : Agent {
-    // Basic data
-    public new string name = "Collector";
+public class Collector : Agent {   
     public int food = 0;
     public BushEntity actualBush = null;
-    // Use this for initialization
+
+    private new string name = "Collector";
+
     void Start()
     {
         center.agentsCounter[name]++;
+
+        // Check if village need carriers
         if(center.needCarriers() && center.agentsCounter[name] >= 2)
         {
             instanciateSuccessor("Carrier");
         }
     }
 	
-	// Update is called once per frame
 	void Update () {
         checkIsAdult();
 	}
@@ -33,9 +33,7 @@ public class Collector : Agent {
         if (actualBush != null)
         {
             goal.Add("collectFood", true);
-        }
-
-        if (actualBush == null)
+        } else
         {
             goal.Add("bushFound", true);
         }
@@ -54,12 +52,14 @@ public class Collector : Agent {
         return worldData;
     }
 
+    // Destroy this collector
     private void autoDestroy()
     {
         center.agentsCounter[name]--;
         Destroy(gameObject);
     }
 
+    // Add successor
     public void instanciateSuccessor(string _prefab)
     {
         Instantiate(Resources.Load("Prefabs/Agents/" + _prefab), new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);

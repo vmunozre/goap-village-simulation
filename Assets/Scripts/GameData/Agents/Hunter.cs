@@ -1,25 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class Hunter : Agent
-{
-    // Basic data
-    public new string name = "Hunter";
+{    
     public int food = 0;
     public DeerEntity actualPrey = null;
 
     // Multiple agents
     public Hunter coopHunter = null;
+    public HuntingShedBuilding huntingShed = null;
     public bool leader = false;
     public bool hasTender = false;
     public bool isInPosition = false;
     
-    public HuntingShedBuilding huntingShed = null;
+
+    private new string name = "Hunter";
     void Start()
     {
         center.agentsCounter[name]++;
 
+        // Find GuntingShed
         HuntingShedBuilding[] huntingSheds = (HuntingShedBuilding[])FindObjectsOfType(typeof(HuntingShedBuilding));
         foreach (HuntingShedBuilding shed in huntingSheds)
         {
@@ -32,6 +31,7 @@ public class Hunter : Agent
             break;
 
         }
+        // If not found send building request
         if (huntingShed == null)
         {
             Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 7, 2);
@@ -58,13 +58,10 @@ public class Hunter : Agent
         if(actualPrey == null)
         {
             goal.Add("preyFound", true);
-            return goal;
-        }
-
-        if(actualPrey != null)
+           
+        } else
         {
             goal.Add("collectFood", true);
-            return goal;
         }
         return goal;
     }

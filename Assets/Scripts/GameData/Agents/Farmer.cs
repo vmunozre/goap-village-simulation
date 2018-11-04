@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class Farmer : Agent
-{
-    // Basic data
-    public new string name = "Farmer";
+{    
     public int food = 0;
     public OrchardBuilding actualOrchard = null;
+
+    private new string name = "Farmer";
+
     void Start()
     {
         center.agentsCounter[name]++;

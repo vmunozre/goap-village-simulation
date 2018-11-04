@@ -157,8 +157,7 @@ public class CenterEntity : MonoBehaviour {
     {
         bool result = false;
 
-        // 3 por ejemplo
-        result = agentsCounter["Builder"] < 3;
+        result = agentsCounter["Builder"] < 2;
 
         return result;
     }
@@ -167,8 +166,7 @@ public class CenterEntity : MonoBehaviour {
     {
         bool result = false;
 
-        // 5 por ejemplo
-        result = agentsCounter["Woodcutter"] < 5;
+        result = agentsCounter["Woodcutter"] < 7;
 
         return result;
     }
