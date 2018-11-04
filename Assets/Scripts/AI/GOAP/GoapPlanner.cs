@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-/**
- * Plans what actions can be completed in order to fulfill a goal state.
- */
 public class GoapPlanner
 {
 
-    /**
-	 * Plan what sequence of actions can fulfill the goal.
-	 * Returns null if a plan could not be found, or a list of the actions
-	 * that must be performed, in order, to fulfill the goal.
-	 */
+    // Plan what sequence of actions can fulfill the goal.
     public Queue<GoapAction> plan(GameObject agent,
                                   HashSet<GoapAction> availableActions,
                                   Dictionary<string, object> worldState,
                                   Dictionary<string, object> goal)
     {
-        // reset the actions so we can start fresh with them
+        // Reset the actions 
         foreach (GoapAction a in availableActions)
         {
             a.doReset();
         }
 
-        // check what actions can run using their checkProceduralPrecondition
+        // Check what actions can run using their checkProceduralPrecondition
         HashSet<GoapAction> usableActions = new HashSet<GoapAction>();
         foreach (GoapAction a in availableActions)
         {
@@ -32,38 +25,22 @@ public class GoapPlanner
                 usableActions.Add(a);
         }
 
-        // we now have all actions that can run, stored in usableActions
-
-        // build up the tree and record the leaf nodes that provide a solution to the goal.
+        // Node leaves
         List<Node> leaves = new List<Node>();
-
-        // build graph
         Node start = new Node(null, 0, worldState, null);
-        bool success = buildGraph(start, leaves, usableActions, goal);
+        // Build graph
+        bool success = optBuildGraph(start, leaves, usableActions, goal);
 
         if (!success)
         {
-            // oh no, we didn't get a plan
+            // No plan
             Debug.Log("NO PLAN");
             return null;
         }
 
-        // get the cheapest leaf
-        Node cheapest = null;
-        foreach (Node leaf in leaves)
-        {
-            if (cheapest == null)
-                cheapest = leaf;
-            else
-            {
-                if (leaf.runningCost < cheapest.runningCost)
-                    cheapest = leaf;
-            }
-        }
-
-        // get its node and work back through the parents
+        // Get a list of actions
         List<GoapAction> result = new List<GoapAction>();
-        Node n = cheapest;
+        Node n = leaves[leaves.Count -1];
         while (n != null)
         {
             if (n.action != null)
@@ -72,64 +49,58 @@ public class GoapPlanner
             }
             n = n.parent;
         }
-        // we now have this action list in correct order
-
+        
+        // Add actions to the queue
         Queue<GoapAction> queue = new Queue<GoapAction>();
         foreach (GoapAction a in result)
         {
             queue.Enqueue(a);
         }
 
-        // hooray we have a plan!
         return queue;
     }
 
-    /**
-	 * Returns true if at least one solution was found.
-	 * The possible paths are stored in the leaves list. Each leaf has a
-	 * 'runningCost' value where the lowest cost will be the best action
-	 * sequence.
-	 */
-    private bool buildGraph(Node parent, List<Node> leaves, HashSet<GoapAction> usableActions, Dictionary<string, object> goal)
+    // Found plan
+    private bool optBuildGraph(Node parent, List<Node> leaves, HashSet<GoapAction> usableActions, Dictionary<string, object> goal)
     {
-        bool foundOne = false;
-        // Debug.Log("Number of actions: " + usableActions.Count);
-        // go through each action available at this node and see if we can use it here
-        foreach (GoapAction action in usableActions)
-        {
+        bool found = false;
+        // Sort the actions
+        List<GoapAction> actions = usableActions.ToList<GoapAction>();
+        actions.Sort((x, y) => x.checkCoincidencies(parent.state).CompareTo(y.checkCoincidencies(parent.state)));
 
-            // if the parent state has the conditions for this action's preconditions, we can use it here
+        foreach (GoapAction action in actions)
+        {
+            // If the parent state has the conditions for this action's preconditions, we can use it here
             if (inState(action.Preconditions, parent.state))
             {
-
-                // apply the action's effects to the parent state
+                // Apply the action's effects to the parent state
                 Dictionary<string, object> currentState = new Dictionary<string, object>(populateState(parent.state, action.Effects));
-                //Debug.Log(GoapAgent.prettyPrint(currentState));
                 Node node = new Node(parent, parent.runningCost + action.cost, currentState, action);
-
+                // If the we have plan and the cost is higher, stop this way
+                if (leaves.Count > 0 && node.runningCost >= leaves[leaves.Count - 1].runningCost)
+                {
+                    continue;
+                }
                 if (inState(goal, currentState))
                 {
-                    // we found a solution!
+                    // Found solution
                     leaves.Add(node);
-                    foundOne = true;
+                    found = true;
                 }
                 else
                 {
-                    // not at a solution yet, so test all the remaining actions and branch out the tree
+                    // Test other branches
                     HashSet<GoapAction> subset = actionSubset(usableActions, action);
-                    bool found = buildGraph(node, leaves, subset, goal);
-                    if (found)
-                        foundOne = true;
+                    bool founded = optBuildGraph(node, leaves, subset, goal);
+                    if (founded)
+                        found = true;
                 }
             }
         }
-
-        return foundOne;
+        return found;
     }
 
-    /**
-	 * Create a subset of the actions excluding the removeMe one. Creates a new set.
-	 */
+    // return subset without removeMe item
     private HashSet<GoapAction> actionSubset(HashSet<GoapAction> actions, GoapAction removeMe)
     {
         HashSet<GoapAction> subset = new HashSet<GoapAction>();
@@ -141,10 +112,7 @@ public class GoapPlanner
         return subset;
     }
 
-    /**
-	 * Check that all items in 'test' are in 'state'. If just one does not match or is not there
-	 * then this returns false.
-	 */
+    // Check if all items in 'test' are in 'state'
     private bool inState(Dictionary<string, object> test, Dictionary<string, object> state)
     {
         bool allMatch = true;
@@ -161,9 +129,7 @@ public class GoapPlanner
         return allMatch;
     }
 
-    /**
-	 * Apply the stateChange to the currentState
-	 */
+    // Apply the stateChange to the currentState
     private Dictionary<string, object> populateState(Dictionary<string, object> currentState, Dictionary<string, object> stateChange)
     {
         Dictionary<string, object> state = new Dictionary<string, object>(currentState);

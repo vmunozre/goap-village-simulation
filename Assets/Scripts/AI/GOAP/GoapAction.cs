@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public abstract class GoapAction : MonoBehaviour
@@ -9,14 +8,13 @@ public abstract class GoapAction : MonoBehaviour
 
     private bool inRange = false;
 
-    // Sprite bubble
+    // Bubble sprite
     public Sprite bubbleSprite;
-    // Coste de la acción
+    // action cost
     public float cost = 1f;
 
-    // Objetivo, si aplica (puede ser null)
+    // targets
     public GameObject target;
-
     public Vector3 targetPosition;
 
     public GoapAction()
@@ -33,41 +31,22 @@ public abstract class GoapAction : MonoBehaviour
         reset();
     }
 
-    /**
-	 * Reset any variables that need to be reset before planning happens again.
-	 */
+    // Reset variables
     public abstract void reset();
 
-    /**
-	 * Is the action done?
-	 */
+    // Check if is done the action
     public abstract bool isDone();
 
-    /**
-	 * Procedurally check if this action can run. Not all actions
-	 * will need this, but some might.
-	 */
+    // Check if this action can run
     public abstract bool checkProceduralPrecondition(GameObject agent);
 
-    /**
-	 * Run the action.
-	 * Returns True if the action performed successfully or false
-	 * if something happened and it can no longer perform. In this case
-	 * the action queue should clear out and the goal cannot be reached.
-	 */
+    // Run the action.
     public abstract bool perform(GameObject agent);
 
-    /**
-	 * Does this action need to be within range of a target game object?
-	 * If not then the moveTo state will not need to run for this action.
-	 */
+    // Check if the agent need go to the target
     public abstract bool requiresInRange();
 
-
-    /**
-	 * Are we in range of the target?
-	 * The MoveTo state will set this and it gets reset each time this action is performed.
-	 */
+    // Check if is in range
     public bool isInRange()
     {
         return inRange;
@@ -120,6 +99,7 @@ public abstract class GoapAction : MonoBehaviour
         }
     }
 
+    // Turn active the bubble and visible the icon
     public void enableBubbleIcon(GameObject _agent)
     {
         Transform bubble = _agent.transform.GetChild(0);
@@ -129,9 +109,22 @@ public abstract class GoapAction : MonoBehaviour
         bubble.gameObject.SetActive(true);
     }
 
+    // Turn disble the bubble
     public void disableBubbleIcon(GameObject _agent)
     {
         GameObject bubble = _agent.transform.GetChild(0).gameObject;
         bubble.SetActive(false);
+    }
+
+    // Check if the _state have preconditions or effects presents in this action
+    public int checkCoincidencies(Dictionary<string,object> _state)
+    {
+        int count = 0;
+        foreach(string key in _state.Keys)
+        {
+            if (preconditions.ContainsKey(key) || effects.ContainsKey(key))
+                count++;
+        }
+        return count;
     }
 }

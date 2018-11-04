@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-/* Máquina de estados finitos */
 public class FSM
 {
     private Stack<FSMState> stateStack = new Stack<FSMState>();
