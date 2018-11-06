@@ -8,6 +8,7 @@ public class DropStoneStonecutterAction : GoapAction
     private float startTime = 0;
     public float dropDuration = 1.5f; // seconds
 
+    // Drop stone
     public DropStoneStonecutterAction()
     {
         addPrecondition("hasStone", true);
@@ -37,7 +38,6 @@ public class DropStoneStonecutterAction : GoapAction
         Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
         targetWarehouse = abstractAgent.warehouse;
         target = targetWarehouse.gameObject;
-        // Debug line
         // Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
         return abstractAgent != null;
     }

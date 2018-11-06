@@ -6,19 +6,20 @@ public class MineStonecutterAction : GoapAction
     private QuarryEntity targetQuarry = null;
 
     private float startTime = 0;
-    public float mineDuration = 10; // seconds
     private int energyCost = 30;
+    public float mineDuration = 10; // seconds
 
     // find settings
     private float radius = 5f;
     private int numTry = 1;
+
+    // Mine stone
     public MineStonecutterAction()
     {
         addPrecondition("hasEnergy", true);
         addPrecondition("hasStone", false);
         addEffect("hasStone", true);
     }
-
 
     public override void reset()
     {
@@ -37,6 +38,7 @@ public class MineStonecutterAction : GoapAction
         return true;
     }
 
+    // Find quarry
     public override bool checkProceduralPrecondition(GameObject agent)
     {
         Stonecutter stonecutter = (Stonecutter)agent.GetComponent(typeof(Stonecutter));
