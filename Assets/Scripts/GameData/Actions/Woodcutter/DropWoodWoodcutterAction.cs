@@ -7,6 +7,7 @@ public class DropWoodWoodcutterAction : GoapAction
     private float startTime = 0;
     public float dropDuration = 1.5f; // seconds
 
+    // Drop wood
     public DropWoodWoodcutterAction()
     {
         addPrecondition("hasWood", true);
@@ -36,12 +37,13 @@ public class DropWoodWoodcutterAction : GoapAction
 
         if (woodcutter.sawmill != null)
         {
+            // Go to sawmill
             target = woodcutter.sawmill.gameObject;
         } else
         {
+            // Go to warehouse
             target = woodcutter.warehouse.gameObject;
         }
-        // Debug line
         // Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
         return target != null;
     }
@@ -60,10 +62,12 @@ public class DropWoodWoodcutterAction : GoapAction
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
             if (woodcutter.sawmill != null)
             {
+                // Drop in sawmill
                 woodcutter.sawmill.wood += woodcutter.wood;
             }
             else
             {
+                // Drop in warehouse
                 woodcutter.warehouse.wood += woodcutter.wood;
                 SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
                 foreach (SawmillBuilding saw in sawmills)
@@ -78,7 +82,8 @@ public class DropWoodWoodcutterAction : GoapAction
 
                 }
                 if (woodcutter.sawmill == null)
-                {
+                {            
+                    // Add request sawmill
                     Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 5, 2);
                     woodcutter.center.addNewBuildingRequest(building);
                 }

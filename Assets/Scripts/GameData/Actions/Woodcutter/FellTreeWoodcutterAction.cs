@@ -4,11 +4,12 @@ public class FellTreeWoodcutterAction : GoapAction
 {
     private bool chopped = false;
     private TreeEntity targetTree = null;
-
-    private float startTime = 0;
+    // Timers
     public float choppedDuration = 5; // seconds
+    private float startTime = 0;
     private int energyCost = 40;
 
+    // Fell Tree
     public FellTreeWoodcutterAction()
     {
         addPrecondition("hasEnergy", true);
@@ -17,7 +18,6 @@ public class FellTreeWoodcutterAction : GoapAction
         addPrecondition("hasWood", false);
         addEffect("treeIsChopped", true);
     }
-
 
     public override void reset()
     {
@@ -33,7 +33,7 @@ public class FellTreeWoodcutterAction : GoapAction
 
     public override bool requiresInRange()
     {
-        return true; // yes we need to be near a tree
+        return true;
     }
 
     public override bool checkProceduralPrecondition(GameObject agent)
@@ -56,6 +56,7 @@ public class FellTreeWoodcutterAction : GoapAction
             startTime = Time.time;
         }
 
+        // Tree empty
         if (targetTree.wood <= 0)
         {
             disableBubbleIcon(agent);
@@ -64,7 +65,7 @@ public class FellTreeWoodcutterAction : GoapAction
             woodcutter.actualTree = null;
             return false;
         }
-
+        
         if (Time.time - startTime > choppedDuration)
         {
             disableBubbleIcon(agent);

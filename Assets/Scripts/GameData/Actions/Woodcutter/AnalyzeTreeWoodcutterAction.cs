@@ -5,15 +5,16 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
     private bool analyzed = false;
     public TreeEntity targetTree;
 
-    private float startTime = 0;
+    // Timer
     public float analyzetDuration = 1.5f; // seconds
+    private float startTime = 0;
     private int energyCost = 5;
-
 
     // find settings
     private float radius = 1f;
     private int numTry = 1;
 
+    // Check tree age
     public AnalyzeTreeWoodcutterAction()
     {
         addPrecondition("hasEnergy", true);
@@ -42,6 +43,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
+        // Find bushes in radius
         float localRadius = (numTry/2) + radius;
         numTry++;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(agent.transform.position, localRadius);
@@ -120,10 +122,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
             else
             {
                 woodcutter.actualTree = targetTree;
-                
-            }
-            
-            
+            }           
         }
         return true;
     }
