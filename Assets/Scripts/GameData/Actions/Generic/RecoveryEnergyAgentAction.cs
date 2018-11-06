@@ -11,7 +11,7 @@ public class RecoveryEnergyAgentAction : GoapAction
 
     public RecoveryEnergyAgentAction()
     {
-        addPrecondition("hasEnergy", false); // we need energy
+        addPrecondition("hasEnergy", false);
         addEffect("hasEnergy", true);
     }
 
@@ -41,6 +41,7 @@ public class RecoveryEnergyAgentAction : GoapAction
             target = abstractAgent.house.gameObject;
         } else
         {
+            // Find empty house
             HouseBuilding[] houses = (HouseBuilding[])FindObjectsOfType(typeof(HouseBuilding));
             foreach (HouseBuilding house in houses)
             {
@@ -56,6 +57,7 @@ public class RecoveryEnergyAgentAction : GoapAction
             }
             if (abstractAgent.house == null)
             {
+                // Add house request
                 Building building = new Building("Prefabs/Buildings/House", 100, 100, 3, 1);
                 abstractAgent.center.addNewBuildingRequest(building);
                 target = abstractAgent.center.gameObject;
@@ -64,14 +66,13 @@ public class RecoveryEnergyAgentAction : GoapAction
                 target = abstractAgent.house.gameObject;
             }
         }
-
-        // Debug line
         //Debug.DrawLine(target.transform.position, agent.transform.position, Color.blue, 3, false);
         return target != null;
     }
 
     public override bool perform(GameObject agent)
     {
+        // Sleep and recover
         Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
         if (startTime == 0)
         {

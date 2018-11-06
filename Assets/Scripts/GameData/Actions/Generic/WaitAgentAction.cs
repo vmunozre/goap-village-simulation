@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class WaitAgentAction : GoapAction
 {
     private bool waited = false;
@@ -8,7 +6,7 @@ public class WaitAgentAction : GoapAction
 
     private float startTime = 0;
     public float waitDuration = 5; // seconds
-
+    
     public WaitAgentAction()
     {
         addPrecondition("isWaiting", true); // we need energy
@@ -45,7 +43,7 @@ public class WaitAgentAction : GoapAction
 
         targetPosition = new Vector3(posX, posY, agent.transform.position.z);
         // Debug line
-        Debug.DrawLine(targetPosition, agent.transform.position, Color.white, 3, false);
+        // Debug.DrawLine(targetPosition, agent.transform.position, Color.white, 3, false);
         return targetCenter != null;
     }
 
