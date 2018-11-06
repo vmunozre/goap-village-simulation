@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class HarvestFarmerAction : GoapAction
 {
     private bool collected = false;
@@ -11,6 +9,8 @@ public class HarvestFarmerAction : GoapAction
 
     public int agentCapacity = 30;
     private int energyCost = 10;
+
+    // Harvest Orchard
     public HarvestFarmerAction()
     {
         addPrecondition("hasEnergy", true);
@@ -39,7 +39,7 @@ public class HarvestFarmerAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-
+        // Move to random position in the orchard
         Farmer farmer = (Farmer)agent.GetComponent(typeof(Farmer));
         if(farmer.actualOrchard != null)
         {
@@ -70,7 +70,7 @@ public class HarvestFarmerAction : GoapAction
 
             startTime = Time.time;
         }
-
+        // Add progress
         if (Time.time - startTime > collectedDuration)
         {
             disableBubbleIcon(agent);

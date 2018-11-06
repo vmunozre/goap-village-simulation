@@ -9,13 +9,13 @@ public class FarmFarmerAction : GoapAction
     private float timeEnergyLoss = 3f;
     private int energyCost = 10;
 
+    // Farm Orchard
     public FarmFarmerAction()
     {
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addEffect("harvestTime", true);
     }
-
 
     public override void reset()
     {
@@ -66,12 +66,14 @@ public class FarmFarmerAction : GoapAction
 
             if (finalOrchard == null)
             {
+                // Add orchard request building
                 addOrchardRequest(farmer);
                 return false;
             }
 
             if (!finalOrchard.addFarmer())
             {
+                // Add orchard request building
                 addOrchardRequest(farmer);
                 return false;
             }
@@ -126,9 +128,9 @@ public class FarmFarmerAction : GoapAction
 
     private void addOrchardRequest(Farmer _farmer)
     {       
+        // Add orchard request building
         Building building = new Building("Prefabs/Buildings/Orchard", 100, 50, 5, 3);
         _farmer.center.addNewBuildingRequest(building);
-        Debug.Log(".------------Go to sleeep!");
         _farmer.waiting = true;
     }
 }
