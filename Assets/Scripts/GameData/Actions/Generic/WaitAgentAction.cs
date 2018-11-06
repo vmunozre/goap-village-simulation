@@ -42,7 +42,6 @@ public class WaitAgentAction : GoapAction
         float posY = targetCenter.transform.position.y + Random.Range(-diff, diff);
 
         targetPosition = new Vector3(posX, posY, agent.transform.position.z);
-        // Debug line
         // Debug.DrawLine(targetPosition, agent.transform.position, Color.white, 3, false);
         return targetCenter != null;
     }
