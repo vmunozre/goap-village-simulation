@@ -8,13 +8,13 @@ public class DropFoodCollectorAction : GoapAction
     private float startTime = 0;
     public float dropDuration = 1.5f; // seconds
 
+    // Drop food
     public DropFoodCollectorAction()
     {
         addPrecondition("hasFood", true);
         addEffect("hasFood", false);
         addEffect("collectFood", true);
     }
-
 
     public override void reset()
     {
@@ -38,7 +38,6 @@ public class DropFoodCollectorAction : GoapAction
         Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
         targetWarehouse = abstractAgent.warehouse;
         target = targetWarehouse.gameObject;
-        // Debug line
         //Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
         return targetWarehouse != null;
     }

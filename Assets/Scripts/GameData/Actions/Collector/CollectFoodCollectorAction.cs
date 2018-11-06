@@ -6,8 +6,8 @@ public class CollectFoodCollectorAction : GoapAction
     private BushEntity targetBush = null;
 
     private float startTime = 0;
-    public float collectDuration = 3; // seconds
     private int energyCost = 30;
+    public float collectDuration = 3; // seconds
 
     public CollectFoodCollectorAction()
     {
@@ -16,7 +16,6 @@ public class CollectFoodCollectorAction : GoapAction
         addPrecondition("hasActualBush", true);
         addEffect("hasFood", true);
     }
-
 
     public override void reset()
     {
@@ -32,7 +31,7 @@ public class CollectFoodCollectorAction : GoapAction
 
     public override bool requiresInRange()
     {
-        return true; // yes we need to be near a tree
+        return true;
     }
 
     public override bool checkProceduralPrecondition(GameObject agent)
@@ -55,6 +54,7 @@ public class CollectFoodCollectorAction : GoapAction
             startTime = Time.time;
         }
 
+        // No more food
         if (targetBush.food <= 0)
         {
             disableBubbleIcon(agent);
@@ -68,7 +68,6 @@ public class CollectFoodCollectorAction : GoapAction
         {
             disableBubbleIcon(agent);
             Collector collector = (Collector)agent.GetComponent(typeof(Collector));
-            // finished cutting
             int food = 30;
             targetBush.collected = true;
             if ((targetBush.food - food) >= 0)

@@ -6,14 +6,14 @@ public class AnalyzeBushCollectorAction : GoapAction
     public BushEntity targetBush;
 
     private float startTime = 0;
-    public float analyzetDuration = 1.5f; // seconds
     private int energyCost = 5;
+    public float analyzetDuration = 1.5f; // seconds
 
-
-    // find settings
+    // Find 
     private float radius = 1f;
     private int numTry = 1;
 
+    // Find adult bush
     public AnalyzeBushCollectorAction()
     {
         addPrecondition("hasEnergy", true);
@@ -21,7 +21,6 @@ public class AnalyzeBushCollectorAction : GoapAction
         addPrecondition("hasActualBush", false);
         addEffect("bushFound", true);
     }
-
 
     public override void reset()
     {
@@ -42,6 +41,7 @@ public class AnalyzeBushCollectorAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
+        // Find bush
         float localRadius = (numTry/2) + radius;
         numTry++;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(agent.transform.position, localRadius);
@@ -89,12 +89,13 @@ public class AnalyzeBushCollectorAction : GoapAction
             target = targetBush.gameObject;
             numTry = 1;
         } 
+        // Bush too far
         if(numTry > 10)
         {
+            // Evolution process
             Collector collector = (Collector)agent.GetComponent(typeof(Collector));
             if (collector.center.needCarriers())
             {
-                
                 collector.instanciateSuccessor("Carrier");
                 return false;
             }
