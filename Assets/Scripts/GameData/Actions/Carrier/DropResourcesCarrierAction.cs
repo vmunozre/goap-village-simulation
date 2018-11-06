@@ -8,6 +8,7 @@ public class DropResourcesCarrierAction : GoapAction
     private float startTime = 0;
     public float dropDuration = 2.5f; // seconds
 
+    // Drop resoucers
     public DropResourcesCarrierAction()
     {
         addPrecondition("hasResources", true);
@@ -37,7 +38,6 @@ public class DropResourcesCarrierAction : GoapAction
         Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
         targetWarehouse = abstractAgent.warehouse;
         target = targetWarehouse.gameObject;
-        // Debug line
         // Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
         return targetWarehouse != null;
     }

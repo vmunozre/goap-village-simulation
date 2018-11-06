@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class CollectResourcesCarrierAction : GoapAction
 {
     private bool collected = false;
@@ -10,6 +8,8 @@ public class CollectResourcesCarrierAction : GoapAction
 
     public int agentCapacity = 30;
     private int energyCost = 10;
+
+    // Collect resources 
     public CollectResourcesCarrierAction()
     {
         addPrecondition("hasEnergy", true);
