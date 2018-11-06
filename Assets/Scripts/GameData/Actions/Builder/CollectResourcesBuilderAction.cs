@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class CollectResourcesBuilderAction : GoapAction
 {
     private bool collected = false;
@@ -11,6 +9,8 @@ public class CollectResourcesBuilderAction : GoapAction
 
     public int agentCapacity = 50;
     private int energyCost = 10;
+
+    // Collect resources to building
     public CollectResourcesBuilderAction()
     {
         addPrecondition("hasEnergy", true);
@@ -19,7 +19,6 @@ public class CollectResourcesBuilderAction : GoapAction
         addPrecondition("hasResources", false);       
         addEffect("hasResources", true);
     }
-
 
     public override void reset()
     {

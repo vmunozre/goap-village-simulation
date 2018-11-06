@@ -9,6 +9,8 @@ public class DropResourcesBuilderAction : GoapAction
     public float dropDuration = 1.5f; // seconds
 
     private int energyCost = 10;
+
+    // Drop resources in building
     public DropResourcesBuilderAction()
     {
         addPrecondition("hasEnergy", true);
@@ -47,7 +49,6 @@ public class DropResourcesBuilderAction : GoapAction
             targetBuilding = builder.actualBuilding;
             target = targetBuilding;
         }
-        // Debug line
         //Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
         return checkActualBuilding;
     }

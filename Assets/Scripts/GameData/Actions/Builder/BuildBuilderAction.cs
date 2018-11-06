@@ -9,6 +9,7 @@ public class BuildBuilderAction : GoapAction
     private float timeEnergyLoss = 5;
     private int energyCost = 5;
 
+    // Build building
     public BuildBuilderAction()
     {
         addPrecondition("hasEnergy", true);
@@ -42,12 +43,10 @@ public class BuildBuilderAction : GoapAction
 
         bool checkActualBuilding = builder.actualBuilding != null;
         if (checkActualBuilding)
-        {
-//            BaseBuilding building = builder.actualBuilding.GetComponent<BaseBuilding>();            
+        {          
             targetBuilding = builder.actualBuilding;
             target = targetBuilding;
         }
-        // Debug line
         //Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
         return checkActualBuilding;
     }

@@ -5,8 +5,9 @@ public class CompleteRequestBuilderAction : GoapAction
     private CenterEntity targetCenter;
 
     private float startTime = 0;
-    public float checkDuration = 0.5f; // seconds
+    public float checkDuration = 1f; // seconds
 
+    // Complete request
     public CompleteRequestBuilderAction()
     {
         addPrecondition("hasActualRequest", true);

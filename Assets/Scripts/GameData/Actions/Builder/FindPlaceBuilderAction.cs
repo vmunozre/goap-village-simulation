@@ -40,12 +40,12 @@ public class FindPlaceBuilderAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        // TODO buscar cerca de lugares apropiados (aserradeor == bosque)
+        // TODO Find according places (sawmill == forest)
+        // Move to random position
         float posX = agent.transform.position.x + Random.Range(minMove, maxMove);
         float posY = agent.transform.position.y + Random.Range(minMove, maxMove);
         nextPosition = new Vector3(posX, posY, agent.transform.position.z);
 
-        
         targetPosition = nextPosition;
         //Debug.DrawLine(targetPosition, agent.transform.position, Color.black, 3, false);
 
@@ -68,7 +68,7 @@ public class FindPlaceBuilderAction : GoapAction
             {
                 builder.energy -= energyCost;
             }
-
+            // Check collider
             BoxCollider2D buildingCollider = builder.actualRequest.building.GetComponent<BoxCollider2D>();
             float offset = 0.1f;
             float divide = 2f;
@@ -80,8 +80,7 @@ public class FindPlaceBuilderAction : GoapAction
             
             Debug.DrawLine(pointA, pointB, Color.black, 3, false);
             Debug.DrawLine(pointC, pointD, Color.black, 3, false);
-
-            // Desactivación del collider del agente un momento
+            
             Collider2D agentCollider = builder.GetComponent<BoxCollider2D>();
             agentCollider.enabled = false;
             Collider2D[] colliders = Physics2D.OverlapAreaAll(pointA, pointB);
@@ -105,7 +104,7 @@ public class FindPlaceBuilderAction : GoapAction
                 return false;
             }
 
-            //TODO si los colliders son árboles pedir que se talen y poner aqui la construcción
+            //TODO Request fell tree
            
         }
         return true;

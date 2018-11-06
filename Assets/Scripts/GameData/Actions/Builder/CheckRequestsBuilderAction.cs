@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class CheckRequestsBuilderAction : GoapAction
 {
     private bool isChecked = false;
@@ -9,6 +7,7 @@ public class CheckRequestsBuilderAction : GoapAction
     private float startTime = 0;
     public float checkDuration = 0.5f; // seconds
 
+    // Check building request
     public CheckRequestsBuilderAction()
     {
         addPrecondition("hasEnergy", true);
@@ -16,7 +15,6 @@ public class CheckRequestsBuilderAction : GoapAction
         addPrecondition("hasActualBuilding", false);
         addEffect("hasActualRequest", true);
     }
-
 
     public override void reset()
     {
