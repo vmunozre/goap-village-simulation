@@ -1,19 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HouseBuilding : BaseBuilding
 {
+    // House capacity and counters
     public int capacity = 4;
     public int agentCount = 0;
     public int actualAgents = 0;
+    // Born food cost
     public int bornCost = 45;
-
     public bool full;
+    // Center and warehouse references
     public WarehouseEntity warehouse;
     public CenterEntity center;
-	// Use this for initialization
+	
 	void Start () {
+        // Found and save buildings references
         WarehouseEntity[] warehouses = (WarehouseEntity[])FindObjectsOfType(typeof(WarehouseEntity));
         if (warehouses.Length > 0)
         {
@@ -25,7 +26,7 @@ public class HouseBuilding : BaseBuilding
             center = centers[0];
         }
     }
-	
+	// Check limitAgents and add agent
     public bool addAgent()
     {
         bool result = false;
@@ -48,7 +49,7 @@ public class HouseBuilding : BaseBuilding
     {
         actualAgents--;
     }
-
+    // Procreate system
     private void procreate()
     {
         if (actualAgents >= 2 && (actualAgents % 2 == 0) && warehouse.food >= bornCost)

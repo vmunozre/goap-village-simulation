@@ -1,22 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SawmillBuilding : BaseBuilding
+﻿public class SawmillBuilding : BaseBuilding
 {
+    // Woodcutters counter
     public int workers = 0;
+    // Carriers counter and limits
     public int carriers = 0;
     public int limitCarriers = 2;
+    // Warehouse wood
     public int wood = 0;
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

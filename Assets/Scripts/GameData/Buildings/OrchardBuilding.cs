@@ -1,23 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OrchardBuilding : BaseBuilding {
     public bool full = false;
-    public int limitWorkers = 3;
+    // Farmers counter
     public int farmers = 0;
-    public int food = 0;
-    public float effort = 10f;
+    // Max workers
+    public int limitWorkers = 3;
+    // Effort and progress
+    public float effort = 20f;
     public float farmProgress = 0f;
-
+    // Food counters
+    public int food = 0;
+    // Harvest Sprite
     public Sprite spriteHarvest;
     private SpriteRenderer sr;
-	// Use this for initialization
+
 	void Start () {
-        limitWorkers = Random.Range(2,4);
+        // Generate limitWorkers
+        limitWorkers = Random.Range(3,8);
         sr = GetComponent<SpriteRenderer>();
     }
 
+    // Check limit workers and add farmer
     public bool addFarmer()
     {
         if (farmers < limitWorkers)
@@ -29,9 +33,10 @@ public class OrchardBuilding : BaseBuilding {
         return false;
     }
 
+    // Farmed complete
     public void farmed()
     {
-        food = Random.Range(150, 300);
+        food = Random.Range(100, (farmers * 100) + 1);
         toggleSpriteHarvest();
     }
 
