@@ -12,6 +12,8 @@ public class FishingFisherAction : GoapAction
     // find settings
     private float radius = 2f;
     private int numTry = 1;
+
+    // Fishing Action
     public FishingFisherAction()
     {
         addPrecondition("hasEnergy", true);
@@ -39,6 +41,7 @@ public class FishingFisherAction : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
+        // Find lake
         Fisher fisher = (Fisher)agent.GetComponent(typeof(Fisher));
         if (fisher.actualLakePosition != null)
         {
@@ -68,7 +71,6 @@ public class FishingFisherAction : GoapAction
                 LakeEntity lake = (LakeEntity)hit.gameObject.GetComponent(typeof(LakeEntity));
                 if (lake.full)
                 {
-                    // TODO transformar en granjero
                     continue;
                 }
 
