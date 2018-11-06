@@ -3,15 +3,11 @@
 public class QuarryEntity : MonoBehaviour
 {
     public bool full = false;
+    // Workers counters
     private int limitWorkers = 4;
     public int stonecutters = 0;
 
-    void Start()
-    {
-        //Por ahora limite fijado en 4
-        //limitWorkers = Random.Range(3, 7);
-    }
-
+    // Add worker
     public bool addStoneCutters()
     {
         if(stonecutters < limitWorkers)
@@ -22,5 +18,4 @@ public class QuarryEntity : MonoBehaviour
         }
         return false;
     }
-
 }

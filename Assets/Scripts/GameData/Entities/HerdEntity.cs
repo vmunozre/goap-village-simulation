@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HerdEntity : MonoBehaviour {
+    // Deer reference
+    public GameObject deerPrefab;
+    // Counters
     public int maxDeer = 5;
     public int deerCount = 0;
-    public GameObject deerPrefab;
-
+    // Control hunted 
     private bool control = false;
-    //Timer
+    //Timers
     private float startTime = 0;
     private float reproductionTime = 10f;
     public float minReproductionTime = 10f;
@@ -20,6 +20,7 @@ public class HerdEntity : MonoBehaviour {
     }
 	
 	void Update () {
+        // Deer counters
         if(deerCount < maxDeer)
         {
             if (startTime == 0)
@@ -36,7 +37,7 @@ public class HerdEntity : MonoBehaviour {
             }
         }
 	}
-
+    // Deer hunted
     public void hunted()
     {
         if (!control)
@@ -48,7 +49,7 @@ public class HerdEntity : MonoBehaviour {
         deerCount--;
         resetTimer();
     }
-
+    
     private void resetTimer()
     {
         startTime = 0;

@@ -4,15 +4,12 @@ using UnityEngine;
 public class LakeEntity : MonoBehaviour
 {
     public bool full = false;
+    // Counters
     public int fishers = 0;
+    // Positions list
     public List<GameObject> positionsEmpty;
 
-    void Start()
-    {
-        //Por ahora limite fijado en 4
-        //limitWorkers = Random.Range(3, 7);
-    }
-
+    // Add fisher
     public GameObject addFisher()
     {
         GameObject position = null;

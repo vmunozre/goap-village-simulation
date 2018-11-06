@@ -1,23 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DeerEntity : MonoBehaviour {
+    // Speed
     public float moveSpeed = 0;
+
+    // Base food
     public int food = 150;
+
+    // States
     public bool isAdult = false;
     public bool isDead = false;
+
+    // Wander position
     public Vector3 randWander;
+
+    // Sprite list
     public Sprite[] sprites;
 
-    //Private var's
+    // Resting time
     private bool resting = false;
     private SpriteRenderer sr;
 
-    //Timer
+    //Timers
     private float startTime = 0;
     private float restingTime = 3;
     private float bornDuration = 5f;
+
     void Start () {
         sr = GetComponent<SpriteRenderer>();
         transform.localScale = new Vector3(0.3f, 0.3f, 1f);
@@ -25,14 +33,15 @@ public class DeerEntity : MonoBehaviour {
         restingTime = getRandomTime(1.5f, 5f);
     }
 	
-	// Update is called once per frame
 	void Update () {
+        // Check is dead
         if (isDead)
         {
             return;
         }
         if (!isAdult)
         {
+            // Born time
             if (startTime == 0)
             {
                 startTime = Time.time;
@@ -52,6 +61,7 @@ public class DeerEntity : MonoBehaviour {
             }
         } else
         {
+            // Move to next wander 
             if (!resting)
             {
                 float step = moveSpeed * Time.deltaTime;
@@ -66,6 +76,7 @@ public class DeerEntity : MonoBehaviour {
             }
             else
             {
+                // Resting time
                 if (startTime == 0)
                 {
                     sr.sprite = sprites[1];
@@ -85,6 +96,7 @@ public class DeerEntity : MonoBehaviour {
         }
     }
 
+    // DEAD!
     public void killDeer()
     {
         isDead = true;
@@ -92,6 +104,7 @@ public class DeerEntity : MonoBehaviour {
         moveSpeed = 0;
     }
 
+    // Turn skeleton mode
     public void turnEmpty()
     {
         food = 0;
@@ -100,10 +113,14 @@ public class DeerEntity : MonoBehaviour {
         HerdEntity herd = GetComponentInParent<HerdEntity>();
         herd.hunted();
     }
+
+    // Return random time
     private float getRandomTime(float _min, float _max)
     {
         return Random.Range(_min, _max);
     }
+
+    // Return wander random position
     private Vector3 getRandomWander(float _min, float _max)
     {
         float posX = transform.position.x - Random.Range(_min, _max);
@@ -121,12 +138,19 @@ public class DeerEntity : MonoBehaviour {
         return new Vector3(posX, posY, transform.position.z); ;
     }
 
+    // Return runaway position
+    private Vector3 getRunAwayPosition(Collider2D collision)
+    {
+        float posX = (transform.position.x - collision.transform.position.x);
+        float posY = (transform.position.y - collision.transform.position.y);
+        return new Vector3(transform.position.x + posX, transform.position.y + posY, transform.position.z);
+    }
+
+    // Check hunter tags collisions
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(!isDead && collision.tag == "Hunter")
-        {
-            Debug.Log("HUMANO!!!!");
-            // Debug.DrawLine(collision.transform.position, transform.position, Color.magenta, 4, false);
+        {                        
             randWander = getRunAwayPosition(collision);
             resting = false;
         }
@@ -138,12 +162,5 @@ public class DeerEntity : MonoBehaviour {
             Debug.DrawLine(collision.transform.position, transform.position, Color.magenta);
             randWander = getRunAwayPosition(collision);
         }
-    }
-
-    private Vector3 getRunAwayPosition(Collider2D collision)
-    {
-        float posX = (transform.position.x - collision.transform.position.x);
-        float posY = (transform.position.y - collision.transform.position.y);
-        return new Vector3(transform.position.x + posX, transform.position.y + posY, transform.position.z); 
     }
 }

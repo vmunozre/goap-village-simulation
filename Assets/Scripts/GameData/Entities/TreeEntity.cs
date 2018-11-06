@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TreeEntity : MonoBehaviour
 {
-    public int age = 4;
+    public int age = 1;
     public int wood = 100;
     public int rare = 0;
     public bool chopped = false;
@@ -18,23 +16,19 @@ public class TreeEntity : MonoBehaviour
     //Images
     public Sprite emptyTreeSprite;
     public Sprite clippedTreeSprite;
-    public void checkChopped()
-    {
-        chopped = true;
-    }
-    // Use this for initialization
+
     void Start()
     {
+        // Rare system
         rare = Random.Range(10, 30);
-        // print("Rare: " + rare.ToString());
         waitTime += rare;
         float scale = calculateScale();
         transform.localScale = new Vector3(scale, scale, 0f);
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Evolution tree system
         if (!empty && !chopped && age < 20)
         {
             timer += Time.deltaTime;
@@ -44,7 +38,6 @@ public class TreeEntity : MonoBehaviour
                 age += 1;
                 float scale = calculateScale();
                 transform.localScale = new Vector3(scale, scale, 0f);
-                // print("Tree grew, age: " + age.ToString());
                 timer = 0f;
             }
         }
@@ -63,6 +56,11 @@ public class TreeEntity : MonoBehaviour
         empty = true;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.sprite = clippedTreeSprite;
+    }
+
+    public void checkChopped()
+    {
+        chopped = true;
     }
 
     private float calculateScale()

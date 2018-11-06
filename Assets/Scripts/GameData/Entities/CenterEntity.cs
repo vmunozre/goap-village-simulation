@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CenterEntity : MonoBehaviour {
@@ -19,6 +18,7 @@ public class CenterEntity : MonoBehaviour {
     {
         buildingsRequests = new Dictionary<string, Building>();
         tenders = new Dictionary<string, Hunter>();
+        // Add agents counters
         agentsCounter = new Dictionary<string, int>();
         agentsCounter.Add("Builder", 0);
         agentsCounter.Add("Carrier", 0);
@@ -32,10 +32,12 @@ public class CenterEntity : MonoBehaviour {
 
     private void Awake()
     {
+        // Add building basic house
         Building building = new Building("Prefabs/Buildings/House", 100, 100, 3, 1);
         addNewBuildingRequest(building);
     }
-
+ 
+    // Buildings functions
     public void addNewBuildingRequest(Building _building)
     {
         if (!checkBuildingRequests(_building))
@@ -52,6 +54,7 @@ public class CenterEntity : MonoBehaviour {
             buildingsRequests.Remove(_building.prefabPath);
         }
     }
+
     public bool checkBuildingRequests(Building _building)
     {
         return buildingsRequests.ContainsKey(_building.prefabPath);
@@ -90,17 +93,7 @@ public class CenterEntity : MonoBehaviour {
         return building;
     }
 
-    public void enterAgentToRecover()
-    {
-        actualAgents++;
-        procreate();
-    }
-
-    public void exitAgentToRecover()
-    {
-        actualAgents--;
-    }
-
+    // Add tender to hunters
     public void addTender(string _title, Hunter _object)
     {
         tenders.Add(_title, _object);
@@ -112,11 +105,24 @@ public class CenterEntity : MonoBehaviour {
         if (tenders.ContainsKey(_title))
         {
             tender = tenders[_title];
-            
+
         }
         return tender;
     }
 
+    // Enter Agents
+    public void enterAgentToRecover()
+    {
+        actualAgents++;
+        procreate();
+    }
+
+    public void exitAgentToRecover()
+    {
+        actualAgents--;
+    }
+
+    // Procreation system
     private void procreate()
     {
         if (actualAgents >= 2 && (actualAgents % 2 == 0) && warehouse.food >= bornCost)
@@ -152,7 +158,7 @@ public class CenterEntity : MonoBehaviour {
         }
 
     }
-
+    // Need system
     public bool needBuilders()
     {
         bool result = false;

@@ -1,21 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BushEntity : MonoBehaviour
 {
     public int age = 1;
     public int food = 100;
     public int rare = 0;
+    // States
     public bool collected = false;
     public bool empty = false;
     public bool viewed = false;
-    //Images
+    // Sprites
     public Sprite emptyBushSprite;
 
-    // Timer
-    float timer = 0f;
-    float waitTime = 10f;
+    // Timers
+    private float timer = 0f;
+    private float waitTime = 10f;
     
     void Start()
     {
@@ -25,7 +24,6 @@ public class BushEntity : MonoBehaviour
         waitTime += rare;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!collected && age < 15)
@@ -35,7 +33,6 @@ public class BushEntity : MonoBehaviour
             {
                 food += 20;
                 age += 1;
-                // print("Bush grew, age: " + age.ToString());
                 viewed = false;
                 timer = 0f;
             }
