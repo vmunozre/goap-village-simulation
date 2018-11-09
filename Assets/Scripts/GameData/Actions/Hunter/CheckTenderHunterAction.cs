@@ -5,11 +5,11 @@ public class CheckTenderHunterAction : GoapAction
     private CenterEntity targetCenter;
 
     private float startTime = 0;
-    private float checkDuration = 1f;
 
     // Check tenders to coop hunting
     public CheckTenderHunterAction()
     {
+        setBaseDuration(1f);
         addPrecondition("hasEnergy", true); 
         addPrecondition("hasTender", false); 
         addEffect("hasTender", true);
@@ -74,7 +74,7 @@ public class CheckTenderHunterAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > checkDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             isChecked = true;

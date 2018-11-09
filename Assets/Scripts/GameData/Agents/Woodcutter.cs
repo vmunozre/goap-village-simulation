@@ -34,7 +34,7 @@ public class Woodcutter : Agent
 
     void Update()
     {
-        checkIsAdult();
+        checkSuperUpdate();
     }
 
     public override Dictionary<string, object> createGoalState()

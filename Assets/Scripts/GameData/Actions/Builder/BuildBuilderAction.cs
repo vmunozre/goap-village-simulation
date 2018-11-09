@@ -6,12 +6,12 @@ public class BuildBuilderAction : GoapAction
     private GameObject targetBuilding;
 
     private float startTime = 0;
-    private float timeEnergyLoss = 5;
     private int energyCost = 5;
 
     // Build building
     public BuildBuilderAction()
     {
+        setBaseDuration(5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualRequest", true);
         addPrecondition("hasActualBuilding", true);        
@@ -61,7 +61,7 @@ public class BuildBuilderAction : GoapAction
             startTime = Time.time;
         }
 
-        if((Time.time - startTime) > timeEnergyLoss)
+        if((Time.time - startTime) > duration)
         {
             building.blueprint.progress += 1;
             builder.energy -= energyCost;

@@ -6,11 +6,11 @@ public class RecoveryEnergyAgentAction : GoapAction
     private bool recovered = false;
 
     private float startTime = 0;
-    public float recoveringDuration = 5; // seconds
     public int foodCost = 10;
 
     public RecoveryEnergyAgentAction()
     {
+        setBaseDuration(5f);
         addPrecondition("hasEnergy", false);
         addEffect("hasEnergy", true);
     }
@@ -95,7 +95,7 @@ public class RecoveryEnergyAgentAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > recoveringDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             abstractAgent.energy = 100;

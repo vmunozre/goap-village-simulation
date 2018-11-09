@@ -7,7 +7,6 @@ public class AnalyzeBushCollectorAction : GoapAction
 
     private float startTime = 0;
     private int energyCost = 5;
-    public float analyzetDuration = 1.5f; // seconds
 
     // Find 
     private float radius = 1f;
@@ -16,6 +15,7 @@ public class AnalyzeBushCollectorAction : GoapAction
     // Find adult bush
     public AnalyzeBushCollectorAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addPrecondition("hasActualBush", false);
@@ -133,7 +133,7 @@ public class AnalyzeBushCollectorAction : GoapAction
             return false;
         }
 
-        if (Time.time - startTime > analyzetDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Collector collector = (Collector)agent.GetComponent(typeof(Collector));

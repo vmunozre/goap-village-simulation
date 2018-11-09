@@ -6,11 +6,11 @@ public class DropFoodFarmerAction : GoapAction
     private WarehouseEntity targetWarehouse;
 
     private float startTime = 0;
-    public float dropDuration = 1.5f; // seconds
 
     // Drop food
     public DropFoodFarmerAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasFood", true);
         addEffect("hasFood", false);
         addEffect("collectFood", true);
@@ -50,7 +50,7 @@ public class DropFoodFarmerAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > dropDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Farmer farmer = (Farmer)agent.GetComponent(typeof(Farmer));

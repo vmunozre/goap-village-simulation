@@ -4,7 +4,6 @@ public class CollectResourcesCarrierAction : GoapAction
     private bool collected = false;
 
     private float startTime = 0;
-    public float checkDuration = 2.5f; // seconds
 
     public int agentCapacity = 30;
     private int energyCost = 10;
@@ -12,6 +11,7 @@ public class CollectResourcesCarrierAction : GoapAction
     // Collect resources 
     public CollectResourcesCarrierAction()
     {
+        setBaseDuration(3f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasResources", false);
         addEffect("hasResources", true);
@@ -121,7 +121,7 @@ public class CollectResourcesCarrierAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > checkDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Carrier carrier = (Carrier)agent.GetComponent(typeof(Carrier));

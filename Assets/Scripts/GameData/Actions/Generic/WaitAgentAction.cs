@@ -5,10 +5,10 @@ public class WaitAgentAction : GoapAction
     private CenterEntity targetCenter;
 
     private float startTime = 0;
-    public float waitDuration = 5; // seconds
     
     public WaitAgentAction()
     {
+        setBaseDuration(5f);
         addPrecondition("isWaiting", true); // we need energy
         addEffect("isWaiting", false);
         addEffect("waitComplete", true);
@@ -55,11 +55,11 @@ public class WaitAgentAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > waitDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Agent abstractAgent = (Agent)agent.GetComponent(typeof(Agent));
-            abstractAgent.energy += 5;
+            abstractAgent.energy = Mathf.Min(100, abstractAgent.energy + 5);
             abstractAgent.waiting = false;
             waited = true;
         }

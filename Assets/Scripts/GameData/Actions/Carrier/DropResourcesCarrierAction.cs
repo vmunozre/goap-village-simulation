@@ -6,11 +6,11 @@ public class DropResourcesCarrierAction : GoapAction
     private WarehouseEntity targetWarehouse;
 
     private float startTime = 0;
-    public float dropDuration = 2.5f; // seconds
 
     // Drop resoucers
     public DropResourcesCarrierAction()
     {
+        setBaseDuration(3f);
         addPrecondition("hasResources", true);
         addEffect("hasResources", false);
         addEffect("collectResources", true);
@@ -50,7 +50,7 @@ public class DropResourcesCarrierAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > dropDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Carrier carrier = (Carrier)agent.GetComponent(typeof(Carrier));

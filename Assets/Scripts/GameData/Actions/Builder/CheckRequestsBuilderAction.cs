@@ -5,11 +5,11 @@ public class CheckRequestsBuilderAction : GoapAction
     private CenterEntity targetCenter;
 
     private float startTime = 0;
-    public float checkDuration = 0.5f; // seconds
 
     // Check building request
     public CheckRequestsBuilderAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualRequest", false);
         addPrecondition("hasActualBuilding", false);
@@ -63,7 +63,7 @@ public class CheckRequestsBuilderAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > checkDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             isChecked = true;

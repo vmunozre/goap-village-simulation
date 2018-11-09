@@ -7,11 +7,11 @@ public class HuntAloneHunterAction : GoapAction
 
     private int energyCost = 50;
     private float startTime = 0;
-    private float huntDuration = 2.5f; // seconds
 
     // Hunt alone
     public HuntAloneHunterAction()
     {
+        setBaseDuration(2.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addPrecondition("hasActualPrey", true);
@@ -60,7 +60,7 @@ public class HuntAloneHunterAction : GoapAction
             hunter.actualPrey.killDeer();
         }
 
-        if (Time.time - startTime > huntDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));

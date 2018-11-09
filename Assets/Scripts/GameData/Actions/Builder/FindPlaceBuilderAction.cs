@@ -6,7 +6,6 @@ public class FindPlaceBuilderAction : GoapAction
     public Vector3 nextPosition;
 
     private float startTime = 0;
-    private float searchDuration = 0.5f; // seconds
     private int energyCost = 2;
 
     // find settings
@@ -14,6 +13,7 @@ public class FindPlaceBuilderAction : GoapAction
     private float maxMove = 1f;
     public FindPlaceBuilderAction()
     {
+        setBaseDuration(0.5f);
         addPrecondition("hasEnergy", true);        
         addPrecondition("hasActualRequest", true);
         addPrecondition("hasActualBuilding", false);
@@ -60,7 +60,7 @@ public class FindPlaceBuilderAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > searchDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));

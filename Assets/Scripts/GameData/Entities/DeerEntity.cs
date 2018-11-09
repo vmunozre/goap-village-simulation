@@ -2,6 +2,7 @@
 
 public class DeerEntity : MonoBehaviour {
     // Speed
+    private float baseSpeed = 0.5f;
     public float moveSpeed = 0;
 
     // Base food
@@ -51,7 +52,7 @@ public class DeerEntity : MonoBehaviour {
             {
                 isAdult = true;
                 transform.localScale = new Vector3(1f, 1f, 1f);
-                moveSpeed = 0.5f;
+                moveSpeed = baseSpeed * GameManager.instance.actualMuti;
                 startTime = 0;
             }
             else
@@ -61,6 +62,7 @@ public class DeerEntity : MonoBehaviour {
             }
         } else
         {
+            moveSpeed = baseSpeed * GameManager.instance.actualMuti;
             // Move to next wander 
             if (!resting)
             {
@@ -117,7 +119,7 @@ public class DeerEntity : MonoBehaviour {
     // Return random time
     private float getRandomTime(float _min, float _max)
     {
-        return Random.Range(_min, _max);
+        return Random.Range(_min, _max) / GameManager.instance.actualMuti;
     }
 
     // Return wander random position

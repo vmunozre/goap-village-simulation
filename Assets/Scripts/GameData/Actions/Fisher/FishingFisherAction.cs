@@ -6,7 +6,6 @@ public class FishingFisherAction : GoapAction
     private GameObject targetLakePosition = null;
 
     private float startTime = 0;
-    public float fishingDuration = 10; // seconds
     private int energyCost = 30;
 
     // find settings
@@ -16,6 +15,7 @@ public class FishingFisherAction : GoapAction
     // Fishing Action
     public FishingFisherAction()
     {
+        setBaseDuration(10f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addEffect("hasFood", true);
@@ -99,7 +99,7 @@ public class FishingFisherAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > fishingDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Fisher fisher = (Fisher)agent.GetComponent(typeof(Fisher));

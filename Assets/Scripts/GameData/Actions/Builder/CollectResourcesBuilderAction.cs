@@ -5,7 +5,6 @@ public class CollectResourcesBuilderAction : GoapAction
     private WarehouseEntity targetWarehouse;
 
     private float startTime = 0;
-    public float checkDuration = 1.5f; // seconds
 
     public int agentCapacity = 50;
     private int energyCost = 10;
@@ -13,6 +12,7 @@ public class CollectResourcesBuilderAction : GoapAction
     // Collect resources to building
     public CollectResourcesBuilderAction()
     {
+        setBaseDuration(2f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualRequest", true);
         addPrecondition("hasActualBuilding", true);
@@ -97,7 +97,7 @@ public class CollectResourcesBuilderAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > checkDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));

@@ -7,10 +7,10 @@ public class CollectFoodCollectorAction : GoapAction
 
     private float startTime = 0;
     private int energyCost = 30;
-    public float collectDuration = 3; // seconds
 
     public CollectFoodCollectorAction()
     {
+        setBaseDuration(3f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addPrecondition("hasActualBush", true);
@@ -64,7 +64,7 @@ public class CollectFoodCollectorAction : GoapAction
             return false;
         }
 
-        if (Time.time - startTime > collectDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Collector collector = (Collector)agent.GetComponent(typeof(Collector));

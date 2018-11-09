@@ -7,7 +7,6 @@ public class CoopSearchPreyHunterAction : GoapAction
 
 
     private float startTime = 0;
-    private float searchDuration = 1.5f;
     private int energyCost = 2;
     private HerdEntity trendHerd = null;
 
@@ -19,6 +18,7 @@ public class CoopSearchPreyHunterAction : GoapAction
     // Search coop 
     public CoopSearchPreyHunterAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addPrecondition("hasActualPrey", false);
@@ -83,7 +83,7 @@ public class CoopSearchPreyHunterAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > searchDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));

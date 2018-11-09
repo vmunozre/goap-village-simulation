@@ -5,11 +5,11 @@ public class DropFoodHunterAction : GoapAction
     private bool droppedFood = false;
 
     private float startTime = 0;
-    private float dropDuration = 1.5f; 
 
     // Drop food
     public DropFoodHunterAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasFood", true);
         addEffect("hasFood", false);
         addEffect("collectFood", true);
@@ -56,7 +56,7 @@ public class DropFoodHunterAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > dropDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));

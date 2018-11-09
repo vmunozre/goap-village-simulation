@@ -71,7 +71,7 @@ public class CoopSurroundTargetHunterAction : GoapAction
     {
         enableBubbleIcon(agent);
         Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
-        float step = 1 * Time.deltaTime;
+        float step = (1 * GameManager.instance.actualMuti) * Time.deltaTime;
         float posX = hunter.actualPrey.transform.position.x - 2f;
         if (hunter.actualPrey.transform.position.x < agent.transform.position.x)
         {
@@ -113,7 +113,7 @@ public class CoopSurroundTargetHunterAction : GoapAction
             } else
             {
                 
-                if (Mathf.Abs(angleRotation - firstAngle) > 3f)
+                if (Mathf.Abs(angleRotation - firstAngle) > (3f / GameManager.instance.actualMuti))
                 {
                     disableBubbleIcon(agent);
                     hunter.isInPosition = true;

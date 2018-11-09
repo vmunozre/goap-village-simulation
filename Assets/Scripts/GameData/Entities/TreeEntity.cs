@@ -11,6 +11,7 @@ public class TreeEntity : MonoBehaviour
 
     // Timer
     float timer = 0f;
+    float baseWaitTime = 10f;
     float waitTime = 10f;
 
     //Images
@@ -21,13 +22,14 @@ public class TreeEntity : MonoBehaviour
     {
         // Rare system
         rare = Random.Range(10, 30);
-        waitTime += rare;
+        baseWaitTime += rare;
         float scale = calculateScale();
         transform.localScale = new Vector3(scale, scale, 0f);
     }
 
     void Update()
     {
+        waitTime = baseWaitTime / GameManager.instance.actualMuti;
         // Evolution tree system
         if (!empty && !chopped && age < 20)
         {

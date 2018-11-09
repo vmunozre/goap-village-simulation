@@ -5,7 +5,6 @@ public class HarvestFarmerAction : GoapAction
     private OrchardBuilding targetOrchard;
 
     private float startTime = 0;
-    public float collectedDuration = 10f; // seconds
 
     public int agentCapacity = 30;
     private int energyCost = 10;
@@ -13,6 +12,7 @@ public class HarvestFarmerAction : GoapAction
     // Harvest Orchard
     public HarvestFarmerAction()
     {
+        setBaseDuration(15f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addPrecondition("harvestTime", true);
@@ -71,7 +71,7 @@ public class HarvestFarmerAction : GoapAction
             startTime = Time.time;
         }
         // Add progress
-        if (Time.time - startTime > collectedDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Farmer farmer = (Farmer)agent.GetComponent(typeof(Farmer));

@@ -6,11 +6,11 @@ public class DropStoneStonecutterAction : GoapAction
     private WarehouseEntity targetWarehouse;
 
     private float startTime = 0;
-    public float dropDuration = 1.5f; // seconds
 
     // Drop stone
     public DropStoneStonecutterAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasStone", true);
         addEffect("hasStone", false);
         addEffect("collectStone", true);
@@ -50,7 +50,7 @@ public class DropStoneStonecutterAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > dropDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Stonecutter stonecutter = (Stonecutter)agent.GetComponent(typeof(Stonecutter));

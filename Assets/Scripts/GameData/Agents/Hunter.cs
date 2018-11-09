@@ -39,6 +39,11 @@ public class Hunter : Agent
         moveSpeed = 1;
     }
 
+    void Update()
+    {
+        checkSuperUpdate();
+    }
+
     public override Dictionary<string, object> createGoalState()
     {
         Dictionary<string, object> goal = new Dictionary<string, object>();

@@ -17,7 +17,7 @@ public class Builder : Agent
 
     void Update()
     {
-        checkIsAdult();
+        checkSuperUpdate();
     }
 
     public override Dictionary<string, object> createGoalState()

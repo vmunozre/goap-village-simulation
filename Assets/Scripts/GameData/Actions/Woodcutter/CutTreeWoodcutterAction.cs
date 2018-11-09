@@ -7,11 +7,11 @@ public class CutTreeWoodcutterAction : GoapAction
 
     private float startTime = 0;
     private int energyCost = 20;
-    public float choppedDuration = 5; // seconds
 
     // Cut wood from fell tree
     public CutTreeWoodcutterAction()
     {
+        setBaseDuration(5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualTree", true);
         addPrecondition("treeIsChopped", true);
@@ -66,7 +66,7 @@ public class CutTreeWoodcutterAction : GoapAction
             return false;
         }
 
-        if (Time.time - startTime > choppedDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));

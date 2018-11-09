@@ -6,7 +6,6 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
     public TreeEntity targetTree;
 
     // Timer
-    public float analyzetDuration = 1.5f; // seconds
     private float startTime = 0;
     private int energyCost = 5;
 
@@ -17,6 +16,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
     // Check tree age
     public AnalyzeTreeWoodcutterAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasWood", false);
         addPrecondition("hasActualTree", false);
@@ -95,6 +95,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
 
     public override bool perform(GameObject agent)
     {
+
         if (startTime == 0)
         {
             enableBubbleIcon(agent);
@@ -108,7 +109,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
             return false;
         }
 
-        if (Time.time - startTime > analyzetDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));

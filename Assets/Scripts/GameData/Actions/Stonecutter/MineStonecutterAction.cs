@@ -7,7 +7,6 @@ public class MineStonecutterAction : GoapAction
 
     private float startTime = 0;
     private int energyCost = 30;
-    public float mineDuration = 10; // seconds
 
     // find settings
     private float radius = 5f;
@@ -16,6 +15,7 @@ public class MineStonecutterAction : GoapAction
     // Mine stone
     public MineStonecutterAction()
     {
+        setBaseDuration(10f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasStone", false);
         addEffect("hasStone", true);
@@ -123,7 +123,7 @@ public class MineStonecutterAction : GoapAction
             }
         }
 
-        if (Time.time - startTime > mineDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Stonecutter stonecutter = (Stonecutter)agent.GetComponent(typeof(Stonecutter));

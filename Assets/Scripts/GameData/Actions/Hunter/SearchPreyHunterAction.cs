@@ -6,7 +6,6 @@ public class SearchPreyHunterAction : GoapAction
     private bool found = false;
 
     private float startTime = 0;
-    private float searchDuration = 1.5f; 
     private int energyCost = 2;
 
     // Herd default
@@ -20,6 +19,7 @@ public class SearchPreyHunterAction : GoapAction
     // Search prey (he tends to go to his herd default)
     public SearchPreyHunterAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addPrecondition("hasActualPrey", false);
@@ -85,7 +85,7 @@ public class SearchPreyHunterAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > searchDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));

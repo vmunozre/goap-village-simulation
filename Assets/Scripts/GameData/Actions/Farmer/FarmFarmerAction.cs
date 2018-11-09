@@ -6,12 +6,12 @@ public class FarmFarmerAction : GoapAction
     private OrchardBuilding targetOrchard = null;
 
     private float startTime = 0;
-    private float timeEnergyLoss = 3f;
     private int energyCost = 10;
 
     // Farm Orchard
     public FarmFarmerAction()
     {
+        setBaseDuration(3f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addEffect("harvestTime", true);
@@ -99,7 +99,7 @@ public class FarmFarmerAction : GoapAction
             startTime = Time.time;
         }
 
-        if ((Time.time - startTime) >= timeEnergyLoss)
+        if ((Time.time - startTime) >= duration)
         {
             startTime = Time.time;
             Farmer farmer = (Farmer)agent.GetComponent(typeof(Farmer));

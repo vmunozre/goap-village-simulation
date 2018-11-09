@@ -5,11 +5,11 @@ public class CompleteRequestBuilderAction : GoapAction
     private CenterEntity targetCenter;
 
     private float startTime = 0;
-    public float checkDuration = 1f; // seconds
 
     // Complete request
     public CompleteRequestBuilderAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasActualRequest", true);
         addPrecondition("hasActualBuilding", true);
         addPrecondition("buildComplete", true);
@@ -51,7 +51,7 @@ public class CompleteRequestBuilderAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > checkDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));

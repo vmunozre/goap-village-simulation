@@ -14,6 +14,7 @@ public class BushEntity : MonoBehaviour
 
     // Timers
     private float timer = 0f;
+    private float baseWaitTime = 10f;
     private float waitTime = 10f;
     
     void Start()
@@ -21,11 +22,12 @@ public class BushEntity : MonoBehaviour
         age = Random.Range(1, 4);
         food = 100 + (20 * age);
         rare = Random.Range(10, 20);
-        waitTime += rare;
+        baseWaitTime += rare;
     }
 
     void Update()
     {
+        waitTime = baseWaitTime / GameManager.instance.actualMuti;
         if (!collected && age < 15)
         {
             timer += Time.deltaTime;

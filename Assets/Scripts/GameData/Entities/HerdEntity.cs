@@ -10,6 +10,7 @@ public class HerdEntity : MonoBehaviour {
     private bool control = false;
     //Timers
     private float startTime = 0;
+    private float baseReproductionTime = 10f;
     private float reproductionTime = 10f;
     public float minReproductionTime = 10f;
     public float maxReproductionTime = 30f;
@@ -20,8 +21,9 @@ public class HerdEntity : MonoBehaviour {
     }
 	
 	void Update () {
+        reproductionTime = baseReproductionTime / GameManager.instance.actualMuti;
         // Deer counters
-        if(deerCount < maxDeer)
+        if (deerCount < maxDeer)
         {
             if (startTime == 0)
             {
@@ -58,6 +60,6 @@ public class HerdEntity : MonoBehaviour {
 
     private void calculateReproductionTime()
     {
-        reproductionTime = Random.Range(minReproductionTime, maxReproductionTime);
+        baseReproductionTime = Random.Range(minReproductionTime, maxReproductionTime);
     }
 }

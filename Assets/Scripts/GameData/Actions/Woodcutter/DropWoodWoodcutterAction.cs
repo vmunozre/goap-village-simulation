@@ -3,13 +3,12 @@
 public class DropWoodWoodcutterAction : GoapAction
 {
     private bool droppedWood = false;
-
     private float startTime = 0;
-    public float dropDuration = 1.5f; // seconds
 
     // Drop wood
     public DropWoodWoodcutterAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasWood", true);
         addEffect("hasWood", false);
         addEffect("collectWood", true);
@@ -56,7 +55,7 @@ public class DropWoodWoodcutterAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > dropDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));

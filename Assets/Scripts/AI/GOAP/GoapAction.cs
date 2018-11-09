@@ -17,10 +17,23 @@ public abstract class GoapAction : MonoBehaviour
     public GameObject target;
     public Vector3 targetPosition;
 
+    public float baseDuration;
+    public float duration;
+
     public GoapAction()
     {
         preconditions = new Dictionary<string, object>();
         effects = new Dictionary<string, object>();
+    }
+
+    void Update()
+    {
+        duration = baseDuration / GameManager.instance.actualMuti;
+    }
+
+    public void setBaseDuration(float _duration)
+    {
+        baseDuration = _duration;
     }
 
     public void doReset()

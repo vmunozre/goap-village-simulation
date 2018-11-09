@@ -5,6 +5,7 @@ public abstract class Agent : MonoBehaviour, IGoap
 {
     // Basic data
     public float moveSpeed = 1;
+    private float baseMoveSpeed = 1;
     public int energy = 100;
    
     public bool recovering = false;
@@ -13,6 +14,7 @@ public abstract class Agent : MonoBehaviour, IGoap
 
     public bool isAdult = false;
     private float startTimerBorn = 0f;
+    private float baseBornDuration = 6f;
     private float bornDuration = 0f;
 
     // Places
@@ -63,12 +65,24 @@ public abstract class Agent : MonoBehaviour, IGoap
             center.addNewBuildingRequest(building);
         }
     }
+   
+    public void checkSuperUpdate()
+    {
+        checkIsAdult();
+    }
+
+    // check global speed
+    private void checkGlobalSpeed()
+    {
+        moveSpeed = baseMoveSpeed * GameManager.instance.actualMuti;
+    }
 
     // Transform in adult agent
-    public void checkIsAdult()
+    private void checkIsAdult()
     {
         if (!isAdult)
         {
+            bornDuration = baseBornDuration / GameManager.instance.actualMuti;
             if (startTimerBorn == 0)
             {
                 startTimerBorn = Time.time;
@@ -76,8 +90,8 @@ public abstract class Agent : MonoBehaviour, IGoap
 
             if (Time.time - startTimerBorn > bornDuration)
             {
-                transform.localScale = new Vector3(1f, 1f, 1f);
-                moveSpeed = 1;
+                transform.localScale = new Vector3(1f, 1f, 1f);                
+                checkGlobalSpeed();
                 isAdult = true;
             }
             else
@@ -87,7 +101,7 @@ public abstract class Agent : MonoBehaviour, IGoap
             }
         } else
         {
-            moveSpeed = 1;
+            checkGlobalSpeed();
         }
     }
 

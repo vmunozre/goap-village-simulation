@@ -6,13 +6,13 @@ public class DropResourcesBuilderAction : GoapAction
     private GameObject targetBuilding;
 
     private float startTime = 0;
-    public float dropDuration = 1.5f; // seconds
 
     private int energyCost = 10;
 
     // Drop resources in building
     public DropResourcesBuilderAction()
     {
+        setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualRequest", true);
         addPrecondition("hasActualBuilding", true);
@@ -61,7 +61,7 @@ public class DropResourcesBuilderAction : GoapAction
             startTime = Time.time;
         }
 
-        if (Time.time - startTime > dropDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Builder builder = (Builder)agent.GetComponent(typeof(Builder));

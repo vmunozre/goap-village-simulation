@@ -137,36 +137,41 @@ public class CenterEntity : MonoBehaviour {
     {
         if (actualAgents >= 2 && (actualAgents % 2 == 0) && warehouse.food >= bornCost)
         {
-            int rate = Random.Range(1, 100);
+            procreateRule();
+        }
 
-            if (rate <= 35 && needStoneCutters())
+    }
+
+    public void procreateRule()
+    {
+        int rate = Random.Range(1, 100);
+
+        if (rate <= 35 && needStoneCutters())
+        {
+            rate = Random.Range(1, 100);
+            if (rate < 25 && needBuilders())
             {
-                rate = Random.Range(1, 100);
-                if (rate < 25 && needBuilders())
-                {
-                    Instantiate(Resources.Load("Prefabs/Agents/Builder"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
-                }
-                else
-                {
-                    Instantiate(Resources.Load("Prefabs/Agents/Stonecutter"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
-                }
+                Instantiate(Resources.Load("Prefabs/Agents/Builder"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
             }
             else
             {
-                rate = Random.Range(1, 100);
-
-                if (rate < 40 && needWoodcutters())
-                {
-                    Instantiate(Resources.Load("Prefabs/Agents/Woodcutter"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
-                }
-                else
-                {
-                    Instantiate(Resources.Load("Prefabs/Agents/Collector"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
-                }
+                Instantiate(Resources.Load("Prefabs/Agents/Stonecutter"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
             }
-            warehouse.food -= bornCost;
         }
+        else
+        {
+            rate = Random.Range(1, 100);
 
+            if (rate < 40 && needWoodcutters())
+            {
+                Instantiate(Resources.Load("Prefabs/Agents/Woodcutter"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(Resources.Load("Prefabs/Agents/Collector"), new Vector3(transform.position.x, transform.position.y - 0.6f, -3), Quaternion.identity);
+            }
+        }
+        warehouse.food -= bornCost;
     }
     // Need system
     public bool needBuilders()

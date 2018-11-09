@@ -5,13 +5,13 @@ public class CollectFoodHunterAction : GoapAction
     private bool collected = false;
     private DeerEntity targetPrey = null;
 
-    private float startTime = 0;
-    private  float collectDuration = 3; 
+    private float startTime = 0; 
     private int energyCost = 30;
 
     // Collect food from prey
     public CollectFoodHunterAction()
     {
+        setBaseDuration(3f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);
         addPrecondition("hasActualPrey", true);
@@ -69,7 +69,7 @@ public class CollectFoodHunterAction : GoapAction
             return false;
         }
 
-        if (Time.time - startTime > collectDuration)
+        if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
