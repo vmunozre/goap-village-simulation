@@ -8,17 +8,16 @@ public class Hunter : Agent
     // Multiple agents
     public Hunter coopHunter = null;
     public HuntingShedBuilding huntingShed = null;
+    public TenderRequest tenderRequest;
     public bool leader = false;
-    public bool hasTender = false;
     public bool isInPosition = false;
-    
 
     private new string name = "Hunter";
     void Start()
     {
         center.agentsCounter[name]++;
 
-        // Find GuntingShed
+        // Find HuntingShed
         HuntingShedBuilding[] huntingSheds = (HuntingShedBuilding[])FindObjectsOfType(typeof(HuntingShedBuilding));
         foreach (HuntingShedBuilding shed in huntingSheds)
         {
@@ -49,7 +48,7 @@ public class Hunter : Agent
             return goal;
         }
 
-        if (!hasTender)
+        if (tenderRequest == null)
         {
             goal.Add("checkTender", true);
             return goal;
@@ -73,7 +72,7 @@ public class Hunter : Agent
         worldData.Add("hasFood", (food > 0));
         worldData.Add("hasEnergy", (energy > 0));
         worldData.Add("hasActualPrey", (actualPrey != null));
-        worldData.Add("hasTender", hasTender);
+        worldData.Add("hasTender", tenderRequest != null);
         worldData.Add("hasCoopHunter", coopHunter != null);
 
         if(coopHunter != null)
@@ -93,4 +92,5 @@ public class Hunter : Agent
         }
         return worldData;
     }
+
 }

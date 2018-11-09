@@ -4,10 +4,12 @@ public class HuntAloneHunterAction : GoapAction
 {
     private bool hunt = false;
     private DeerEntity targetPrey = null;
+
     private int energyCost = 50;
     private float startTime = 0;
-    public float huntDuration = 2.5f; // seconds
+    private float huntDuration = 2.5f; // seconds
 
+    // Hunt alone
     public HuntAloneHunterAction()
     {
         addPrecondition("hasEnergy", true);
@@ -17,7 +19,6 @@ public class HuntAloneHunterAction : GoapAction
         addPrecondition("hasCoopHunter", false);
         addEffect("hasDeadPrey", true);
     }
-
 
     public override void reset()
     {
@@ -56,7 +57,6 @@ public class HuntAloneHunterAction : GoapAction
             enableBubbleIcon(agent);
             startTime = Time.time;
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
-            Debug.Log("PREY DEAD!");
             hunter.actualPrey.killDeer();
         }
 
@@ -70,7 +70,6 @@ public class HuntAloneHunterAction : GoapAction
             
         return true;
     }
-
 }
 
 

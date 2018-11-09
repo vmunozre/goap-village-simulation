@@ -7,13 +7,16 @@ public class CoopSearchPreyHunterAction : GoapAction
 
 
     private float startTime = 0;
-    private float searchDuration = 1.5f; // seconds
+    private float searchDuration = 1.5f;
     private int energyCost = 2;
     private HerdEntity trendHerd = null;
-    // find settings
+
+    // Find settings
     private float radius = 2f;
     private float minMove = -0.4f;
     private float maxMove = 0.8f;
+
+    // Search coop 
     public CoopSearchPreyHunterAction()
     {
         addPrecondition("hasEnergy", true);
@@ -24,7 +27,6 @@ public class CoopSearchPreyHunterAction : GoapAction
         addEffect("hasActualPrey", true);
         addEffect("preyFound", true);
     }
-
 
     public override void reset()
     {
@@ -67,7 +69,7 @@ public class CoopSearchPreyHunterAction : GoapAction
 
             nextPosition = new Vector3(posX, posY, agent.transform.position.z);
             targetPosition = nextPosition;
-            Debug.DrawLine(targetPosition, agent.transform.position, Color.black, 3, false);
+            //Debug.DrawLine(targetPosition, agent.transform.position, Color.black, 3, false);
         }
 
         return trendHerd != null;
@@ -93,6 +95,8 @@ public class CoopSearchPreyHunterAction : GoapAction
                 found = true;
                 return true;
             }
+
+            // Check prey's in a radius
             Collider2D[] colliders = Physics2D.OverlapCircleAll(agent.transform.position, radius);
             Collider2D closestCollider = null;
             float closestDist = 0;
@@ -134,6 +138,7 @@ public class CoopSearchPreyHunterAction : GoapAction
             if (isClosest)
             {
                 hunter.actualPrey = (DeerEntity)closestCollider.gameObject.GetComponent(typeof(DeerEntity));
+                // Coophunter add prey
                 hunter.coopHunter.actualPrey = hunter.actualPrey;
                 found = true;
             }
@@ -156,7 +161,6 @@ public class CoopSearchPreyHunterAction : GoapAction
 
         if (herds.Length > 0)
         {
-            Debug.Log("HERD FOUND");
             return herds[index];
         }
         return null;

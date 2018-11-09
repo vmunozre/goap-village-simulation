@@ -5,8 +5,9 @@ public class DropFoodHunterAction : GoapAction
     private bool droppedFood = false;
 
     private float startTime = 0;
-    public float dropDuration = 1.5f; // seconds
+    private float dropDuration = 1.5f; 
 
+    // Drop food
     public DropFoodHunterAction()
     {
         addPrecondition("hasFood", true);
@@ -43,7 +44,6 @@ public class DropFoodHunterAction : GoapAction
             target = hunter.warehouse.gameObject;
         }
         
-        // Debug line
         // Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
         return target != null;
     }
@@ -79,6 +79,7 @@ public class DropFoodHunterAction : GoapAction
                 }
                 if (hunter.huntingShed == null)
                 {
+                    // Add request building hunting shed
                     Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 7, 2);
                     hunter.center.addNewBuildingRequest(building);
                     hunter.warehouse.food += hunter.food;

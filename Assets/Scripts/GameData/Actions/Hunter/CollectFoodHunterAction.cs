@@ -6,9 +6,10 @@ public class CollectFoodHunterAction : GoapAction
     private DeerEntity targetPrey = null;
 
     private float startTime = 0;
-    public float collectDuration = 3; // seconds
+    private  float collectDuration = 3; 
     private int energyCost = 30;
 
+    // Collect food from prey
     public CollectFoodHunterAction()
     {
         addPrecondition("hasEnergy", true);
@@ -17,7 +18,6 @@ public class CollectFoodHunterAction : GoapAction
         addPrecondition("hasDeadPrey", true);
         addEffect("hasFood", true);
     }
-
 
     public override void reset()
     {
@@ -56,12 +56,16 @@ public class CollectFoodHunterAction : GoapAction
             startTime = Time.time;
         }
 
+        // Prey empty
         if (targetPrey.food <= 0)
         {
             disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
             hunter.actualPrey.turnEmpty();
-            hunter.actualPrey = null;            
+            // Remove tender
+            hunter.center.removeTenderList(hunter.tenderRequest);
+            hunter.tenderRequest = null;
+            hunter.actualPrey = null;           
             return false;
         }
 

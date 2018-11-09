@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class CheckTenderHunterAction : GoapAction
 {
     private bool isChecked = false;
     private CenterEntity targetCenter;
 
     private float startTime = 0;
-    public float checkDuration = 1f; // seconds
+    private float checkDuration = 1f;
 
+    // Check tenders to coop hunting
     public CheckTenderHunterAction()
     {
         addPrecondition("hasEnergy", true); 
@@ -16,7 +15,6 @@ public class CheckTenderHunterAction : GoapAction
         addEffect("hasTender", true);
         addEffect("checkTender", true);
     }
-
 
     public override void reset()
     {
@@ -45,21 +43,22 @@ public class CheckTenderHunterAction : GoapAction
 
     public override bool perform(GameObject agent)
     {
-        
         if (startTime == 0)
         {
             enableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
-            Hunter tender = (Hunter)targetCenter.checkTender("Coop-Hunt");
+
+            TenderRequest tender = targetCenter.checkTenderList();
             if(tender == null)
             {
-                targetCenter.addTender("Coop-Hunt", hunter);
-                hunter.hasTender = true;
+                Debug.Log("AAAHH no tender");
+                TenderRequest newTender = targetCenter.addTenderList(hunter);
+                hunter.tenderRequest = newTender;
             } else
             {
-                Hunter targetHunter = tender;
-                //This hunter
-                hunter.hasTender = true;
+                Hunter targetHunter = tender.hunter;
+                // This hunter
+                hunter.tenderRequest = tender;
                 hunter.coopHunter = targetHunter;
                 hunter.leader = false;
                 //The other hunter
@@ -68,7 +67,6 @@ public class CheckTenderHunterAction : GoapAction
 
                 //Copy other's states
                 hunter.actualPrey = targetHunter.actualPrey;
-
                 Debug.Log("Coop Hunter found!");
                 // Debug line
                 Debug.DrawLine(targetHunter.transform.position, agent.transform.position, Color.red, 3, false);

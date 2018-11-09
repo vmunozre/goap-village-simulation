@@ -11,13 +11,13 @@ public class CenterEntity : MonoBehaviour {
     public Dictionary<string, int> agentsCounter;
 
     public Dictionary<string, Building> buildingsRequests;
-    //Tenders
-    private Dictionary<string, Hunter> tenders;
+
+    private Dictionary<string, TenderRequest> tenderList;
 
     public CenterEntity()
     {
         buildingsRequests = new Dictionary<string, Building>();
-        tenders = new Dictionary<string, Hunter>();
+        tenderList = new Dictionary<string, TenderRequest>();
         // Add agents counters
         agentsCounter = new Dictionary<string, int>();
         agentsCounter.Add("Builder", 0);
@@ -93,19 +93,29 @@ public class CenterEntity : MonoBehaviour {
         return building;
     }
 
-    // Add tender to hunters
-    public void addTender(string _title, Hunter _object)
+    public TenderRequest addTenderList(Hunter _hunter)
     {
-        tenders.Add(_title, _object);
+        string index = Time.time + "h" + Random.Range(-10000, 10000);
+        TenderRequest tender = new TenderRequest(index, _hunter);
+        tenderList.Add(index,tender);
+        return tender;
     }
 
-    public Hunter checkTender(string _title)
+    public void removeTenderList(TenderRequest _tender)
     {
-        Hunter tender = null;
-        if (tenders.ContainsKey(_title))
-        {
-            tender = tenders[_title];
+        tenderList.Remove(_tender.index);
+    }
 
+    public TenderRequest checkTenderList()
+    {
+        TenderRequest tender = null;
+        foreach(string key in tenderList.Keys)
+        {
+            if (tenderList[key].available)
+            {
+                tenderList[key].available = false;
+                tender = tenderList[key];
+            }
         }
         return tender;
     }

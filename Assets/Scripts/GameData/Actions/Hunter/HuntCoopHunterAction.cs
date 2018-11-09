@@ -4,10 +4,11 @@ public class HuntCoopHunterAction : GoapAction
 {
     private bool hunt = false;
     private DeerEntity targetPrey = null;
+
     private int energyCost = 50;
     private float startTime = 0;
-    public float huntDuration = 2.5f; // seconds
-
+    private float huntDuration = 2.5f; // seconds
+    // Hunt coop
     public HuntCoopHunterAction()
     {
         addPrecondition("hasEnergy", true);
@@ -18,8 +19,6 @@ public class HuntCoopHunterAction : GoapAction
         addPrecondition("isInPosition", true);
         addEffect("hasDeadPrey", true);
     }
-
-
     public override void reset()
     {
         hunt = false;
@@ -35,7 +34,7 @@ public class HuntCoopHunterAction : GoapAction
 
     public override bool requiresInRange()
     {
-        return true; // yes we need to be near a tree
+        return true;
     }
 
     public override bool checkProceduralPrecondition(GameObject agent)
@@ -57,7 +56,6 @@ public class HuntCoopHunterAction : GoapAction
             enableBubbleIcon(agent);
             startTime = Time.time;
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
-            Debug.Log("PREY DEAD!");
             if (!hunter.actualPrey.isDead)
             {
                 hunter.actualPrey.killDeer();
