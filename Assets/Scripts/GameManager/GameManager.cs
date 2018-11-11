@@ -137,11 +137,10 @@ public class GameManager : MonoBehaviour {
         metric1.transform.SetParent(panelMetrics.transform);
         metric1.transform.localScale = new Vector3(1, 1, 1);
 
-        GameObject metric2 = (GameObject)Instantiate(Resources.Load("Prefabs/UI/metric"));
-       
-        metric2.GetComponent<Text>().text = " Nº paths: " + numPaths;
-        metric2.transform.SetParent(panelMetrics.transform);
-        metric2.transform.localScale = new Vector3(1, 1, 1);
+        //GameObject metric2 = (GameObject)Instantiate(Resources.Load("Prefabs/UI/metric"));       
+        // metric2.GetComponent<Text>().text = " Nº paths: " + numPaths;
+        // metric2.transform.SetParent(panelMetrics.transform);
+        // metric2.transform.localScale = new Vector3(1, 1, 1);
 
         GameObject metric3 = (GameObject)Instantiate(Resources.Load("Prefabs/UI/metric"));
         
