@@ -76,7 +76,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1063974001219804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1947112, y: -0.22496065, z: -3}
+  m_LocalPosition: {x: -0.7750504, y: 1.4455781, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4748286011423528}
@@ -202,11 +202,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e8bd5f5c3ca2f4cb7a6c78d5019cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Mine stone
+  uiImage: {fileID: 21300026, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300030, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  mineDuration: 10
+  baseDuration: 10
+  duration: 0
 --- !u!114 &114700656794506798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b7fb3f38056344a87f68ab1274493b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSelected: 0
 --- !u!114 &114732431415339202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,11 +233,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba79860abeb80fa4bb36dfb19fa54037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Drop stone
+  uiImage: {fileID: 21300006, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300020, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  dropDuration: 1.5
+  baseDuration: 1.5
+  duration: 0
 --- !u!114 &114899008284641330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,7 +261,6 @@ MonoBehaviour:
   center: {fileID: 0}
   warehouse: {fileID: 0}
   house: {fileID: 0}
-  name: Stonecutter
   stone: 0
   actualQuarry: {fileID: 0}
 --- !u!114 &114959050697269210
@@ -268,11 +274,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c875fcc669aeb47a75b696ec704114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Recovery energy
+  uiImage: {fileID: 21300046, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300012, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  recoveringDuration: 5
+  baseDuration: 5
+  duration: 0
   foodCost: 10
 --- !u!114 &114975226563618714
 MonoBehaviour:
@@ -285,11 +294,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Wait
+  uiImage: {fileID: 21300028, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300032, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  waitDuration: 5
+  baseDuration: 5
+  duration: 0
 --- !u!212 &212046597751920308
 SpriteRenderer:
   m_ObjectHideFlags: 1

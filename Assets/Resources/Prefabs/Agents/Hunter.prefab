@@ -109,7 +109,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550548726277508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1055133, y: -0.4255699, z: -2.5}
+  m_LocalPosition: {x: -1.664067, y: 0.4955426, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4477146904226014}
@@ -208,11 +208,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb6e64c42a13aa4b8843b8e895b193f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Drop food
+  uiImage: {fileID: 21300006, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300020, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  dropDuration: 1.5
+  baseDuration: 1.5
+  duration: 0
 --- !u!114 &114088419002564382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,11 +227,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Wait
+  uiImage: {fileID: 21300028, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300032, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  waitDuration: 5
+  baseDuration: 5
+  duration: 0
 --- !u!114 &114372144160655646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,14 +255,12 @@ MonoBehaviour:
   center: {fileID: 0}
   warehouse: {fileID: 0}
   house: {fileID: 0}
-  name: Hunter
   food: 0
   actualPrey: {fileID: 0}
   coopHunter: {fileID: 0}
-  leader: 0
-  hasTender: 0
-  isInPosition: 0
   huntingShed: {fileID: 0}
+  leader: 0
+  isInPosition: 0
 --- !u!114 &114376028588165556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,11 +272,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e188a2c06b62c64694202bcb2506d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Cooperative Hunt prey
+  uiImage: {fileID: 21300000, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300036, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  huntDuration: 2.5
+  baseDuration: 2.5
+  duration: 0
 --- !u!114 &114458047662271682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,11 +291,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6cb543932143b445bbd3ddb3d58f643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Collect food
+  uiImage: {fileID: 21300036, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300024, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  collectDuration: 3
+  baseDuration: 3
+  duration: 0
 --- !u!114 &114570975216938806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -300,11 +310,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdb7bd5bdb138646b17e64a1ff42120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Hunt prey
+  uiImage: {fileID: 21300000, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300036, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  huntDuration: 2.5
+  baseDuration: 2.5
+  duration: 0
 --- !u!114 &114588256633721168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,11 +329,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa8198418671c74abff85c561aa6656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Check tender
+  uiImage: {fileID: 21300016, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300008, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  checkDuration: 1
+  baseDuration: 1
+  duration: 0
 --- !u!114 &114651238888641470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b7fb3f38056344a87f68ab1274493b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSelected: 0
 --- !u!114 &114660190957012068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -343,10 +360,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457546c4d5478714a8bdb7fd25237cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Cooperative surround prey
+  uiImage: {fileID: 21300014, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300042, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
+  baseDuration: 0
+  duration: 0
   nextPosition: {x: 0, y: 0, z: 0}
   angleRotation: 0
   firstAngle: 0
@@ -363,10 +384,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af06639ee03bfd45bb70eb020c5c87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Search prey
+  uiImage: {fileID: 21300020, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300016, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
+  baseDuration: 1.5
+  duration: 0
   nextPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114741857414184244
 MonoBehaviour:
@@ -379,10 +404,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ce52b57e2103d418dce5d625ff8900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Cooperative search prey
+  uiImage: {fileID: 21300020, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300016, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
+  baseDuration: 1.5
+  duration: 0
   nextPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114794902640131546
 MonoBehaviour:
@@ -395,11 +424,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c875fcc669aeb47a75b696ec704114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Recovery energy
+  uiImage: {fileID: 21300046, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300012, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  recoveringDuration: 5
+  baseDuration: 5
+  duration: 0
   foodCost: 10
 --- !u!212 &212217981650485190
 SpriteRenderer:

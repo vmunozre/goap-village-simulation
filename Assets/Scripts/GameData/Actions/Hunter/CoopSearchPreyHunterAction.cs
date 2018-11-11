@@ -18,6 +18,7 @@ public class CoopSearchPreyHunterAction : GoapAction
     // Search coop 
     public CoopSearchPreyHunterAction()
     {
+        setActionName("Cooperative search prey");
         setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

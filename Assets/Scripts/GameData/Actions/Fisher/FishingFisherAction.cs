@@ -15,6 +15,7 @@ public class FishingFisherAction : GoapAction
     // Fishing Action
     public FishingFisherAction()
     {
+        setActionName("Fishing");
         setBaseDuration(10f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

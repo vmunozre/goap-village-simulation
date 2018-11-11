@@ -11,6 +11,7 @@ public class HuntCoopHunterAction : GoapAction
     // Hunt coop
     public HuntCoopHunterAction()
     {
+        setActionName("Cooperative hunt");
         setBaseDuration(2.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

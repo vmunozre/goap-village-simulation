@@ -11,6 +11,7 @@ public class FarmFarmerAction : GoapAction
     // Farm Orchard
     public FarmFarmerAction()
     {
+        setActionName("Farm orchard");
         setBaseDuration(3f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

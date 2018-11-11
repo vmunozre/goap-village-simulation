@@ -15,6 +15,7 @@ public class AnalyzeBushCollectorAction : GoapAction
     // Find adult bush
     public AnalyzeBushCollectorAction()
     {
+        setActionName("Analyze bush");
         setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

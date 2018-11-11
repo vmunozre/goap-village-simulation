@@ -11,6 +11,7 @@ public class CoopSurroundTargetHunterAction : GoapAction
     public Vector3 tentativePos;
     public CoopSurroundTargetHunterAction()
     {
+        setActionName("Cooperative surround prey");
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualPrey", true);
         addPrecondition("hasCoopHunter", true);

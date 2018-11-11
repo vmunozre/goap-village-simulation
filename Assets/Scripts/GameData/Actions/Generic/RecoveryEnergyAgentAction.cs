@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class RecoveryEnergyAgentAction : GoapAction
 {
     private bool recovered = false;
@@ -10,6 +8,7 @@ public class RecoveryEnergyAgentAction : GoapAction
 
     public RecoveryEnergyAgentAction()
     {
+        setActionName("Recovery energy");
         setBaseDuration(5f);
         addPrecondition("hasEnergy", false);
         addEffect("hasEnergy", true);

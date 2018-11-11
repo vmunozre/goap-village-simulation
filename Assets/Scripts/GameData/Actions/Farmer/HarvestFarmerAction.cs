@@ -12,6 +12,7 @@ public class HarvestFarmerAction : GoapAction
     // Harvest Orchard
     public HarvestFarmerAction()
     {
+        setActionName("Harvest orchard");
         setBaseDuration(15f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

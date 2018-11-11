@@ -17,6 +17,7 @@ public sealed class GoapAgent : MonoBehaviour
 
     private GoapPlanner planner;
 
+    public bool isSelected = false;
 
     void Start()
     {
@@ -37,7 +38,6 @@ public sealed class GoapAgent : MonoBehaviour
     {
         stateMachine.Update(gameObject);
     }
-
 
     public void addAction(GoapAction a)
     {
@@ -77,6 +77,10 @@ public sealed class GoapAgent : MonoBehaviour
             {   
                 // Plan found
                 currentActions = plan;
+                if (isSelected)
+                {
+                    generatePlanPanel();
+                }
                 dataProvider.planFound(goal, plan);
                 fsm.popState(); // move to PerformAction state
                 fsm.pushState(performActionState);
@@ -134,6 +138,10 @@ public sealed class GoapAgent : MonoBehaviour
             {
                 // Action is done
                 currentActions.Dequeue();
+                if (isSelected)
+                {
+                    generatePlanPanel();
+                }
             }
 
             if (hasActionPlan())
@@ -232,5 +240,20 @@ public sealed class GoapAgent : MonoBehaviour
     {
         string s = "" + action.GetType().Name;
         return s;
+    }
+
+    public void generatePlanPanel()
+    {
+        if (currentActions != null)
+        {
+            GameManager.instance.addListToActionPlanPanel(this, currentActions);
+        }
+    }
+
+    void OnMouseDown()
+    {
+        MovementCamera movCam = Camera.main.gameObject.GetComponent<MovementCamera>();
+        movCam.target = gameObject;
+        generatePlanPanel();
     }
 }

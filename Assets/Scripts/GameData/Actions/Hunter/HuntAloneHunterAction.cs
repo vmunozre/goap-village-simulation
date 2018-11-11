@@ -11,6 +11,7 @@ public class HuntAloneHunterAction : GoapAction
     // Hunt alone
     public HuntAloneHunterAction()
     {
+        setActionName("Hunt alone");
         setBaseDuration(2.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

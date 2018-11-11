@@ -10,6 +10,7 @@ public class DropResourcesCarrierAction : GoapAction
     // Drop resoucers
     public DropResourcesCarrierAction()
     {
+        setActionName("Drop resources");
         setBaseDuration(3f);
         addPrecondition("hasResources", true);
         addEffect("hasResources", false);

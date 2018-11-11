@@ -9,6 +9,7 @@ public class CheckRequestsBuilderAction : GoapAction
     // Check building request
     public CheckRequestsBuilderAction()
     {
+        setActionName("Check building requests");
         setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualRequest", false);

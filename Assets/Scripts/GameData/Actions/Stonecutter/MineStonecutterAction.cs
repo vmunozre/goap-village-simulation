@@ -15,6 +15,7 @@ public class MineStonecutterAction : GoapAction
     // Mine stone
     public MineStonecutterAction()
     {
+        setActionName("Mine stone");
         setBaseDuration(10f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasStone", false);

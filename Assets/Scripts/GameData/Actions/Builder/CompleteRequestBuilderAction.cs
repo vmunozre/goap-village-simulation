@@ -9,6 +9,7 @@ public class CompleteRequestBuilderAction : GoapAction
     // Complete request
     public CompleteRequestBuilderAction()
     {
+        setActionName("Complete building request");
         setBaseDuration(1.5f);
         addPrecondition("hasActualRequest", true);
         addPrecondition("hasActualBuilding", true);

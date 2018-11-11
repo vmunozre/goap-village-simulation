@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1405534807906124}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.135246, y: -0.58159935, z: -3}
+  m_LocalPosition: {x: -1.2160197, y: 1.2251837, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4526743043560016}
@@ -202,11 +202,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc644f66448964f43b090364b67c5e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Fishing
+  uiImage: {fileID: 21300018, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300022, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  fishingDuration: 10
+  baseDuration: 10
+  duration: 0
 --- !u!114 &114210138900578072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,11 +221,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c875fcc669aeb47a75b696ec704114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Recovery energy
+  uiImage: {fileID: 21300046, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300012, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  recoveringDuration: 5
+  baseDuration: 5
+  duration: 0
   foodCost: 10
 --- !u!114 &114557601026065242
 MonoBehaviour:
@@ -235,11 +241,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Wait
+  uiImage: {fileID: 21300028, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300032, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  waitDuration: 5
+  baseDuration: 5
+  duration: 0
 --- !u!114 &114616115407695086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -251,6 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b7fb3f38056344a87f68ab1274493b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSelected: 0
 --- !u!114 &114630698859884502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,7 +281,6 @@ MonoBehaviour:
   center: {fileID: 0}
   warehouse: {fileID: 0}
   house: {fileID: 0}
-  name: Fisher
   food: 0
   actualLakePosition: {fileID: 0}
 --- !u!114 &114714045832475604
@@ -285,11 +294,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a585268f528e21e46b5a3a7f8e769c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Drop fish
+  uiImage: {fileID: 21300006, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300020, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  dropDuration: 1.5
+  baseDuration: 1.5
+  duration: 0
 --- !u!212 &212131375650251778
 SpriteRenderer:
   m_ObjectHideFlags: 1

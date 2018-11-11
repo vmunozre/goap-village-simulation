@@ -12,6 +12,7 @@ public class BuildBuilderAction : GoapAction
     public BuildBuilderAction()
     {
         setBaseDuration(5f);
+        setActionName("Build building");
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualRequest", true);
         addPrecondition("hasActualBuilding", true);        

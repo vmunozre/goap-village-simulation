@@ -10,6 +10,7 @@ public class CollectFoodCollectorAction : GoapAction
 
     public CollectFoodCollectorAction()
     {
+        setActionName("Collect food");
         setBaseDuration(3f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

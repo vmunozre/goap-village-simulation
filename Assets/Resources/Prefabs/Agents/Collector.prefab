@@ -90,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1234606181017666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2690432, y: -0.4478599, z: -2.5}
+  m_LocalPosition: {x: -2.097959, y: 0.42837498, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4767694585501022}
@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b7fb3f38056344a87f68ab1274493b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSelected: 0
 --- !u!114 &114391516507379272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,7 +224,6 @@ MonoBehaviour:
   center: {fileID: 0}
   warehouse: {fileID: 0}
   house: {fileID: 0}
-  name: Collector
   food: 0
   actualBush: {fileID: 0}
 --- !u!114 &114710342385887994
@@ -237,11 +237,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c875fcc669aeb47a75b696ec704114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Recovery energy
+  uiImage: {fileID: 21300046, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300012, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  recoveringDuration: 5
+  baseDuration: 5
+  duration: 0
   foodCost: 10
 --- !u!114 &114717043433876312
 MonoBehaviour:
@@ -254,11 +257,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a142d8fadd5fa1144ae2adc6e492adde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Collect food
+  uiImage: {fileID: 21300048, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300038, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  collectDuration: 3
+  baseDuration: 3
+  duration: 0
 --- !u!114 &114748117791955744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,11 +276,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6d2b4d9a19d66468f54c972cdac272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Drop food
+  uiImage: {fileID: 21300006, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300020, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  dropDuration: 1.5
+  baseDuration: 1.5
+  duration: 0
 --- !u!114 &114811531908540626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,12 +295,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc03b7f578bd1c34facfeeb287671a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Analyze bushes
+  uiImage: {fileID: 21300022, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300016, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
+  baseDuration: 1.5
+  duration: 0
   targetBush: {fileID: 0}
-  analyzetDuration: 1.5
 --- !u!114 &114958286713942490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -303,11 +315,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Wait
+  uiImage: {fileID: 21300028, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300032, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  waitDuration: 5
+  baseDuration: 5
+  duration: 0
 --- !u!212 &212252631544261532
 SpriteRenderer:
   m_ObjectHideFlags: 1

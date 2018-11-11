@@ -11,6 +11,7 @@ public class CutTreeWoodcutterAction : GoapAction
     // Cut wood from fell tree
     public CutTreeWoodcutterAction()
     {
+        setActionName("Chop log");
         setBaseDuration(5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualTree", true);

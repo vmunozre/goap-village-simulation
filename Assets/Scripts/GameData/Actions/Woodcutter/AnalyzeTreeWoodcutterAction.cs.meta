@@ -4,8 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - target: {instanceID: 0}
+  - uiImage: {fileID: 21300022, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   - bubbleSprite: {fileID: 21300010, guid: 1390338d34c1b084b92a72b01a11a601, type: 3}
+  - target: {instanceID: 0}
   - targetTree: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}

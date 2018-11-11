@@ -10,6 +10,7 @@ public class DropFoodCollectorAction : GoapAction
     // Drop food
     public DropFoodCollectorAction()
     {
+        setActionName("Drop food");
         setBaseDuration(1.5f);
         addPrecondition("hasFood", true);
         addEffect("hasFood", false);

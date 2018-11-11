@@ -9,6 +9,7 @@ public class CheckTenderHunterAction : GoapAction
     // Check tenders to coop hunting
     public CheckTenderHunterAction()
     {
+        setActionName("Check hunter tender");
         setBaseDuration(1f);
         addPrecondition("hasEnergy", true); 
         addPrecondition("hasTender", false); 

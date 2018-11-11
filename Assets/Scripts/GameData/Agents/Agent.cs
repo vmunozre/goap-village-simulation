@@ -159,11 +159,5 @@ public abstract class Agent : MonoBehaviour, IGoap
         else
             return false;
     }
-
-    void OnMouseDown()
-    {
-        MovementCamera movCam = Camera.main.gameObject.GetComponent<MovementCamera>();
-        movCam.target = gameObject;
-    }
 }
 

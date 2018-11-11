@@ -3,7 +3,10 @@ guid: 551a50d23fffaa0418508231df98c586
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - uiImage: {fileID: 21300012, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
+  - bubbleSprite: {instanceID: 0}
+  - target: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

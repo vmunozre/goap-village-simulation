@@ -8,6 +8,7 @@ public class WaitAgentAction : GoapAction
     
     public WaitAgentAction()
     {
+        setActionName("Waiting");
         setBaseDuration(5f);
         addPrecondition("isWaiting", true); // we need energy
         addEffect("isWaiting", false);

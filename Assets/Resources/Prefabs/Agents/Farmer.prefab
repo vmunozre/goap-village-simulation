@@ -90,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1649881770625082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0757806, y: -0.31412035, z: -3}
+  m_LocalPosition: {x: -1.5891482, y: 0.6487689, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4633131408843486}
@@ -212,7 +212,6 @@ MonoBehaviour:
   center: {fileID: 0}
   warehouse: {fileID: 0}
   house: {fileID: 0}
-  name: Farmer
   food: 0
   actualOrchard: {fileID: 0}
 --- !u!114 &114220892990584030
@@ -226,11 +225,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5f62bc7ccf4b2428a9058a78e32529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Harvest orchard
+  uiImage: {fileID: 21300054, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300014, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  collectedDuration: 1.5
+  baseDuration: 15
+  duration: 0
   agentCapacity: 30
 --- !u!114 &114283716041501822
 MonoBehaviour:
@@ -243,11 +245,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c875fcc669aeb47a75b696ec704114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Recovery energy
+  uiImage: {fileID: 21300046, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300012, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  recoveringDuration: 5
+  baseDuration: 5
+  duration: 0
   foodCost: 10
 --- !u!114 &114455122011596738
 MonoBehaviour:
@@ -260,11 +265,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24cb25d00746ed408632bde0ce1f37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Wait
+  uiImage: {fileID: 21300028, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300032, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  waitDuration: 5
+  baseDuration: 5
+  duration: 0
 --- !u!114 &114921599141510060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b7fb3f38056344a87f68ab1274493b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSelected: 0
 --- !u!114 &114931584386910390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,10 +296,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183e32c1a0a7f47469881e272d1d869a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Farm orchard
+  uiImage: {fileID: 21300038, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300026, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
+  baseDuration: 3
+  duration: 0
 --- !u!114 &114984289425681522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,11 +315,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56533778736a2c043893d8887da5d261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: Drop food
+  uiImage: {fileID: 21300006, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
   bubbleSprite: {fileID: 21300020, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
   cost: 1
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  dropDuration: 1.5
+  baseDuration: 1.5
+  duration: 0
 --- !u!212 &212048888537560632
 SpriteRenderer:
   m_ObjectHideFlags: 1

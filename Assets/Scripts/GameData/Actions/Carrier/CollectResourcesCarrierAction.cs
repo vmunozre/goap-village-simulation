@@ -11,6 +11,7 @@ public class CollectResourcesCarrierAction : GoapAction
     // Collect resources 
     public CollectResourcesCarrierAction()
     {
+        setActionName("Collect resources");
         setBaseDuration(3f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasResources", false);

@@ -8,6 +8,10 @@ public abstract class GoapAction : MonoBehaviour
 
     private bool inRange = false;
 
+    // UI items
+    public string actionName = "Default action";
+    public Sprite uiImage;
+
     // Bubble sprite
     public Sprite bubbleSprite;
     // action cost
@@ -29,6 +33,11 @@ public abstract class GoapAction : MonoBehaviour
     void Update()
     {
         duration = baseDuration / GameManager.instance.actualMuti;
+    }
+
+    protected void setActionName(string _actionName)
+    {
+        this.actionName = _actionName;
     }
 
     public void setBaseDuration(float _duration)

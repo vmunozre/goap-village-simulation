@@ -11,6 +11,7 @@ public class FellTreeWoodcutterAction : GoapAction
     // Fell Tree
     public FellTreeWoodcutterAction()
     {
+        setActionName("Fell tree");
         setBaseDuration(5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("treeIsChopped", false);

@@ -8,6 +8,7 @@ public class DropWoodWoodcutterAction : GoapAction
     // Drop wood
     public DropWoodWoodcutterAction()
     {
+        setActionName("Drop wood");
         setBaseDuration(1.5f);
         addPrecondition("hasWood", true);
         addEffect("hasWood", false);

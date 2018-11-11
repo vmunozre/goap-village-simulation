@@ -16,6 +16,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
     // Check tree age
     public AnalyzeTreeWoodcutterAction()
     {
+        setActionName("Analyze tree");
         setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasWood", false);

@@ -9,8 +9,9 @@ public class DropStoneStonecutterAction : GoapAction
 
     // Drop stone
     public DropStoneStonecutterAction()
-    {
+    { 
         setBaseDuration(1.5f);
+        setActionName("Drop stone");
         addPrecondition("hasStone", true);
         addEffect("hasStone", false);
         addEffect("collectStone", true);

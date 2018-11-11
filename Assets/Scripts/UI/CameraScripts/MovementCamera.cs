@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementCamera : MonoBehaviour {
 
-    public bool activeMovement = true;
+    public bool activeMovement = false;
 
     private int boundary = 50;
     private int speed = 5;

@@ -12,6 +12,7 @@ public class DropResourcesBuilderAction : GoapAction
     // Drop resources in building
     public DropResourcesBuilderAction()
     {
+        setActionName("Drop resources");
         setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualRequest", true);

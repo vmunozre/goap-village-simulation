@@ -19,6 +19,7 @@ public class SearchPreyHunterAction : GoapAction
     // Search prey (he tends to go to his herd default)
     public SearchPreyHunterAction()
     {
+        setActionName("Search prey");
         setBaseDuration(1.5f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

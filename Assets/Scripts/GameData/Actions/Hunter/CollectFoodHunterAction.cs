@@ -11,6 +11,7 @@ public class CollectFoodHunterAction : GoapAction
     // Collect food from prey
     public CollectFoodHunterAction()
     {
+        setActionName("Collect food");
         setBaseDuration(3f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasFood", false);

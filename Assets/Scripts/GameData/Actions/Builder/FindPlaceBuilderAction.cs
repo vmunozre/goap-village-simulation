@@ -13,6 +13,7 @@ public class FindPlaceBuilderAction : GoapAction
     private float maxMove = 1f;
     public FindPlaceBuilderAction()
     {
+        setActionName("Find building place");
         setBaseDuration(0.5f);
         addPrecondition("hasEnergy", true);        
         addPrecondition("hasActualRequest", true);

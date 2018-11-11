@@ -12,6 +12,7 @@ public class CollectResourcesBuilderAction : GoapAction
     // Collect resources to building
     public CollectResourcesBuilderAction()
     {
+        setActionName("Collect resources");
         setBaseDuration(2f);
         addPrecondition("hasEnergy", true);
         addPrecondition("hasActualRequest", true);
