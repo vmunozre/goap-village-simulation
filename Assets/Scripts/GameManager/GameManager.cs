@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public float actualMuti = 1;
@@ -7,7 +8,14 @@ public class GameManager : MonoBehaviour {
     private CenterEntity center = null;
     private WarehouseEntity warehouse = null;
 
+    // metrics
+    public int numActions = 0;
+    public int numPossibilities = 0;
+    public int numRealIterations = 0;
+    public int numPaths = 0;
+
     public GameObject panelActionPlan;
+    public GameObject panelMetrics;
     public GameObject panelDeselectAgent;
     public GoapAgent agentSelected;
 
@@ -23,7 +31,7 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
+       
         CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
         if (centers.Length > 0)
         {
@@ -117,9 +125,41 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void prepareMetricsPanel()
+    {
+        foreach (Transform child in panelMetrics.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        GameObject metric1 = (GameObject)Instantiate(Resources.Load("Prefabs/UI/metric"));
+       
+        metric1.GetComponent<Text>().text = " Nº Actions: " + numActions;
+        metric1.transform.SetParent(panelMetrics.transform);
+        metric1.transform.localScale = new Vector3(1, 1, 1);
+
+        GameObject metric2 = (GameObject)Instantiate(Resources.Load("Prefabs/UI/metric"));
+       
+        metric2.GetComponent<Text>().text = " Nº paths: " + numPaths;
+        metric2.transform.SetParent(panelMetrics.transform);
+        metric2.transform.localScale = new Vector3(1, 1, 1);
+
+        GameObject metric3 = (GameObject)Instantiate(Resources.Load("Prefabs/UI/metric"));
+        
+        metric3.GetComponent<Text>().text = " Nº Possibilities: " + numPossibilities;
+        metric3.transform.SetParent(panelMetrics.transform);
+        metric3.transform.localScale = new Vector3(1, 1, 1);
+
+        GameObject metric4 = (GameObject)Instantiate(Resources.Load("Prefabs/UI/metric"));
+   
+        metric4.GetComponent<Text>().text = " Nº real iter: " + numRealIterations;
+        metric4.transform.SetParent(panelMetrics.transform);
+        metric4.transform.localScale = new Vector3(1, 1, 1);
+    }
+
     private void toggleVisiblePanels(bool _active)
     {
         panelActionPlan.transform.parent.parent.parent.gameObject.SetActive(_active);
+        panelMetrics.transform.parent.gameObject.SetActive(_active);
         panelDeselectAgent.SetActive(_active);
     }
     private bool isVisibleActionPlanPanel()

@@ -73,6 +73,13 @@ public sealed class GoapAgent : MonoBehaviour
 
             // Generate the plan using GOAP Planner
             Queue<GoapAction> plan = planner.plan(gameObject, availableActions, worldState, goal);
+            if (isSelected)
+            {
+                GameManager.instance.numActions = planner.numActions;
+                GameManager.instance.numPaths = planner.numLeaves;
+                GameManager.instance.numPossibilities = planner.numPossibilities;
+                GameManager.instance.numRealIterations = planner.numRealIteration;
+            }
             if (plan != null)
             {   
                 // Plan found
@@ -247,13 +254,21 @@ public sealed class GoapAgent : MonoBehaviour
         if (currentActions != null)
         {
             GameManager.instance.addListToActionPlanPanel(this, currentActions);
+            GameManager.instance.prepareMetricsPanel();
         }
     }
 
+    // Follow camera
     void OnMouseDown()
     {
         MovementCamera movCam = Camera.main.gameObject.GetComponent<MovementCamera>();
         movCam.target = gameObject;
+        
+        GameManager.instance.numActions = planner.numActions;
+        GameManager.instance.numPaths = planner.numLeaves;
+        GameManager.instance.numPossibilities = planner.numPossibilities;
+        GameManager.instance.numRealIterations = planner.numRealIteration;
+
         generatePlanPanel();
     }
 }

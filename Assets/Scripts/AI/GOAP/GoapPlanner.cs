@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GoapPlanner
 {
+    public int numRealIteration;
+    public int numPossibilities;
+    public int numLeaves;
+    public int numActions;
 
     // Plan what sequence of actions can fulfill the goal.
     public Queue<GoapAction> plan(GameObject agent,
@@ -16,7 +20,10 @@ public class GoapPlanner
         {
             a.doReset();
         }
-
+        numRealIteration = 0;
+        numPossibilities = 0;
+        numLeaves = 0;
+        numActions = 0;
         // Check what actions can run using their checkProceduralPrecondition
         HashSet<GoapAction> usableActions = new HashSet<GoapAction>();
         foreach (GoapAction a in availableActions)
@@ -28,6 +35,7 @@ public class GoapPlanner
         // Node leaves
         List<Node> leaves = new List<Node>();
         Node start = new Node(null, 0, worldState, null);
+        numPossibilities = usableActions.Count * usableActions.Count * usableActions.Count;
         // Build graph
         bool success = optBuildGraph(start, leaves, usableActions, goal);
 
@@ -37,7 +45,7 @@ public class GoapPlanner
             Debug.Log("NO PLAN");
             return null;
         }
-
+        numLeaves = leaves.Count;
         // Get a list of actions
         List<GoapAction> result = new List<GoapAction>();
         Node n = leaves[leaves.Count -1];
@@ -49,7 +57,7 @@ public class GoapPlanner
             }
             n = n.parent;
         }
-        
+        numActions = result.Count;
         // Add actions to the queue
         Queue<GoapAction> queue = new Queue<GoapAction>();
         foreach (GoapAction a in result)
@@ -70,6 +78,7 @@ public class GoapPlanner
 
         foreach (GoapAction action in actions)
         {
+            numRealIteration++;
             // If the parent state has the conditions for this action's preconditions, we can use it here
             if (inState(action.Preconditions, parent.state))
             {
