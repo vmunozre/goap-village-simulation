@@ -60,6 +60,16 @@ public class GameManager : MonoBehaviour {
             actualMuti = 10;
         }
 
+        // Unselect target
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            MovementCamera movCam = Camera.main.gameObject.GetComponent<MovementCamera>();
+            movCam.target = null;
+            agentSelected.isSelected = false;
+            agentSelected = null;
+            toggleVisibleActionPlanPanel(false);
+        }
+
         // Force procreate
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -77,6 +87,10 @@ public class GameManager : MonoBehaviour {
 
     public void addListToActionPlanPanel(GoapAgent agent, Queue<GoapAction> queue)
     {
+        if (!isVisibleActionPlanPanel())
+        {
+            toggleVisibleActionPlanPanel(true);            
+        }
         if(agentSelected != null)
         {
             agentSelected.isSelected = false;
@@ -95,5 +109,14 @@ public class GameManager : MonoBehaviour {
             inst.transform.SetParent(panelActionPlan.transform);
             inst.transform.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    private void toggleVisibleActionPlanPanel(bool _active)
+    {
+        panelActionPlan.transform.parent.parent.parent.gameObject.SetActive(_active);
+    }
+    private bool isVisibleActionPlanPanel()
+    {
+        return panelActionPlan.transform.parent.parent.parent.gameObject.activeSelf;
     }
 }

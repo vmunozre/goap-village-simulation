@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovementCamera : MonoBehaviour {
 
@@ -20,12 +18,6 @@ public class MovementCamera : MonoBehaviour {
     }
 	
 	void Update () {
-
-        // Unselect target
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            target = null;
-        }
         // Turn on/off activeMovement
         if (Input.GetKeyDown(KeyCode.M))
         {
