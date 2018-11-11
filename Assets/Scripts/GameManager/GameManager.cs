@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     private WarehouseEntity warehouse = null;
 
     public GameObject panelActionPlan;
+    public GameObject panelDeselectAgent;
     public GoapAgent agentSelected;
 
     public static GameManager instance = null;
@@ -63,11 +64,7 @@ public class GameManager : MonoBehaviour {
         // Unselect target
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            MovementCamera movCam = Camera.main.gameObject.GetComponent<MovementCamera>();
-            movCam.target = null;
-            agentSelected.isSelected = false;
-            agentSelected = null;
-            toggleVisibleActionPlanPanel(false);
+            deselectAgent();
         }
 
         // Force procreate
@@ -85,11 +82,20 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void deselectAgent()
+    {
+        MovementCamera movCam = Camera.main.gameObject.GetComponent<MovementCamera>();
+        movCam.target = null;
+        agentSelected.isSelected = false;
+        agentSelected = null;
+        toggleVisiblePanels(false);
+    }
+
     public void addListToActionPlanPanel(GoapAgent agent, Queue<GoapAction> queue)
     {
         if (!isVisibleActionPlanPanel())
         {
-            toggleVisibleActionPlanPanel(true);            
+            toggleVisiblePanels(true);            
         }
         if(agentSelected != null)
         {
@@ -111,9 +117,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void toggleVisibleActionPlanPanel(bool _active)
+    private void toggleVisiblePanels(bool _active)
     {
         panelActionPlan.transform.parent.parent.parent.gameObject.SetActive(_active);
+        panelDeselectAgent.SetActive(_active);
     }
     private bool isVisibleActionPlanPanel()
     {
