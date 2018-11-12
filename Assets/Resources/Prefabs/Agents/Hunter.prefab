@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 114741857414184244}
   - component: {fileID: 114660190957012068}
   - component: {fileID: 114376028588165556}
+  - component: {fileID: 114725884080773890}
   - component: {fileID: 61766414361289224}
   - component: {fileID: 50100733862605410}
   - component: {fileID: 95980924306244386}
@@ -109,7 +110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550548726277508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.664067, y: 0.4955426, z: -2.5}
+  m_LocalPosition: {x: -2.1035347, y: -0.1902009, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4477146904226014}
@@ -393,6 +394,25 @@ MonoBehaviour:
   baseDuration: 1.5
   duration: 0
   nextPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &114725884080773890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1550548726277508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 731b3dc014190864cb12f41676a8f2e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Drop food in Hunting shed
+  uiImage: {fileID: 21300056, guid: 1fe32c7f7153d954193458f8435f2178, type: 3}
+  bubbleSprite: {fileID: 21300020, guid: 179b8c1272b29d24091334f2f29229bf, type: 3}
+  cost: 0.5
+  target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  baseDuration: 1.5
+  duration: 0
 --- !u!114 &114741857414184244
 MonoBehaviour:
   m_ObjectHideFlags: 1

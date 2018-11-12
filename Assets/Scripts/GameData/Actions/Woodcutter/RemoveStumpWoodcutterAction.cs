@@ -1,40 +1,41 @@
 ﻿using UnityEngine;
 
-public class AnalyzeTreeWoodcutterAction : GoapAction
+public class RemoveStumpWoodcutterAction : GoapAction
 {
-    private bool analyzed = false;
-    public TreeEntity targetTree;
+    private bool removed = false;
+    private TreeEntity targetTree = null;
 
-    // Timer
     private float startTime = 0;
-    private int energyCost = 5;
+    private int energyCost = 30;
 
     // find settings
-    private float radius = 1f;
+    private float radius = 5f;
     private int numTry = 1;
 
-    // Check tree age
-    public AnalyzeTreeWoodcutterAction()
+    // Remove stump tree
+    public RemoveStumpWoodcutterAction()
     {
-        setActionName("Analyze tree");
-        setBaseDuration(1.5f);
+        setActionName("Remove Stump");
+        changeDefaultCost(0.5f);
+        setBaseDuration(5f);
         addPrecondition("hasEnergy", true);
-        addPrecondition("hasWood", false);
-        addPrecondition("hasActualTree", false);
+        addPrecondition("hasActualTree", false);        
+        addPrecondition("hasWood", false);        
+        addEffect("hasWood", true);
         addEffect("treeFound", true);
     }
 
 
     public override void reset()
     {
-        analyzed = false;
+        removed = false;
         targetTree = null;
         startTime = 0;
     }
 
     public override bool isDone()
     {
-        return analyzed;
+        return removed;
     }
 
     public override bool requiresInRange()
@@ -45,7 +46,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
     public override bool checkProceduralPrecondition(GameObject agent)
     {
         // Find bushes in radius
-        float localRadius = (numTry/2) + radius;
+        float localRadius = numTry + radius;
         numTry++;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(agent.transform.position, localRadius);
         Collider2D closestCollider = null;
@@ -63,7 +64,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
             }
 
             TreeEntity tree = (TreeEntity)hit.gameObject.GetComponent(typeof(TreeEntity));
-            if (tree == null || tree.empty || tree.viewed || tree.chopped)
+            if (tree == null || !tree.empty)
             {
                 continue;
             }
@@ -85,7 +86,7 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
             Debug.DrawLine(closestCollider.gameObject.transform.position, agent.transform.position, Color.green, 3, false);
         }
         bool isClosest = closestCollider != null;
-        if(isClosest)
+        if (isClosest)
         {
             targetTree = (TreeEntity)closestCollider.gameObject.GetComponent(typeof(TreeEntity));
             target = targetTree.gameObject;
@@ -96,40 +97,24 @@ public class AnalyzeTreeWoodcutterAction : GoapAction
 
     public override bool perform(GameObject agent)
     {
-
         if (startTime == 0)
         {
             enableBubbleIcon(agent);
             startTime = Time.time;
         }
 
-        if (targetTree.wood <= 0)
-        {
-            disableBubbleIcon(agent);
-            targetTree.turnEmptySprite();
-            return false;
-        }
-
         if (Time.time - startTime > duration)
         {
             disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
+            Destroy(targetTree.gameObject);
+            woodcutter.wood += 20;
             woodcutter.energy -= energyCost;
-            analyzed = true;
-            if (targetTree.age < 3)
-            {
-                targetTree.viewed = true;
-                return false;
-            }
-            else
-            {
-                woodcutter.actualTree = targetTree;
-            }           
+            removed = true;
         }
         return true;
     }
 
 }
-
 
 

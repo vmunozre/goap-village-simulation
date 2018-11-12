@@ -19,8 +19,13 @@ public sealed class GoapAgent : MonoBehaviour
 
     public bool isSelected = false;
 
+    private Dictionary<string, int> metrics;
+
     void Start()
     {
+        metrics = new Dictionary<string, int>();
+        metrics.Add("actionsDone", 0);
+        metrics.Add("abortedPlans", 0);
         stateMachine = new FSM();
         availableActions = new HashSet<GoapAction>();
         currentActions = new Queue<GoapAction>();
@@ -75,10 +80,7 @@ public sealed class GoapAgent : MonoBehaviour
             Queue<GoapAction> plan = planner.plan(gameObject, availableActions, worldState, goal);
             if (isSelected)
             {
-                GameManager.instance.numActions = planner.numActions;
-                GameManager.instance.numPaths = planner.numLeaves;
-                GameManager.instance.numPossibilities = planner.numPossibilities;
-                GameManager.instance.numRealIterations = planner.numRealIteration;
+                setMetrics();
             }
             if (plan != null)
             {   
@@ -94,7 +96,7 @@ public sealed class GoapAgent : MonoBehaviour
 
             }
             else
-            {   
+            {
                 // No plan
                 Debug.Log("<color=orange>Failed Plan:</color>" + prettyPrint(goal));
                 dataProvider.planFailed(goal);
@@ -145,6 +147,7 @@ public sealed class GoapAgent : MonoBehaviour
             {
                 // Action is done
                 currentActions.Dequeue();
+                metrics["actionsDone"]++;
                 if (isSelected)
                 {
                     generatePlanPanel();
@@ -167,6 +170,7 @@ public sealed class GoapAgent : MonoBehaviour
                         fsm.popState();
                         fsm.pushState(idleState);
                         dataProvider.planAborted(action);
+                        metrics["abortedPlans"]++;
                     }
                 }
                 else
@@ -254,8 +258,20 @@ public sealed class GoapAgent : MonoBehaviour
         if (currentActions != null)
         {
             GameManager.instance.addListToActionPlanPanel(this, currentActions);
+            setMetrics();
             GameManager.instance.prepareMetricsPanel();
         }
+    }
+
+    private void setMetrics()
+    {
+        GameManager.instance.metrics.Clear();
+        GameManager.instance.metrics.Add("Plan sctions", planner.metrics["actionsPlan"]);
+        GameManager.instance.metrics.Add("Usable actons", planner.metrics["usableActions"]);
+        GameManager.instance.metrics.Add("Worst case", planner.metrics["worstCase"]);
+        GameManager.instance.metrics.Add("Real iterarions", planner.metrics["realIterations"]);
+        GameManager.instance.metrics.Add("Actions done", metrics["actionsDone"]);
+        GameManager.instance.metrics.Add("Aborted plans", metrics["abortedPlans"]);
     }
 
     // Follow camera
@@ -263,11 +279,8 @@ public sealed class GoapAgent : MonoBehaviour
     {
         MovementCamera movCam = Camera.main.gameObject.GetComponent<MovementCamera>();
         movCam.target = gameObject;
-        
-        GameManager.instance.numActions = planner.numActions;
-        GameManager.instance.numPaths = planner.numLeaves;
-        GameManager.instance.numPossibilities = planner.numPossibilities;
-        GameManager.instance.numRealIterations = planner.numRealIteration;
+
+        setMetrics();
 
         generatePlanPanel();
     }

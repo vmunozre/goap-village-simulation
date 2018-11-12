@@ -6,9 +6,8 @@ public class GoapPlanner
 {
     public int numRealIteration;
     public int numPossibilities;
-    public int numLeaves;
-    public int numActions;
 
+    public Dictionary<string, int> metrics = new Dictionary<string, int>();
     // Plan what sequence of actions can fulfill the goal.
     public Queue<GoapAction> plan(GameObject agent,
                                   HashSet<GoapAction> availableActions,
@@ -20,10 +19,14 @@ public class GoapPlanner
         {
             a.doReset();
         }
+        metrics.Clear();
+        metrics.Add("realIterations", 0);
+        metrics.Add("worstCase", 1);
+        metrics.Add("leaves", 0);
+        metrics.Add("actionsPlan", 0);
+        metrics.Add("usableActions", 0);
+        numPossibilities = 1;
         numRealIteration = 0;
-        numPossibilities = 0;
-        numLeaves = 0;
-        numActions = 0;
         // Check what actions can run using their checkProceduralPrecondition
         HashSet<GoapAction> usableActions = new HashSet<GoapAction>();
         foreach (GoapAction a in availableActions)
@@ -31,13 +34,21 @@ public class GoapPlanner
             if (a.checkProceduralPrecondition(agent))
                 usableActions.Add(a);
         }
-
+        metrics["usableActions"] = usableActions.Count;
         // Node leaves
         List<Node> leaves = new List<Node>();
         Node start = new Node(null, 0, worldState, null);
-        numPossibilities = usableActions.Count * usableActions.Count * usableActions.Count;
+
+        // Worst case O(n!)
+        for (int i = 1; i <= usableActions.Count; i++)
+        {
+            numPossibilities = numPossibilities * i;
+        }
+        metrics["worstCase"] = numPossibilities;
         // Build graph
         bool success = optBuildGraph(start, leaves, usableActions, goal);
+
+        metrics["realIterations"] = numRealIteration;
 
         if (!success)
         {
@@ -45,7 +56,8 @@ public class GoapPlanner
             Debug.Log("NO PLAN");
             return null;
         }
-        numLeaves = leaves.Count;
+        metrics["leaves"] = leaves.Count;
+
         // Get a list of actions
         List<GoapAction> result = new List<GoapAction>();
         Node n = leaves[leaves.Count -1];
@@ -57,7 +69,8 @@ public class GoapPlanner
             }
             n = n.parent;
         }
-        numActions = result.Count;
+        metrics["actionsPlan"] = result.Count;
+
         // Add actions to the queue
         Queue<GoapAction> queue = new Queue<GoapAction>();
         foreach (GoapAction a in result)

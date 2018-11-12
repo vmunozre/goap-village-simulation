@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 
-public class DropWoodWoodcutterAction : GoapAction
+public class DropInSawmillWoodcutterAction : GoapAction
 {
     private bool droppedWood = false;
     private float startTime = 0;
 
     // Drop wood
-    public DropWoodWoodcutterAction()
+    public DropInSawmillWoodcutterAction()
     {
-        setActionName("Drop wood");
+        setActionName("Drop in sawmill");
         setBaseDuration(1.5f);
+        changeDefaultCost(0.5f);
         addPrecondition("hasWood", true);
         addEffect("hasWood", false);
         addEffect("collectWood", true);
@@ -35,9 +36,10 @@ public class DropWoodWoodcutterAction : GoapAction
     {
         Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
 
-        // Go to warehouse
-        target = woodcutter.warehouse.gameObject;
-        
+        if (woodcutter.sawmill != null)
+        {
+            target = woodcutter.sawmill.gameObject;
+        }
         // Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
         return target != null;
     }
@@ -54,29 +56,12 @@ public class DropWoodWoodcutterAction : GoapAction
         {
             disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
-
-            // Drop in warehouse
-            woodcutter.warehouse.wood += woodcutter.wood;
-            SawmillBuilding[] sawmills = (SawmillBuilding[])FindObjectsOfType(typeof(SawmillBuilding));
-            foreach (SawmillBuilding saw in sawmills)
+            if (woodcutter.sawmill != null)
             {
-                if (!saw.blueprint.done)
-                {
-                    continue;
-                }
-                woodcutter.sawmill = saw;
-                woodcutter.sawmill.workers++;
-                break;
-
-            }
-            if (woodcutter.sawmill == null)
-            {            
-                // Add request sawmill
-                Building building = new Building("Prefabs/Buildings/Sawmill", 200, 150, 5, 2);
-                woodcutter.center.addNewBuildingRequest(building);
+                // Drop in sawmill
+                woodcutter.sawmill.wood += woodcutter.wood;
             }
             
-
             woodcutter.wood = 0;
             droppedWood = true;
         }

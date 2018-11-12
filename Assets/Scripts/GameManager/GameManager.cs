@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public int numPossibilities = 0;
     public int numRealIterations = 0;
     public int numPaths = 0;
+    public Dictionary<string, int> metrics;
 
     public GameObject panelActionPlan;
     public GameObject panelMetrics;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-       
+        metrics = new Dictionary<string, int>();
         CenterEntity[] centers = (CenterEntity[])FindObjectsOfType(typeof(CenterEntity));
         if (centers.Length > 0)
         {
@@ -131,6 +132,16 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(child.gameObject);
         }
+
+        foreach(string key in metrics.Keys)
+        {
+            GameObject metric = (GameObject)Instantiate(Resources.Load("Prefabs/UI/metric"));
+            string metricText = " " + key + ": " + metrics[key];
+            metric.GetComponent<Text>().text = metricText;
+            metric.transform.SetParent(panelMetrics.transform);
+            metric.transform.localScale = new Vector3(1, 1, 1);
+        }
+        /*
         GameObject metric1 = (GameObject)Instantiate(Resources.Load("Prefabs/UI/metric"));
        
         metric1.GetComponent<Text>().text = " Nº Actions: " + numActions;
@@ -153,6 +164,7 @@ public class GameManager : MonoBehaviour {
         metric4.GetComponent<Text>().text = " Nº real iter: " + numRealIterations;
         metric4.transform.SetParent(panelMetrics.transform);
         metric4.transform.localScale = new Vector3(1, 1, 1);
+        */
     }
 
     private void toggleVisiblePanels(bool _active)

@@ -39,6 +39,11 @@ public abstract class GoapAction : MonoBehaviour
     {
         this.actionName = _actionName;
     }
+    
+    public void changeDefaultCost(float _cost)
+    {
+        cost = _cost;
+    }
 
     public void setBaseDuration(float _duration)
     {

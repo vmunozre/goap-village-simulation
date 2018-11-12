@@ -36,7 +36,7 @@ public class TreeEntity : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > waitTime)
             {
-                wood += 50;
+                wood += 20;
                 age += 1;
                 float scale = calculateScale();
                 transform.localScale = new Vector3(scale, scale, 0f);
@@ -55,7 +55,7 @@ public class TreeEntity : MonoBehaviour
 
     public void turnChoppedSprite()
     {
-        empty = true;
+        //empty = true;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.sprite = clippedTreeSprite;
     }

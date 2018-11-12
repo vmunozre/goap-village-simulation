@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 
-public class DropFoodHunterAction : GoapAction
+public class DropInHuntingShedHunterAction : GoapAction
 {
     private bool droppedFood = false;
 
     private float startTime = 0;
 
-    // Drop food
-    public DropFoodHunterAction()
+    // Drop food in hunting shed
+    public DropInHuntingShedHunterAction()
     {
-        setActionName("Drop food");
+        setActionName("Drop food in Hunting shed");
         setBaseDuration(1.5f);
+        changeDefaultCost(0.5f);
         addPrecondition("hasFood", true);
         addEffect("hasFood", false);
         addEffect("collectFood", true);
     }
+
 
     public override void reset()
     {
@@ -36,7 +38,10 @@ public class DropFoodHunterAction : GoapAction
     {
         Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
 
-        target = hunter.warehouse.gameObject; 
+        if (hunter.huntingShed != null)
+        {
+            target = hunter.huntingShed.gameObject;
+        }
         
         // Debug.DrawLine(target.transform.position, agent.transform.position, Color.yellow, 3, false);
         return target != null;
@@ -54,25 +59,7 @@ public class DropFoodHunterAction : GoapAction
         {
             disableBubbleIcon(agent);
             Hunter hunter = (Hunter)agent.GetComponent(typeof(Hunter));
-            
-            HuntingShedBuilding[] huntingSheds = (HuntingShedBuilding[])FindObjectsOfType(typeof(HuntingShedBuilding));
-            foreach (HuntingShedBuilding shed in huntingSheds)
-            {
-                if (!shed.blueprint.done)
-                {
-                    continue;
-                }
-                hunter.huntingShed = shed;
-                hunter.huntingShed.hunters++;
-                break;
-            }
-            if (hunter.huntingShed == null)
-            {
-                // Add request building hunting shed
-                Building building = new Building("Prefabs/Buildings/huntingShed", 250, 150, 7, 2);
-                hunter.center.addNewBuildingRequest(building);
-                hunter.warehouse.food += hunter.food;
-            } else
+            if (hunter.huntingShed != null)
             {
                 hunter.huntingShed.food += hunter.food;
             }
