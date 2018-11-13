@@ -5,7 +5,7 @@ public class CenterEntity : MonoBehaviour {
 
     public int actualAgents = 0;
     public int bornCost = 50;
-
+    public int maxPopulation = 45;
     // Warehouse associated
     public WarehouseEntity warehouse;
     public Dictionary<string, int> agentsCounter;
@@ -144,6 +144,11 @@ public class CenterEntity : MonoBehaviour {
 
     public void procreateRule()
     {
+        if(getPopulation() >= maxPopulation)
+        {
+            return;
+        }
+
         int rate = Random.Range(1, 100);
 
         if (rate <= 35 && needStoneCutters())
@@ -173,6 +178,18 @@ public class CenterEntity : MonoBehaviour {
         }
         warehouse.food -= bornCost;
     }
+
+    public int getPopulation()
+    {
+        int population = 0;
+
+        foreach(string key in agentsCounter.Keys)
+        {
+            population += agentsCounter[key];
+        }
+        return population;
+    }
+
     // Need system
     public bool needBuilders()
     {
@@ -207,7 +224,7 @@ public class CenterEntity : MonoBehaviour {
         }
         return result;
     }
-
+    
     public bool needCarriers()
     {
         bool result = false;

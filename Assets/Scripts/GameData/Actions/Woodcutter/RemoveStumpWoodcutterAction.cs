@@ -107,7 +107,10 @@ public class RemoveStumpWoodcutterAction : GoapAction
         {
             disableBubbleIcon(agent);
             Woodcutter woodcutter = (Woodcutter)agent.GetComponent(typeof(Woodcutter));
-            Destroy(targetTree.gameObject);
+            if(targetTree != null && targetTree.gameObject != null)
+            {
+                Destroy(targetTree.gameObject);
+            }
             woodcutter.wood += 20;
             woodcutter.energy -= energyCost;
             removed = true;

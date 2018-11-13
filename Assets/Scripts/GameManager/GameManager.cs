@@ -9,10 +9,6 @@ public class GameManager : MonoBehaviour {
     private WarehouseEntity warehouse = null;
 
     // metrics
-    public int numActions = 0;
-    public int numPossibilities = 0;
-    public int numRealIterations = 0;
-    public int numPaths = 0;
     public Dictionary<string, int> metrics;
 
     public GameObject panelActionPlan;

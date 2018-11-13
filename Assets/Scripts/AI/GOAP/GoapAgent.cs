@@ -266,7 +266,7 @@ public sealed class GoapAgent : MonoBehaviour
     private void setMetrics()
     {
         GameManager.instance.metrics.Clear();
-        GameManager.instance.metrics.Add("Plan sctions", planner.metrics["actionsPlan"]);
+        GameManager.instance.metrics.Add("Plan actions", planner.metrics["actionsPlan"]);
         GameManager.instance.metrics.Add("Usable actons", planner.metrics["usableActions"]);
         GameManager.instance.metrics.Add("Worst case", planner.metrics["worstCase"]);
         GameManager.instance.metrics.Add("Real iterarions", planner.metrics["realIterations"]);

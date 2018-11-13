@@ -52,6 +52,10 @@ public class HouseBuilding : BaseBuilding
     // Procreate system
     private void procreate()
     {
+        if (center.getPopulation() >= center.maxPopulation)
+        {
+            return;
+        }
         if (actualAgents >= 2 && (actualAgents % 2 == 0) && warehouse.food >= bornCost)
         {
             int rate = Random.Range(1, 100);

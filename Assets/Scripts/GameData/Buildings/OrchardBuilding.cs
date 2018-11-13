@@ -17,7 +17,7 @@ public class OrchardBuilding : BaseBuilding {
 
 	void Start () {
         // Generate limitWorkers
-        limitWorkers = Random.Range(3,8);
+        limitWorkers = Random.Range(2,4);
         sr = GetComponent<SpriteRenderer>();
     }
 
